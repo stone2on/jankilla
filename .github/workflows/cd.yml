@@ -14,19 +14,16 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: List directory contents before download
-      run: dir ./artifacts
 
     - name: Download artifacts
       uses: actions/download-artifact@v4
       with:
         name: build-artifacts-${{ github.event.workflow_run.head_branch }}
-        path: ./artifacts
 
     - name: List directory contents after download
-      run: dir ./artifacts
+      run: dir 
 
     - name: Deploy artifacts
       run: |
-        echo "Deploying artifacts from ./artifacts"
+        # echo "Deploying artifacts from ./artifacts"
         # 여기에 배포 스크립트 또는 명령어를 추가하세요
