@@ -1,4 +1,4 @@
-name: .NET Framework Build
+name: Build
 
 on:
   push:
