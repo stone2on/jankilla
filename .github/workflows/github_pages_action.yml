@@ -15,6 +15,9 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+      
+    - name: List directory contents
+      run: dir
 
     - name: Install NuGet
       run: choco install nuget.commandline
