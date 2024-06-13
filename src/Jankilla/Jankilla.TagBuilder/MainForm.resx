@@ -1,0 +1,391 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <metadata name="barManager1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="tagBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>310, 17</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="MainForm.IconOptions.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAMAEBAAAAEAIABoBAAANgAAACAgAAABACAAKBEAAJ4EAAAwMAAAAQAgAGgmAADGFQAAKAAAABAA
+        AAAgAAAAAQAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP+q3X7/qt35/6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd+f+q3X7/qt35/6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt35/6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd///U7v//0ez//9Xu///H6P//vOT//7rk///I6f//1e7//9Hs///U7v//qt3//6rd//+q
+        3f//qt3//6rd//+v3///0Oz//6rd///N6///s+D//9bv///X7///seD//87r//+q3f//z+z//7Hg//+q
+        3f//qt3//6rd//+q3f//r9///9Ds//+q3f//zev//7Pg///U7v//1e7//7Hg///O6///qt3//8/s//+x
+        4P//qt3//6rd//+q3f//qt3//6rd///T7f//0ez//9Tu///B5v//web//8Dm///C5///1O3//9Hs///T
+        7v//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd+f+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd+f+q3X7/qt35/6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd+f+q3X4AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKAAAACAAAABAAAAAAQAgAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAP+AgAL/qdx8/6ve5v+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6ve5v+p3Hz/gIAC/6ncfP+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+p3Hz/q97m/6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6ve5v+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+y4P//4fP///f7///3/P//5PT//7Th//+y4P//8vr//7Pg//+q
+        3f//qt3//7Hg///x+f//tOH//7Ph///j9P//9/z///f8///i9P//s+D//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//+34///R7P//q93//6vd///L6v//8vr//6vd///N
+        6///6Pb//6rd//+q3f//5fX//9Ds//+q3f//8Pn//83r//+r3f//q93//87r///v+f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+04f//+Pz//6rd//+q3f//qt3//6rd///y
+        +v//uuP//6rd///l9P//0Oz//8zq///o9v//qt3//7fi///1+///qt3//6rd//+q3f//qt3///X7//+3
+        4v//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//7bh///1+///qt3//6rd//+q
+        3f//qt3//+74//+95P//qt3//7Hg///0+///9fv//7Lg//+q3f//ueP///H5//+q3f//qt3//6rd//+q
+        3f//8vr//7nj//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//tuH///X7//+q
+        3f//qt3//6rd//+q3f//7vj//73k//+q3f//rN7//+34///y+v//rd7//6rd//+54///8fn//6rd//+q
+        3f//qt3//6rd///y+v//ueP//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+z
+        4P//+Pz//6rd//+q3f//qt3//6rd///y+v//uuP//6rd///a8P//3PH//9nv///d8f//qt3//7fi///1
+        +///qt3//6rd//+q3f//qt3///b7//+24v//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd///r9///1O7//63e//+s3v//z+z///D5//+r3f//wub///H5//+t3v//rN7///D5///F
+        6P//qt3//+74///R7P//rd7//63e///R7f//7fj//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//7Df///d8f//9fv///X7///g8v//suD//6ze///t+P//u+T//6rd//+q
+        3f//ueP//+74//+t3v//seD//9/y///1+///9fv//97y//+x4P//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//q97m/6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6ve5v+p3Hz/qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qdx8/4CAAv+p3Hz/q97m/6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//q97m/6ncfP+AgAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKAAAADAA
+        AABgAAAAAQAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/qt0P/6nbXP+q3sb/qt32/6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt72/6rexv+p21z/ttsOAAAAAP+q3Q//qd2V/6rd9/+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3fj/qd2V/7bbDv+p
+        21z/qt33/6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt34/6nbXP+q3sb/qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rexv+q3fb/qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6re9v+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+r3f//uOL//9nw///y
+        +v//+fz///T6///c8P//uuP//6vd//+u3///3fH//+b1//+v3///qt3//6rd//+q3f//qt3//67f///i
+        8///4PL//6/f//+r3f//ueP//9vw///z+v//+f3///P6///a8P//uOP//6vd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//++
+        5f//8Pn//+z3///W7v//0Oz//9Tu///p9v//8vr//8Tn//+q3f//web///f8///c8f//rd7//6rd//+q
+        3f//rN7//9jw///4/f//xOf//6rd///C5///8fn//+r2///V7v//z+z//9Xu///r9v//8fn//8Hm//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd///u+P//6fb//7bi//+r3f//qt3//6rd//+z4f//4/T///X7//+t3v//q97//9Lt///6
+        /f//yen//6rd//+q3f//xuj///n9///X7v//rN7//6ve///z+v//5vX//7Xh//+r3f//qt3//6vd//+1
+        4f//5vX///L6//+r3v//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//7ji///9/v//0Oz//6rd//+q3f//qt3//6rd//+q3f//yer///v+///D
+        5///qt3//6vd///l9P//7vj//7bi//+04f//6/f//+r2//+r3v//qt3//77l///8/v//zOv//6rd//+q
+        3f//qt3//6rd//+q3f//zev///z+//+95P//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//77k///8/v//y+r//6rd//+q3f//qt3//6rd//+q
+        3f//xOf///r9///J6f//qt3//6rd//+34v//7/j//+Dz///c8f//8fn//7nj//+q3f//qt3//8Tn///6
+        /f//x+j//6rd//+q3f//qt3//6rd//+q3f//yOn///v9///D5///qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//77k///8/v//yur//6rd//+q
+        3f//qt3//6rd//+q3f//xOf///n9///K6f//qt3//6rd//+r3f//yen///n9///5/f//zev//6vd//+q
+        3f//qt3//8Tn///6/f//xuj//6rd//+q3f//qt3//6rd//+q3f//yOn///v9///D5///qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//77k///8
+        /v//yur//6rd//+q3f//qt3//6rd//+q3f//xOf///n9///K6f//qt3//6rd//+q3f//vuX///b7///4
+        /P//wub//6rd//+q3f//qt3//8Tn///6/f//xuj//6rd//+q3f//qt3//6rd//+q3f//yOn///v9///D
+        5///qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//77k///8/v//y+r//6rd//+q3f//qt3//6rd//+q3f//xOf///r9///J6f//qt3//6rd//+x
+        4P//5fX//+n2///r9///6Pb//7Lg//+q3f//qt3//8Pn///6/f//x+j//6rd//+q3f//qt3//6rd//+q
+        3f//yOn///v9///D5///qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//7fi///9/v//0Oz//6rd//+q3f//qt3//6rd//+q3f//yur///z+///C
+        5///qt3//6rd///U7v//9vv//73l//+75P//9fv//9nw//+q3f//qt3//73k///8/v//zev//6rd//+q
+        3f//qt3//6rd//+q3f//zev///3+//+85P//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd///s9///6/f//7jj//+s3v//qt3//6ve//+1
+        4v//5vX///P7//+t3v//qt3//8Hm///8/v//1e7//6ze//+r3v//0u3///z+///F6P//q93//6ve///x
+        +f//6Pb//7fi//+s3v//qt3//6ze//+34v//6Pb///D5//+r3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+85P//7fj//+/5///a
+        8P//1O7//9jw///s9///8fn//8Hm//+q3f//uOL///D5///q9///s+D//6rd//+q3f//seD//+f1///z
+        +v//uuP//6rd//+/5f//7/n//+34///Z8P//1O3//9nw///t+P//7/j//77l//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+r
+        3f//teH//9Lt///s9///8/r//+34///W7v//t+L//6vd//+r3f//z+z//+v3//+44///qt3//6rd//+q
+        3f//qt3//7Xh///p9v//0u3//6ze//+r3f//tuH//9Tu///s9///8/r//+z3///U7f//tuH//6vd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3vb/qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd9v+q3sb/qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rexv+p21z/qt34/6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt33/6nbXP+22w7/qd2V/6rd+P+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3ff/qd2V/6rdDwAA
+        AAD/ttsO/6nbXP+q3sb/qt72/6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q
+        3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt3//6rd//+q3f//qt32/6rexv+p
+        21z/qt0PAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+</value>
+  </data>
+  <metadata name="svgImageCollection1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>143, 17</value>
+  </metadata>
+</root>

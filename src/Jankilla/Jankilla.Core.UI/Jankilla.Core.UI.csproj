@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{65326A1E-A13C-4B6A-9613-FBAF6606A058}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Jankilla.Core.UI</RootNamespace>
+    <AssemblyName>Jankilla.Core.UI</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>false</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\build\debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowedReferenceRelatedFileExtensions>
+    *.pdb;
+    *.xml
+	</AllowedReferenceRelatedFileExtensions>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\build\release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowedReferenceRelatedFileExtensions>
+    *.pdb;
+    *.xml
+	</AllowedReferenceRelatedFileExtensions>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Data.Desktop.v20.1, Version=20.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Data.v20.1, Version=20.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v20.1.Core, Version=20.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v20.1, Version=20.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraBars.v20.1, Version=20.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\DevExpress 20.1\Components\Bin\Framework\DevExpress.XtraBars.v20.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v20.1, Version=20.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraGrid.v20.1, Version=20.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraLayout.v20.1, Version=20.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="Jankilla.Core, Version=1.0.8825.17533, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\build\Debug\Jankilla.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controls\BaseDeviceControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\BaseDeviceControl.designer.cs">
+      <DependentUpon>BaseDeviceControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RemarkControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\RemarkControl.designer.cs">
+      <DependentUpon>RemarkControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Base\EControlCommand.cs" />
+    <Compile Include="Forms\Base\IDataAccessControl.cs" />
+    <Compile Include="Forms\Base\IBindableControl.cs" />
+    <Compile Include="Forms\DataAccessForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DataAccessForm.Designer.cs">
+      <DependentUpon>DataAccessForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LicenseAdminForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LicenseAdminForm.Designer.cs">
+      <DependentUpon>LicenseAdminForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LicenseClientForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LicenseClientForm.Designer.cs">
+      <DependentUpon>LicenseClientForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listeners\ListBoxTraceListener.cs" />
+    <Compile Include="Models\Progress\EProgressReportMode.cs" />
+    <Compile Include="Models\Progress\IProgressReportable.cs" />
+    <Compile Include="Models\Progress\ProgressExtension.cs" />
+    <Compile Include="Models\Progress\ProgressReportModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\DialogHelper.cs" />
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\BaseDeviceControl.resx">
+      <DependentUpon>BaseDeviceControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\RemarkControl.resx">
+      <DependentUpon>RemarkControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DataAccessForm.resx">
+      <DependentUpon>DataAccessForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LicenseAdminForm.resx">
+      <DependentUpon>LicenseAdminForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LicenseClientForm.resx">
+      <DependentUpon>LicenseClientForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\assemble.png" />
+    <Content Include="Resources\baking-tray.png" />
+    <Content Include="Resources\barcode.png" />
+    <Content Include="Resources\cloud.png" />
+    <Content Include="Resources\cool.png" />
+    <Content Include="Resources\free-icon-computer-10161109.png" />
+    <Content Include="Resources\free-icon-pc-4330711.png" />
+    <Content Include="Resources\frost.png" />
+    <Content Include="Resources\hourglass.png" />
+    <Content Include="Resources\ice-tray.png" />
+    <Content Include="Resources\medium.png" />
+    <Content Include="Resources\monitor.png" />
+    <Content Include="Resources\north.png" />
+    <Content Include="Resources\oven-tray.png" />
+    <Content Include="Resources\plc.png" />
+    <Content Include="Resources\power-button.png" />
+    <Content Include="Resources\power-on-button.png" />
+    <Content Include="Resources\temperature.png" />
+    <Content Include="Resources\tester.png" />
+    <Content Include="Resources\top-10.png" />
+    <Content Include="Resources\top-5.png" />
+    <Content Include="Resources\worker.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
