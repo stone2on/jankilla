@@ -2,8 +2,8 @@ name: .NET Framework Build
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - '*'
   pull_request:
     branches:
       - main

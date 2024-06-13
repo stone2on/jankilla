@@ -2,8 +2,8 @@ name: Deploy
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - '*'
 
 jobs:
   deploy:
@@ -18,6 +18,9 @@ jobs:
       with:
         name: build-artifacts-${{ github.ref_name }}
         path: ./artifacts
+
+    - name: List directory contents after download
+      run: dir ./artifacts
 
     - name: Deploy artifacts
       run: |
