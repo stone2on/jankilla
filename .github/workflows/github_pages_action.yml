@@ -17,7 +17,15 @@ jobs:
       uses: actions/checkout@v4
       
     - name: List directory contents
-      run: dir
+      run: |
+        $items = Get-ChildItem -Path . -Recurse
+        $items | ForEach-Object {
+          if ($_.PSIsContainer) {
+            Write-Output ("[DIR] " + $_.FullName)
+          } else {
+            Write-Output ("[FILE] " + $_.FullName)
+          }
+        }
 
     - name: Install NuGet
       run: choco install nuget.commandline
