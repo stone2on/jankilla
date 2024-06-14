@@ -44,15 +44,15 @@ jobs:
         name: build-artifacts-${{ github.ref_name }}
         path: build/release/
 
-    - name: Download artifacts
-      uses: actions/download-artifact@v4
-      with:
-        name: build-artifacts-${{ github.ref_name }}
+    # - name: Download artifacts
+    #   uses: actions/download-artifact@v4
+    #   with:
+    #     name: build-artifacts-${{ github.ref_name }}
   
-    - name: List directory contents after download
-      run: dir 
+    # - name: List directory contents after download
+    #   run: dir 
   
-    - name: Deploy artifacts
-      run: |
-        # echo "Deploying artifacts from ./artifacts"
-        # 여기에 배포 스크립트 또는 명령어를 추가하세요
+    # - name: Deploy artifacts
+    #   run: |
+    #     # echo "Deploying artifacts from ./artifacts"
+    #     # 여기에 배포 스크립트 또는 명령어를 추가하세요
