@@ -50,8 +50,8 @@ jobs:
 
     # 소스 파일 압축
     - name: zip artifacts
-      run: zip ./artifacts/build-artifacts-${{ github.ref_name }}.zip build/release/* -r
-
+      run: Compress-Archive build/release/* build/release/* ./artifacts/build-artifacts-${{ github.ref_name }}.zip
+      
     - name: List directory contents
       run: |
         $items = Get-ChildItem -Path . -Recurse
