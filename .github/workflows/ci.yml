@@ -43,7 +43,9 @@ jobs:
       with:
         name: build-artifacts-${{ github.ref_name }}
         path: build/release/
-        
+ 
+
+ 
     - name: build
       run: make build
 
@@ -63,8 +65,8 @@ jobs:
 
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./bin/jankilla.windows-amd64.zip
-        asset_name: jankilla.windows-amd64.zip
+        asset_path: build/release/
+        asset_name: build-artifacts-${{ github.ref_name }}
         asset_content_type: application/zip    
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
