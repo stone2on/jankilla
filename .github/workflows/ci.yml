@@ -79,10 +79,9 @@ jobs:
         
     - name: upload windows artifact
       uses: actions/upload-release-asset@v1
-
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./artifacts/
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: ./artifacts/build-artifacts-${{ github.ref_name }}.zip
         asset_name: build-artifacts-${{ github.ref_name }}.zip
         asset_content_type: application/zip    
       env:
