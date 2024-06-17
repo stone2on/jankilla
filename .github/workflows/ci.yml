@@ -43,8 +43,17 @@ jobs:
       with:
         name: build-artifacts-${{ github.ref_name }}
         path: build/release/
- 
 
+    - name: List directory contents
+      run: |
+        $items = Get-ChildItem -Path . -Recurse
+        $items | ForEach-Object {
+          if ($_.PSIsContainer) {
+            Write-Output ("[DIR] " + $_.FullName)
+          } else {
+            Write-Output ("[FILE] " + $_.FullName)
+          }
+        }
  
     - name: build
       run: make build
