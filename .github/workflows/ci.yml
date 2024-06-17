@@ -55,8 +55,6 @@ jobs:
         prerelease: false
         release_name: ${{ steps.version.outputs.version }}
         tag_name: ${{ github.ref }}
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
         
     - name: build artifacts
       run: make build-windows  
@@ -69,8 +67,7 @@ jobs:
         asset_path: ./bin/jankilla.windows-amd64.zip
         asset_name: jankilla.windows-amd64.zip
         asset_content_type: application/zip    
-      env:
-        GITHUB_TOKEN: ${{ github.token }}        
+      
     # - name: Download artifacts
     #   uses: actions/download-artifact@v4
     #   with:
