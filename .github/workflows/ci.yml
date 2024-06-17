@@ -43,7 +43,25 @@ jobs:
       with:
         name: build-artifacts-${{ github.ref_name }}
         path: build/release/
+        
+    - name: release
+      uses: actions/create-release@v1
+      id: create_release
+      with:
+        draft: false
+        prerelease: false
+        release_name: ${{ github.ref_name }}
+        tag_name: ${{ github.ref }}
+        
+    - name: upload windows artifact
+      uses: actions/upload-release-asset@v1
 
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./bin/jankilla.windows-amd64.zip
+        asset_name: jankilla.windows-amd64.zip
+        asset_content_type: application/zip    
+        
     # - name: Download artifacts
     #   uses: actions/download-artifact@v4
     #   with:
