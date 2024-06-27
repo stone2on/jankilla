@@ -1,0 +1,101 @@
+name: Build
+
+on:
+  push:
+    tags:
+      - '*'
+      
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+    permissions: write-all
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: List directory contents
+      run: |
+        $items = Get-ChildItem -Path . -Recurse
+        $items | ForEach-Object {
+          if ($_.PSIsContainer) {
+            Write-Output ("[DIR] " + $_.FullName)
+          } else {
+            Write-Output ("[FILE] " + $_.FullName)
+          }
+        }
+
+    - name: Install NuGet
+      run: choco install nuget.commandline
+
+    - name: Restore NuGet packages
+      run: nuget restore src/Jankilla/Jankilla.sln
+      
+    - name: Build the solution
+      run: |
+        & 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin\MSBuild.exe' src/Jankilla/Jankilla.sln /p:Configuration=Release
+        
+    - name: Publish artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-artifacts-${{ github.ref_name }}
+        path: build/release/
+
+    # 폴더 만드는 스탭
+    - name: make artifacts dir
+      run: mkdir ./artifacts/
+
+    # 소스 파일 압축
+    - name: zip artifacts
+      run: Compress-Archive build/release/* ./artifacts/build-artifacts-${{ github.ref_name }}.zip
+      
+    - name: List directory contents
+      run: |
+        $items = Get-ChildItem -Path . -Recurse
+        $items | ForEach-Object {
+          if ($_.PSIsContainer) {
+            Write-Output ("[DIR] " + $_.FullName)
+          } else {
+            Write-Output ("[FILE] " + $_.FullName)
+          }
+        }
+ 
+    - name: build
+      run: make build
+
+    - name: release
+      uses: actions/create-release@v1
+      id: create_release
+      with:
+        draft: false
+        prerelease: false
+        release_name: ${{ github.ref_name }}
+        tag_name: ${{ github.ref }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: upload windows artifact
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./artifacts/build-artifacts-${{ github.ref_name }}.zip
+        asset_name: build-artifacts-${{ github.ref_name }}.zip
+        asset_content_type: application/zip    
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
+        
+    # - name: Download artifacts
+    #   uses: actions/download-artifact@v4
+    #   with:
+    #     name: build-artifacts-${{ github.ref_name }}
+  
+    # - name: List directory contents after download
+    #   run: dir 
+  
+    # - name: Deploy artifacts
+    #   run: |
+    #     # echo "Deploying artifacts from ./artifacts"
+    #     # 여기에 배포 스크립트 또는 명령어를 추가하세요
