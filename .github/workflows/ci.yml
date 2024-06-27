@@ -102,5 +102,8 @@ jobs:
     
     # NuGet
     
-      # - name: Pack NuGet package
-        # run: nuget pack Jankilla.Core/Jankilla.Core.csproj -Properties Configuration=Release
+    - name: Pack NuGet package
+      run: nuget pack Jankilla.Core/Jankilla.Core.csproj -Properties Configuration=Release
+
+    - name: Publish NuGet package
+      run: nuget push Jankilla.Core*.nupkg -Source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json -ApiKey ${{ secrets.GITHUB_TOKEN }}
