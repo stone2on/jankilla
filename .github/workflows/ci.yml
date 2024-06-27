@@ -44,19 +44,19 @@ jobs:
     - name: Publish NuGet package
       run: nuget push Jankilla.Core*.nupkg -Source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json -ApiKey ${{ secrets.GITHUB_TOKEN }}
  
-    - name: Publish artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: build-artifacts-${{ github.ref_name }}
-        path: build/release/
+    # - name: Publish artifacts
+      # uses: actions/upload-artifact@v4
+      # with:
+        # name: build-artifacts-${{ github.ref_name }}
+        # path: build/release/
 
     # 폴더 만드는 스탭
-    - name: make artifacts dir
-      run: mkdir ./artifacts/
+    # - name: make artifacts dir
+      # run: mkdir ./artifacts/
 
     # 소스 파일 압축
-    - name: zip artifacts
-      run: Compress-Archive build/release/* ./artifacts/build-artifacts-${{ github.ref_name }}.zip
+    # - name: zip artifacts
+      # run: Compress-Archive build/release/* ./artifacts/build-artifacts-${{ github.ref_name }}.zip
       
     - name: List directory contents
       run: |
@@ -83,15 +83,15 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
-    - name: upload windows artifact
-      uses: actions/upload-release-asset@v1
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./artifacts/build-artifacts-${{ github.ref_name }}.zip
-        asset_name: build-artifacts-${{ github.ref_name }}.zip
-        asset_content_type: application/zip    
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
+    # - name: upload windows artifact
+      # uses: actions/upload-release-asset@v1
+      # with:
+        # upload_url: ${{ steps.create_release.outputs.upload_url }}
+        # asset_path: ./artifacts/build-artifacts-${{ github.ref_name }}.zip
+        # asset_name: build-artifacts-${{ github.ref_name }}.zip
+        # asset_content_type: application/zip    
+      # env:
+        # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
         
     # - name: Download artifacts
     #   uses: actions/download-artifact@v4
