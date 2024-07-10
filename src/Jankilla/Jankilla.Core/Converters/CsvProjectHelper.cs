@@ -20,8 +20,6 @@ using System.Threading.Tasks;
 
 namespace Jankilla.Core.Converters
 {
-
-
     public class CsvProjectHelper
     {
         private static CsvProjectHelper _instance;
