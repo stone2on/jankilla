@@ -41,33 +41,6 @@ namespace Jankilla.Core.Contracts.Tags
 
         public override ETagDiscriminator Discriminator => ETagDiscriminator.String;
 
-        public StringTag(string name, string address, EDirection inOut, int byteSize)
-          : base(name, address, byteSize, inOut)
-        {
-            this._writebuffer = new byte[this.ByteSize];
-        }
-
-        public StringTag(Guid id, int no, string name, int direction, int byteSize, bool readOnly,
-            string address, string category, string description, string path, string unit, bool useOffset, double offset, bool useFactor, double factor, 
-            int discriminator, Guid blockID)
-            : this(name, address, (EDirection)direction, byteSize)
-        {
-            ID = id;
-            No = no;
-            ReadOnly = readOnly;
-            Description = description;
-            Category = category;
-            Path = path;
-            Unit = unit;
-            UseFactor = useFactor;
-            Factor = factor;
-            UseOffset = useOffset;
-            Offset = offset;
-            BlockID = blockID;
-
-            Debug.Assert(discriminator == (int)ETagDiscriminator.String);
-        }
-
         public override void Read(short[] buffer, int startIndex)
         {
             if (CompareByteArrayToShortArray(_readbuffer, 0, buffer, startIndex, _readbuffer.Length))

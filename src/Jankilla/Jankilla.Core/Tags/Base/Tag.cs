@@ -28,7 +28,20 @@ namespace Jankilla.Core.Contracts.Tags
 
         public EDirection Direction { get; set; }
 
-        public int ByteSize { get; protected set; }
+        public int ByteSize 
+        {
+            get {  return _byteSize; } 
+            set
+            {
+                if (value <= 0)
+                    throw new ArgumentOutOfRangeException(nameof(ByteSize));
+
+                _byteSize = value;
+
+                _readbuffer = new byte[value];
+                _writebuffer = new byte[value];
+            } 
+        }
 
         public bool ReadOnly { get; set; }
 
@@ -61,23 +74,13 @@ namespace Jankilla.Core.Contracts.Tags
         protected byte[] _readbuffer;
         protected byte[] _writebuffer;
 
+        private int _byteSize;
+
         #endregion
 
         #region Constructor
 
-        protected Tag(string name, string address, int byteSize, EDirection direction)
-        {
-            if (string.IsNullOrEmpty(address))
-                throw new NullReferenceException(nameof(address));
-            if (byteSize <= 0)
-                throw new ArgumentOutOfRangeException(nameof(byteSize));
-
-            this.Name = name;
-            this.Address = address;
-            this.ByteSize = byteSize;
-            this.Direction = direction;
-            this._readbuffer = new byte[this.ByteSize];
-        }
+        protected Tag() { }
 
         #endregion
 

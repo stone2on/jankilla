@@ -28,7 +28,7 @@ namespace Jankilla.Core.DB.Repositories
         {
             switch (driver.Discriminator)
             {
-                case EDriverDiscriminator.MitsubishiMxComponent:
+                case "MitsubishiMxComponent":
                     return MitsubishiMxComponentDriverRepo.Add((MitsubishiMxComponentDriver)driver);
                 default:
                     throw new NotSupportedException();
@@ -39,7 +39,7 @@ namespace Jankilla.Core.DB.Repositories
         {
             switch (driver.Discriminator)
             {
-                case EDriverDiscriminator.MitsubishiMxComponent:
+                case "MitsubishiMxComponent":
                     return MitsubishiMxComponentDriverRepo.Delete((MitsubishiMxComponentDriver)driver);
                 default:
                     throw new NotSupportedException();
@@ -58,7 +58,7 @@ namespace Jankilla.Core.DB.Repositories
         {
             switch (driver.Discriminator)
             {
-                case EDriverDiscriminator.MitsubishiMxComponent:
+                case "MitsubishiMxComponent":
                     return MitsubishiMxComponentDriverRepo.Update((MitsubishiMxComponentDriver)driver);
                 default:
                     throw new NotSupportedException();

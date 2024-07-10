@@ -14,7 +14,7 @@ namespace Jankilla.Driver.MitsubishiMcProtocol
     {
         #region Public Properties
 
-        public override EDriverDiscriminator Discriminator => EDriverDiscriminator.MitsubishiMcProtocol;
+        public override string Discriminator => "MitsubishiMcProtocol";
         public override IReadOnlyList<Block> Blocks => (IReadOnlyList<Block>)_blocks;
         public EProtocol Protocol => EProtocol.TCP;
 
@@ -107,7 +107,7 @@ namespace Jankilla.Driver.MitsubishiMcProtocol
                 return false;
             }
 
-            if (block.Discriminator != EDriverDiscriminator.MitsubishiMxComponent)
+            if (block.Discriminator != "MitsubishiMcProtocol")
             {
                 return false;
             }

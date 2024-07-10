@@ -188,21 +188,26 @@ namespace Jankilla.TagBuilder.Controls.MitsubishiMxComponent
             {
                 case ETagDiscriminator.Boolean:
                     int bitIndex = (int)spinEditBitIndex.Value;
-                    tmp = new BooleanTag(name, address, tagDirection, bitIndex);
+                    tmp = new BooleanTag(){ Name = name, Address = address, Direction = tagDirection, BitIndex = bitIndex };
                     break;
                 case ETagDiscriminator.Int:
-                    tmp = new IntTag(name, address, tagDirection) 
-                    {
+                    tmp = new IntTag() 
+                    { 
+                        Name = name, 
+                        Address = address, 
+                        Direction = tagDirection,
                         UseFactor = checkEditUseFactor.Checked,
                         Factor = (double)textEditFactor.Value,
                         UseOffset = checkEditUseOffset.Checked,
                         Offset = (double)textEditOffset.Value,
                     };
-                    
                     break;
                 case ETagDiscriminator.Short:
-                    tmp = new ShortTag(name, address, tagDirection)
+                    tmp = new ShortTag()
                     {
+                        Name = name,
+                        Address = address,
+                        Direction = tagDirection,
                         UseFactor = checkEditUseFactor.Checked,
                         Factor = (double)textEditFactor.Value,
                         UseOffset = checkEditUseOffset.Checked,
@@ -210,11 +215,20 @@ namespace Jankilla.TagBuilder.Controls.MitsubishiMxComponent
                     };
                     break;
                 case ETagDiscriminator.String:
-                    tmp = new StringTag(name, address, tagDirection, byteSize);
+                    tmp = new StringTag()
+                    {
+                        Name = name,
+                        Address = address,
+                        Direction = tagDirection,
+                        ByteSize = byteSize
+                    };
                     break;
                 case ETagDiscriminator.Float:
-                    tmp = new FloatTag(name, address, tagDirection)
+                    tmp = new FloatTag()
                     {
+                        Name = name,
+                        Address = address,
+                        Direction = tagDirection,
                         UseFactor = checkEditUseFactor.Checked,
                         Factor = (double)textEditFactor.Value,
                         UseOffset = checkEditUseOffset.Checked,

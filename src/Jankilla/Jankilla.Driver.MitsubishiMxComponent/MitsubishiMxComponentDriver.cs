@@ -111,7 +111,7 @@ namespace Jankilla.Driver.MitsubishiMxComponent
 
         #region Public Properties
 
-        public override EDriverDiscriminator Discriminator => EDriverDiscriminator.MitsubishiMxComponent;
+        public override string Discriminator => "MitsubishiMxComponent";
 
         public override IReadOnlyList<Device> Devices
         {
@@ -210,7 +210,7 @@ namespace Jankilla.Driver.MitsubishiMxComponent
                 return false;
             }
 
-            if (device.Discriminator != EDriverDiscriminator.MitsubishiMxComponent)
+            if (device.Discriminator != "MitsubishiMxComponent")
             {
                 return false;
             }

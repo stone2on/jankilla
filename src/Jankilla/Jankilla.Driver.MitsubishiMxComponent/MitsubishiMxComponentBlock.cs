@@ -19,13 +19,75 @@ namespace Jankilla.Driver.MitsubishiMxComponent
     {
         #region Public Properties
 
-        public override EDriverDiscriminator Discriminator => EDriverDiscriminator.MitsubishiMxComponent;
+        public override string Discriminator => "MitsubishiMxComponent";
 
+        private string _startAddress;
         public override string StartAddress 
         { 
-            get => base.StartAddress; 
-            protected set => 
-                base.StartAddress = value; 
+            get => _startAddress; 
+            set {
+                Debug.Assert(!string.IsNullOrEmpty(value));
+                _startAddress = value;
+
+                string s = null;
+                DeviceCode = null;
+
+                foreach (var dType in MitsubishiMxComponentDriver.AllDevices)
+                {
+                    if (_startAddress.StartsWith(dType))
+                    {
+                        DeviceCode = dType;
+                        s = _startAddress.Substring(dType.Length);
+                        break;
+                    }
+                }
+
+                if (DeviceCode == null)
+                {
+                    throw new NotSupportedException(_startAddress);
+                }
+
+                if (MitsubishiMxComponentDriver.BitDeviceTypes.Contains(DeviceCode))
+                    DeviceType = EDeviceType.Bit;
+                if (MitsubishiMxComponentDriver.WordDeviceTypes.Contains(DeviceCode))
+                    DeviceType = EDeviceType.Word;
+
+                if (MitsubishiMxComponentDriver.HexDeviceTypes.Contains(DeviceCode))
+                    DeviceNumber = EDeviceNumber.Hex;
+                if (MitsubishiMxComponentDriver.DecimalDeviceTypes.Contains(DeviceCode))
+                    DeviceNumber = EDeviceNumber.Decimal;
+
+
+                if (DeviceType == EDeviceType.Unknown)
+                    throw new NotSupportedException(DeviceCode);
+                if (this.DeviceNumber == EDeviceNumber.Unknown)
+                    throw new NotSupportedException(DeviceCode);
+
+                StartAddressNo = DeviceNumber != EDeviceNumber.Hex ? int.Parse(s) : int.Parse(s, NumberStyles.HexNumber);
+
+                if (this.DeviceType == EDeviceType.Bit && StartAddressNo % 16 != 0)
+                {
+                    throw new NotSupportedException(_startAddress);
+                }
+            }
+        }
+
+        private int _bufferSize;
+        public override int BufferSize 
+        {
+            get => _bufferSize;
+            set
+            {
+                _bufferSize = value;
+
+                int shortBuffSize = value / 2;
+
+                this._readbuffer = new short[shortBuffSize];
+                this._writeBuffer = new short[shortBuffSize];
+                _bufferSize = shortBuffSize * 2;
+
+                _shortBufferSize = shortBuffSize;
+            }
         }
 
         public int StationNo 
@@ -33,6 +95,11 @@ namespace Jankilla.Driver.MitsubishiMxComponent
             get { return _stationNo; }
             set
             {
+                if (value < 0)
+                {
+                    value = 1;
+                }
+
                 _stationNo = value;
                 _plc.ActLogicalStationNumber = _stationNo;
             }
@@ -49,8 +116,8 @@ namespace Jankilla.Driver.MitsubishiMxComponent
 
         private int _stationNo;
 
-        private readonly short[] _readbuffer;
-        private readonly short[] _writeBuffer;
+        private short[] _readbuffer;
+        private short[] _writeBuffer;
 
         private ActUtlType64 _plc = new ActUtlType64();
 
@@ -63,79 +130,11 @@ namespace Jankilla.Driver.MitsubishiMxComponent
 
         #region Constructor
 
-        public MitsubishiMxComponentBlock(string name, int stationNo, string startAddress, int bufferSize)
+        public MitsubishiMxComponentBlock()
         {
-            Name = name;
-
-            Debug.Assert(!string.IsNullOrEmpty(startAddress));
-            Debug.Assert(stationNo > 0);
-
-            StationNo = stationNo;
-
-            int shortBuffSize = bufferSize / 2;
-
-            this._readbuffer = new short[shortBuffSize];
-            this._writeBuffer = new short[shortBuffSize];
-            this.StartAddress = startAddress;
-            this.BufferSize = shortBuffSize * 2;
-
-            _shortBufferSize = shortBuffSize;
-
-           
-            string s = null;
-            DeviceCode = null;
-  
-            foreach (var dType in MitsubishiMxComponentDriver.AllDevices)
-            {
-                if (startAddress.StartsWith(dType))
-                {
-                    DeviceCode = dType;
-                    s = startAddress.Substring(dType.Length);
-                    break;
-                }
-            }
-
-            if (DeviceCode == null)
-            {
-                throw new NotSupportedException(startAddress);
-            }
-
-            if (MitsubishiMxComponentDriver.BitDeviceTypes.Contains(DeviceCode))
-                DeviceType = EDeviceType.Bit;
-            if (MitsubishiMxComponentDriver.WordDeviceTypes.Contains(DeviceCode))
-                DeviceType = EDeviceType.Word;
-
-            if (MitsubishiMxComponentDriver.HexDeviceTypes.Contains(DeviceCode))
-                DeviceNumber = EDeviceNumber.Hex;
-            if (MitsubishiMxComponentDriver.DecimalDeviceTypes.Contains(DeviceCode))
-                DeviceNumber = EDeviceNumber.Decimal;
-
-
-            if (DeviceType == EDeviceType.Unknown)
-                throw new NotSupportedException(DeviceCode);
-            if (this.DeviceNumber == EDeviceNumber.Unknown)
-                throw new NotSupportedException(DeviceCode);
-
-            StartAddressNo = DeviceNumber != EDeviceNumber.Hex ? int.Parse(s) : int.Parse(s, NumberStyles.HexNumber);
-
-            if (this.DeviceType == EDeviceType.Bit && StartAddressNo % 16 != 0)
-            {
-                throw new NotSupportedException(startAddress);
-            }
-
             _tags.CollectionChanged += tags_CollectionChanged;
         }
 
-        public MitsubishiMxComponentBlock(Guid id, string name, string path, string description, int discriminator,
-            string startAddress, int bufferSize, Guid deviceID, int stationNo) : this(name, stationNo, startAddress, bufferSize)
-        {
-            ID = id;
-            Path = path;
-            Description = description;
-            DeviceID = deviceID;
-
-            Debug.Assert(discriminator == (int)EDriverDiscriminator.MitsubishiMxComponent);
-        }
 
         #endregion
 

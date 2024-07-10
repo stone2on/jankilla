@@ -58,32 +58,9 @@ namespace Jankilla.Core.Contracts.Tags
 
         public override ETagDiscriminator Discriminator => ETagDiscriminator.Float;
 
-        public FloatTag(string name, string address, EDirection inOut)
-          : base(name, address, 4, inOut)
+        public FloatTag()
         {
-            this._writebuffer = new byte[this.ByteSize];
-        }
-
-        public FloatTag(Guid id, int no, string name, int direction, int byteSize, bool readOnly,
-          string address, string category, string description, string path, string unit, bool useOffset, double offset, bool useFactor, double factor, 
-          int discriminator, Guid blockID)
-          : this(name, address, (EDirection)direction)
-        {
-            ID = id;
-            No = no;
-            ReadOnly = readOnly;
-            Description = description;
-            Category = category;
-            Path = path;
-            Unit = unit;
-            UseFactor = useFactor;
-            Factor = factor;
-            UseOffset = useOffset;
-            Offset = offset;
-            BlockID = blockID;
-
-            Debug.Assert(byteSize == 4);
-            Debug.Assert(discriminator == (int)ETagDiscriminator.Float);
+            ByteSize = 4;
         }
 
         public override void Read(short[] buffer, int startIndex)

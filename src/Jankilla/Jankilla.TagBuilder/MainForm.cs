@@ -4,7 +4,7 @@ using DevExpress.XtraSplashScreen;
 using Jankilla.Core.Contracts;
 using Jankilla.Core.Contracts.Tags;
 using Jankilla.Core.Contracts.Tags.Base;
-using Jankilla.Core.Converter;
+using Jankilla.Core.Converters;
 using Jankilla.Core.Tags.Base;
 using Jankilla.Core.UI.Forms;
 using Jankilla.Core.UI.Forms.Base;
@@ -45,7 +45,7 @@ namespace Jankilla.TagBuilder
 
         private Project _loadedProject = new Project();
 
-  
+
 
         #endregion
 
@@ -74,7 +74,7 @@ namespace Jankilla.TagBuilder
             treeListChannels.ClearNodes();
             tagBindingSource.Clear();
 
-            _loadedProject = JSONProjectHelper.OpenProjectFile(path);
+            _loadedProject = JsonProjectHelper.Instance.OpenProjectFile(path);
             if (_loadedProject == null)
             {
                 DialogHelper.CloseProgressPanel(handle);
@@ -104,7 +104,7 @@ namespace Jankilla.TagBuilder
 
         private void saveFile(string path)
         {
-            JSONProjectHelper.SaveProjectFile(path, _loadedProject);
+            JsonProjectHelper.Instance.SaveProjectFile(path, _loadedProject);
 
         }
 
@@ -157,35 +157,35 @@ namespace Jankilla.TagBuilder
 
             mxDriver.AddDevice(mxDevice);
 
-            var myBlock = new MitsubishiMxComponentBlock("BLOCK 01", 2, "D0000", 2000) { ID = Guid.NewGuid() };
+            var myBlock = new MitsubishiMxComponentBlock { ID = Guid.NewGuid(), Name = "BLOCK 01", StationNo = 1, StartAddress = "D0000", BufferSize = 2000 };
             mxDevice.AddBlock(myBlock);
-            mxDevice.AddBlock(new MitsubishiMxComponentBlock("BLOCK 02", 2, "D1000", 2000) { ID = Guid.NewGuid() });
-            mxDevice.AddBlock(new MitsubishiMxComponentBlock("BLOCK 03", 2, "D2000", 2000) { ID = Guid.NewGuid() });
+            mxDevice.AddBlock(new MitsubishiMxComponentBlock { ID = Guid.NewGuid(), Name = "BLOCK 02", StationNo = 1, StartAddress = "D1000", BufferSize = 2000 });
+            mxDevice.AddBlock(new MitsubishiMxComponentBlock { ID = Guid.NewGuid(), Name = "BLOCK 03", StationNo = 1, StartAddress = "D2000", BufferSize = 2000 });
 
-            var bitBlock = new MitsubishiMxComponentBlock("BLOCK 04", 2, "M0000", 10) { ID = Guid.NewGuid() };
+            var bitBlock = new MitsubishiMxComponentBlock { ID = Guid.NewGuid(), Name = "BLOCK 04", StationNo = 1, StartAddress = "M1000", BufferSize = 10 };
             mxDevice.AddBlock(bitBlock);
 
             int noCount = 0;
 
-            myBlock.AddTag(new StringTag("SAMPLE_STR_DATA_001", "D0000", EDirection.In, 10) { No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
-            myBlock.AddTag(new StringTag("SAMPLE_STR_DATA_002", "D0010", EDirection.In, 10) { No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
-            myBlock.AddTag(new StringTag("SAMPLE_STR_DATA_003", "D0020", EDirection.In, 10) { No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
-            myBlock.AddTag(new StringTag("SAMPLE_STR_DATA_004", "D0030", EDirection.In, 10) { No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
+            myBlock.AddTag(new StringTag() { Name = "SAMPLE_STR_DATA_001", Address = "D0000", Direction = EDirection.In, ByteSize = 10, No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
+            myBlock.AddTag(new StringTag() { Name = "SAMPLE_STR_DATA_002", Address = "D0010", Direction = EDirection.In, ByteSize = 10, No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
+            myBlock.AddTag(new StringTag() { Name = "SAMPLE_STR_DATA_003", Address = "D0020", Direction = EDirection.In, ByteSize = 10, No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
+            myBlock.AddTag(new StringTag() { Name = "SAMPLE_STR_DATA_004", Address = "D0030", Direction = EDirection.In, ByteSize = 10, No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
 
-            myBlock.AddTag(new ShortTag("SAMPLE_SRT_DATA_005", "D0100", EDirection.In) { No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
-            myBlock.AddTag(new ShortTag("SAMPLE_SRT_DATA_006", "D0101", EDirection.In) { No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
-            myBlock.AddTag(new ShortTag("SAMPLE_SRT_DATA_007", "D0102", EDirection.In) { No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
-            myBlock.AddTag(new ShortTag("SAMPLE_SRT_DATA_008", "D0103", EDirection.In) { No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
+            myBlock.AddTag(new ShortTag() { Name = "SAMPLE_SRT_DATA_005", Address = "D0100", Direction = EDirection.In,No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
+            myBlock.AddTag(new ShortTag() { Name = "SAMPLE_SRT_DATA_006", Address = "D0101", Direction = EDirection.In,No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
+            myBlock.AddTag(new ShortTag() { Name = "SAMPLE_SRT_DATA_007", Address = "D0102", Direction = EDirection.In,No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
+            myBlock.AddTag(new ShortTag() { Name = "SAMPLE_SRT_DATA_008", Address = "D0103", Direction = EDirection.In, No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
 
-            myBlock.AddTag(new IntTag("SAMPLE_INT_DATA_009", "D0110", EDirection.In) { No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
-            myBlock.AddTag(new IntTag("SAMPLE_INT_DATA_010", "D0112", EDirection.In) { No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
-            myBlock.AddTag(new IntTag("SAMPLE_INT_DATA_011", "D0114", EDirection.In) { No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
-            myBlock.AddTag(new IntTag("SAMPLE_INT_DATA_012", "D0116", EDirection.In) { No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
+            myBlock.AddTag(new IntTag() { Name = "SAMPLE_INT_DATA_009", Address = "D0110", Direction = EDirection.In, No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
+            myBlock.AddTag(new IntTag() { Name = "SAMPLE_INT_DATA_010", Address = "D0112", Direction = EDirection.In, No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
+            myBlock.AddTag(new IntTag() { Name = "SAMPLE_INT_DATA_011", Address = "D0114", Direction = EDirection.In, No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
+            myBlock.AddTag(new IntTag() { Name = "SAMPLE_INT_DATA_012", Address = "D0116", Direction = EDirection.In, No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
 
-            bitBlock.AddTag(new BooleanTag("SAMPLE_BOOL_DATA_013", "M0000", EDirection.In, 0) { No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
-            bitBlock.AddTag(new BooleanTag("SAMPLE_BOOL_DATA_014", "M0001", EDirection.In, 1) { No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
-            bitBlock.AddTag(new BooleanTag("SAMPLE_BOOL_DATA_015", "M0002", EDirection.In, 2) { No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
-            bitBlock.AddTag(new BooleanTag("SAMPLE_BOOL_DATA_016", "M0003", EDirection.In, 3) { No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
+            bitBlock.AddTag(new BooleanTag() { Name = "SAMPLE_BOOL_DATA_013", Address = "M0000", Direction = EDirection.In, BitIndex = 0, No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
+            bitBlock.AddTag(new BooleanTag() { Name = "SAMPLE_BOOL_DATA_014", Address = "M0001", Direction = EDirection.In, BitIndex = 1, No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
+            bitBlock.AddTag(new BooleanTag() { Name = "SAMPLE_BOOL_DATA_015", Address = "M0002", Direction = EDirection.In, BitIndex = 2, No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
+            bitBlock.AddTag(new BooleanTag() { Name = "SAMPLE_BOOL_DATA_016", Address = "M0003", Direction = EDirection.In, BitIndex = 3, No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
 
             string path = DialogHelper.ShowSaveFileDialog(DialogHelper.FILTER_STR_JSON);
             if (string.IsNullOrEmpty(path))
@@ -411,7 +411,7 @@ namespace Jankilla.TagBuilder
             IDataAccessControl control = null;
             switch (driver.Discriminator)
             {
-                case EDriverDiscriminator.MitsubishiMxComponent:
+                case "MitsubishiMxComponent":
                     var mitsubishiMxComponentDriverUserControl = new MitsubishiMxComponentDriverUserControl()
                     {
                         Project = _loadedProject,
@@ -480,7 +480,7 @@ namespace Jankilla.TagBuilder
 
             switch (driver.Discriminator)
             {
-                case EDriverDiscriminator.MitsubishiMxComponent:
+                case "MitsubishiMxComponent":
                     control = new MitsubishiMxComponentDeviceUserControl()
                     {
                         Driver = (MitsubishiMxComponentDriver)driver,
@@ -530,7 +530,7 @@ namespace Jankilla.TagBuilder
 
             switch (device.Discriminator)
             {
-                case EDriverDiscriminator.MitsubishiMxComponent:
+                case "MitsubishiMxComponent":
                     var mitsubishiMxComponentDeviceUserControl = new MitsubishiMxComponentDeviceUserControl()
                     {
                         Driver = (MitsubishiMxComponentDriver)driver,
@@ -605,7 +605,7 @@ namespace Jankilla.TagBuilder
 
             switch (device.Discriminator)
             {
-                case EDriverDiscriminator.MitsubishiMxComponent:
+                case "MitsubishiMxComponent":
                     control = new MitsubishiMxComponentBlockUserControl()
                     {
                         Device = (MitsubishiMxComponentDevice)device,
@@ -655,7 +655,7 @@ namespace Jankilla.TagBuilder
 
             switch (block.Discriminator)
             {
-                case EDriverDiscriminator.MitsubishiMxComponent:
+                case "MitsubishiMxComponent":
                     var mitsubishiMxComponentBlockUserControl = new MitsubishiMxComponentBlockUserControl()
                     {
                         Device = (MitsubishiMxComponentDevice)device,
@@ -735,7 +735,7 @@ namespace Jankilla.TagBuilder
 
             switch (block.Discriminator)
             {
-                case EDriverDiscriminator.MitsubishiMxComponent:
+                case "MitsubishiMxComponent":
                     control = new MitsubishiMxComponentTagUserControl()
                     {
                         Block = (MitsubishiMxComponentBlock)block,
@@ -787,7 +787,7 @@ namespace Jankilla.TagBuilder
 
             switch (block.Discriminator)
             {
-                case EDriverDiscriminator.MitsubishiMxComponent:
+                case "MitsubishiMxComponent":
                     var mitsubishiMxComponentTagUserControl = new MitsubishiMxComponentTagUserControl()
                     {
                         Block = (MitsubishiMxComponentBlock)block,
@@ -907,7 +907,7 @@ namespace Jankilla.TagBuilder
 
         #endregion
 
-    
+
     }
 
 

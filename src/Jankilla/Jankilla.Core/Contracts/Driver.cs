@@ -9,7 +9,6 @@ namespace Jankilla.Core.Contracts
 {
     public abstract class Driver : BaseContract
     {
-
         #region Public Properties
         public abstract IReadOnlyList<Device> Devices { get; }
 

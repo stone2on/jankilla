@@ -44,34 +44,33 @@
     <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-   <Reference Include="DevExpress.BonusSkins.v20.1">
+    <Reference Include="DevExpress.BonusSkins.v20.1">
       <HintPath>..\..\..\external\ui\DevExpress.BonusSkins.v20.1.dll</HintPath>
-   </Reference>
+    </Reference>
     <Reference Include="DevExpress.Data.Desktop.v20.1">
       <HintPath>..\..\..\external\ui\DevExpress.Data.Desktop.v20.1.dll</HintPath>
-   </Reference>
-   <Reference Include="DevExpress.Data.v20.1">
+    </Reference>
+    <Reference Include="DevExpress.Data.v20.1">
       <HintPath>..\..\..\external\ui\DevExpress.Data.v20.1.dll</HintPath>
-   </Reference>
-   <Reference Include="DevExpress.Utils.v20.1">
+    </Reference>
+    <Reference Include="DevExpress.Utils.v20.1">
       <HintPath>..\..\..\external\ui\DevExpress.Utils.v20.1.dll</HintPath>
-   </Reference>
-   <Reference Include="DevExpress.XtraBars.v20.1">
+    </Reference>
+    <Reference Include="DevExpress.XtraBars.v20.1">
       <HintPath>..\..\..\external\ui\DevExpress.XtraBars.v20.1.dll</HintPath>
-   </Reference>
-   <Reference Include="DevExpress.XtraEditors.v20.1">
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v20.1">
       <HintPath>..\..\..\external\ui\DevExpress.XtraEditors.v20.1.dll</HintPath>
-   </Reference>
-   <Reference Include="DevExpress.XtraGrid.v20.1">
+    </Reference>
+    <Reference Include="DevExpress.XtraGrid.v20.1">
       <HintPath>..\..\..\external\ui\DevExpress.XtraGrid.v20.1.dll</HintPath>
-   </Reference>
-   <Reference Include="DevExpress.XtraLayout.v20.1">
+    </Reference>
+    <Reference Include="DevExpress.XtraLayout.v20.1">
       <HintPath>..\..\..\external\ui\DevExpress.XtraLayout.v20.1.dll</HintPath>
-   </Reference>
-   <Reference Include="DevExpress.XtraTreeList.v20.1">
+    </Reference>
+    <Reference Include="DevExpress.XtraTreeList.v20.1">
       <HintPath>..\..\..\external\ui\DevExpress.XtraTreeList.v20.1.dll</HintPath>
-   </Reference>
-  
+    </Reference>
     <Reference Include="Accessibility" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -169,10 +168,6 @@
     <ProjectReference Include="..\Jankilla.Core\Jankilla.Core.csproj">
       <Project>{25992354-99a9-4e9e-96a3-2572770dd01b}</Project>
       <Name>Jankilla.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Jankilla.Core.Converter\Jankilla.Core.Converter.csproj">
-      <Project>{fdef9c71-36f2-4b1b-85ed-fdba215f2bfa}</Project>
-      <Name>Jankilla.JSON.Converter</Name>
     </ProjectReference>
     <ProjectReference Include="..\Jankilla.Driver.MitsubishiMxComponent\Jankilla.Driver.MitsubishiMxComponent.csproj">
       <Project>{a92db163-f0c6-4cd3-8be4-8cccfd843265}</Project>

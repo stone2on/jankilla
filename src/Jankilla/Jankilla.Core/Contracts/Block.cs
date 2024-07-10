@@ -15,8 +15,8 @@ namespace Jankilla.Core.Contracts
         #region Public Properties
 
         public Guid DeviceID { get; set; }
-        public virtual string StartAddress { get; protected set; }
-        public virtual int BufferSize { get; protected set; }
+        public virtual string StartAddress { get; set; }
+        public virtual int BufferSize { get; set; }
 
         public virtual ObservableCollection<Tag> Tags
         {

@@ -13,12 +13,27 @@ namespace Jankilla.Core.Contracts.Tags
 
         public override event PropertyChangedEventHandler PropertyChanged;
 
+        private int _bitIndex;
+        public int BitIndex 
+        { 
+            get {  return _bitIndex; }
+            set 
+            {
+                if (value > 15 || value < 0)
+                {
+                    throw new ArgumentOutOfRangeException("*bitIndex");
+                }
+
+                if (value >= 8)
+                {
+                    _writeIndex = 1;
+                }
+
+                _bitIndex = value; 
+            }
+        }
+
         public bool BooleanValue { get; private set; }
-
-        public int BitIndex { get; set; }
-
-        private int _writeIndex = 0;
-        private string _modifiedAddress;
 
         public override object Value
         {
@@ -49,48 +64,12 @@ namespace Jankilla.Core.Contracts.Tags
             }
         }
 
-        public BooleanTag(
-          string name,
-          string address,
-          EDirection inOut,
-          int bitIndex)
-          : base(name, address, 2, inOut)
+        private int _writeIndex = 0;
+        private string _modifiedAddress;
+
+        public BooleanTag()
         {
-            this._writebuffer = new byte[this.ByteSize];
-            this.BitIndex = bitIndex;
-
-            if (bitIndex > 15 || bitIndex < 0)
-            {
-                throw new ArgumentOutOfRangeException("*bitIndex");
-            }
-
-            if (bitIndex >= 8)
-            {
-                _writeIndex = 1;
-            }
-        }
-     
-
-        public BooleanTag (Guid id, int no, string name, int direction, int byteSize, bool readOnly,
-            string address, string category, string description, string path, string unit, bool useOffset, double offset, bool useFactor, double factor, 
-            int discriminator, Guid blockID, int bitIndex) 
-            : this (name, address, (EDirection)direction, bitIndex)
-        {
-            ID = id;
-            No = no;
-            ReadOnly = readOnly;
-            Description = description;
-            Category = category;
-            Path = path;
-            Unit = unit;
-            UseFactor = useFactor;
-            Factor = factor;
-            UseOffset = useOffset;
-            Offset = offset;
-            BlockID = blockID;
-
-            Debug.Assert(byteSize == 2);
-            Debug.Assert(discriminator == (int)ETagDiscriminator.Boolean);
+            ByteSize = 2;
         }
 
         public override void Read(short[] buffer, int startIndex)

@@ -121,7 +121,7 @@ namespace Jankilla.TagBuilder.Controls.MitsubishiMxComponent
             var dType = comboBoxEditDeviceType.SelectedItem.ToString();
             var address = textEditAddress.Text;
 
-            var block = new MitsubishiMxComponentBlock(name, sNo, $"{dType}{address}", byteSize) { ID = Guid.NewGuid() };
+            var block = new MitsubishiMxComponentBlock{ ID = Guid.NewGuid(), Name = name, StationNo = sNo, StartAddress = $"{dType}{address}", BufferSize = byteSize };
             block.Description = desc;
 
             _result = block;
@@ -162,7 +162,7 @@ namespace Jankilla.TagBuilder.Controls.MitsubishiMxComponent
             var dType = comboBoxEditDeviceType.SelectedItem.ToString();
             var address = textEditAddress.Text;
 
-            var block = new MitsubishiMxComponentBlock(name, sNo, $"{dType}{address}", byteSize) { ID = _result.ID };
+            var block = new MitsubishiMxComponentBlock{ ID = _result.ID, Name = name, StationNo = sNo, StartAddress = $"{dType}{address}", BufferSize = byteSize };
             block.Description = desc;
 
             Device.ReplaceBlock(index, block);

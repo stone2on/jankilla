@@ -11,7 +11,7 @@ namespace Jankilla.Driver.MitsubishiMcProtocol
 {
     public class MitsubishiMcProtocolDriver : Core.Contracts.Driver
     {
-        public override EDriverDiscriminator Discriminator => EDriverDiscriminator.MitsubishiMcProtocol;
+        public override string Discriminator => "MitsubishiMcProtocol";
 
         public override IReadOnlyList<Device> Devices
         {
@@ -128,7 +128,7 @@ namespace Jankilla.Driver.MitsubishiMcProtocol
                 return false;
             }
 
-            if (device.Discriminator != EDriverDiscriminator.MitsubishiMcProtocol)
+            if (device.Discriminator != Discriminator)
             {
                 return false;
             }

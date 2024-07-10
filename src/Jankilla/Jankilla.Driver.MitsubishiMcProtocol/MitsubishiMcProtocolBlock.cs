@@ -17,12 +17,12 @@ namespace Jankilla.Driver.MitsubishiMcProtocol
     {
         #region Public Properties
 
-        public override EDriverDiscriminator Discriminator => EDriverDiscriminator.MitsubishiMcProtocol;
+        public override string Discriminator => "MitsubishiMcProtocol";
 
         public override string StartAddress
         {
             get => base.StartAddress;
-            protected set =>
+            set =>
                 base.StartAddress = value;
         }
 
@@ -37,15 +37,23 @@ namespace Jankilla.Driver.MitsubishiMcProtocol
 
         #region Fields
 
+#pragma warning disable CS0169 // 'MitsubishiMcProtocolBlock._stationNo' 필드가 사용되지 않았습니다.
         private int _stationNo;
+#pragma warning restore CS0169 // 'MitsubishiMcProtocolBlock._stationNo' 필드가 사용되지 않았습니다.
 
+#pragma warning disable CS0649 // 'MitsubishiMcProtocolBlock._readbuffer' 필드에는 할당되지 않으므로 항상 null 기본값을 사용합니다.
         private readonly short[] _readbuffer;
+#pragma warning restore CS0649 // 'MitsubishiMcProtocolBlock._readbuffer' 필드에는 할당되지 않으므로 항상 null 기본값을 사용합니다.
+#pragma warning disable CS0649 // 'MitsubishiMcProtocolBlock._writeBuffer' 필드에는 할당되지 않으므로 항상 null 기본값을 사용합니다.
         private readonly short[] _writeBuffer;
+#pragma warning restore CS0649 // 'MitsubishiMcProtocolBlock._writeBuffer' 필드에는 할당되지 않으므로 항상 null 기본값을 사용합니다.
 
         private IList<MitsubishiMcProtocolTagWrapper> _mcTags = new List<MitsubishiMcProtocolTagWrapper>();
         private ConcurrentQueue<TagEventArgs> _writeEventQueue = new ConcurrentQueue<TagEventArgs>();
 
+#pragma warning disable CS0649 // 'MitsubishiMcProtocolBlock._shortBufferSize' 필드에는 할당되지 않으므로 항상 0 기본값을 사용합니다.
         private int _shortBufferSize;
+#pragma warning restore CS0649 // 'MitsubishiMcProtocolBlock._shortBufferSize' 필드에는 할당되지 않으므로 항상 0 기본값을 사용합니다.
 
         #endregion
 

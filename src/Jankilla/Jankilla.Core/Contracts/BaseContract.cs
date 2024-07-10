@@ -14,13 +14,12 @@ namespace Jankilla.Core.Contracts
         public string Name { get; set; }
         public string Path { get; set; }
         public string Description { get; set; }
-        [JsonIgnore]
         public bool IsOpened { get; protected set; }
         #endregion
 
         #region Abstracts
 
-        public abstract EDriverDiscriminator Discriminator { get; }
+        public abstract string Discriminator { get; }
 
         public abstract bool Open();
         public abstract void Close();

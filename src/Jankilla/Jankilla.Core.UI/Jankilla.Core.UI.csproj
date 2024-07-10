@@ -38,31 +38,30 @@
 	</AllowedReferenceRelatedFileExtensions>
   </PropertyGroup>
   <ItemGroup>
-   <Reference Include="DevExpress.Data.Desktop.v20.1">
+    <Reference Include="DevExpress.Data.Desktop.v20.1">
       <HintPath>..\..\..\external\ui\DevExpress.Data.Desktop.v20.1.dll</HintPath>
-   </Reference>
-   <Reference Include="DevExpress.Data.v20.1">
+    </Reference>
+    <Reference Include="DevExpress.Data.v20.1">
       <HintPath>..\..\..\external\ui\DevExpress.Data.v20.1.dll</HintPath>
-   </Reference>
-   <Reference Include="DevExpress.Printing.v20.1.Core">
+    </Reference>
+    <Reference Include="DevExpress.Printing.v20.1.Core">
       <HintPath>..\..\..\external\ui\DevExpress.Printing.v20.1.Core.dll</HintPath>
-   </Reference>
-   <Reference Include="DevExpress.Utils.v20.1">
+    </Reference>
+    <Reference Include="DevExpress.Utils.v20.1">
       <HintPath>..\..\..\external\ui\DevExpress.Utils.v20.1.dll</HintPath>
-   </Reference>
-   <Reference Include="DevExpress.XtraBars.v20.1">
+    </Reference>
+    <Reference Include="DevExpress.XtraBars.v20.1">
       <HintPath>..\..\..\external\ui\DevExpress.XtraBars.v20.1.dll</HintPath>
-   </Reference>
-   <Reference Include="DevExpress.XtraEditors.v20.1">
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v20.1">
       <HintPath>..\..\..\external\ui\DevExpress.XtraEditors.v20.1.dll</HintPath>
-   </Reference>
-   <Reference Include="DevExpress.XtraGrid.v20.1">
+    </Reference>
+    <Reference Include="DevExpress.XtraGrid.v20.1">
       <HintPath>..\..\..\external\ui\DevExpress.XtraGrid.v20.1.dll</HintPath>
-   </Reference>
-   <Reference Include="DevExpress.XtraLayout.v20.1">
+    </Reference>
+    <Reference Include="DevExpress.XtraLayout.v20.1">
       <HintPath>..\..\..\external\ui\DevExpress.XtraLayout.v20.1.dll</HintPath>
-   </Reference>
- 
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -173,6 +172,9 @@
       <Project>{25992354-99a9-4e9e-96a3-2572770dd01b}</Project>
       <Name>Jankilla.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
