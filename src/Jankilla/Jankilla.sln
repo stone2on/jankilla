@@ -1,21 +1,16 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.9.34714.143
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33214.272
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jankilla.Core", "Jankilla.Core\Jankilla.Core.csproj", "{25992354-99A9-4E9E-96A3-2572770DD01B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jankilla.Core", "Jankilla.Core\Jankilla.Core.csproj", "{25992354-99A9-4E9E-96A3-2572770DD01B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jankilla.Driver.MitsubishiMxComponent", "Jankilla.Driver.MitsubishiMxComponent\Jankilla.Driver.MitsubishiMxComponent.csproj", "{A92DB163-F0C6-4CD3-8BE4-8CCCFD843265}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jankilla.Driver.MitsubishiMxComponent", "Jankilla.Driver.MitsubishiMxComponent\Jankilla.Driver.MitsubishiMxComponent.csproj", "{A92DB163-F0C6-4CD3-8BE4-8CCCFD843265}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jankilla.Driver.MitsubishiMxComponent.Test", "Jankilla.Driver.MitsubishiMxComponent.Test\Jankilla.Driver.MitsubishiMxComponent.Test.csproj", "{EBB5CC32-C89B-4BB2-9EA8-E7307B7EC3EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jankilla.Core.DB", "Jankilla.Core.DB\Jankilla.Core.DB.csproj", "{9A2FAD5F-7189-4831-BDCE-790D7B7D1447}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jankilla.TagBuilder", "Jankilla.TagBuilder\Jankilla.TagBuilder.csproj", "{B03E4182-F795-4DBE-929C-0A8DD698E3FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jankilla.Driver.MitsubishiMcProtocol", "Jankilla.Driver.MitsubishiMcProtocol\Jankilla.Driver.MitsubishiMcProtocol.csproj", "{D2746111-A152-40B2-A49E-777483EAC0E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jankilla.Core.UI", "Jankilla.Core.UI\Jankilla.Core.UI.csproj", "{65326A1E-A13C-4B6A-9613-FBAF6606A058}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jankilla.Core.DB", "Jankilla.Core.DB\Jankilla.Core.DB.csproj", "{9A2FAD5F-7189-4831-BDCE-790D7B7D1447}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jankilla.Driver.MitsubishiMcProtocol", "Jankilla.Driver.MitsubishiMcProtocol\Jankilla.Driver.MitsubishiMcProtocol.csproj", "{D2746111-A152-40B2-A49E-777483EAC0E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jankilla.Driver.Test", "Jankilla.Driver.Test\Jankilla.Driver.Test.csproj", "{2A00F802-0E87-43B4-BD03-CE9B3D624DF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,18 +26,6 @@ Global
 		{A92DB163-F0C6-4CD3-8BE4-8CCCFD843265}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A92DB163-F0C6-4CD3-8BE4-8CCCFD843265}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A92DB163-F0C6-4CD3-8BE4-8CCCFD843265}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EBB5CC32-C89B-4BB2-9EA8-E7307B7EC3EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EBB5CC32-C89B-4BB2-9EA8-E7307B7EC3EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EBB5CC32-C89B-4BB2-9EA8-E7307B7EC3EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EBB5CC32-C89B-4BB2-9EA8-E7307B7EC3EC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B03E4182-F795-4DBE-929C-0A8DD698E3FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B03E4182-F795-4DBE-929C-0A8DD698E3FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B03E4182-F795-4DBE-929C-0A8DD698E3FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B03E4182-F795-4DBE-929C-0A8DD698E3FC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{65326A1E-A13C-4B6A-9613-FBAF6606A058}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{65326A1E-A13C-4B6A-9613-FBAF6606A058}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{65326A1E-A13C-4B6A-9613-FBAF6606A058}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{65326A1E-A13C-4B6A-9613-FBAF6606A058}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9A2FAD5F-7189-4831-BDCE-790D7B7D1447}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9A2FAD5F-7189-4831-BDCE-790D7B7D1447}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A2FAD5F-7189-4831-BDCE-790D7B7D1447}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -51,6 +34,10 @@ Global
 		{D2746111-A152-40B2-A49E-777483EAC0E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2746111-A152-40B2-A49E-777483EAC0E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2746111-A152-40B2-A49E-777483EAC0E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A00F802-0E87-43B4-BD03-CE9B3D624DF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A00F802-0E87-43B4-BD03-CE9B3D624DF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A00F802-0E87-43B4-BD03-CE9B3D624DF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A00F802-0E87-43B4-BD03-CE9B3D624DF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

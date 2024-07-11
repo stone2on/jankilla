@@ -1,41 +1,25 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{65326A1E-A13C-4B6A-9613-FBAF6606A058}</ProjectGuid>
+    <TargetFramework>net472</TargetFramework>
     <OutputType>Library</OutputType>
-    <RootNamespace>Jankilla.Core.UI</RootNamespace>
-    <AssemblyName>Jankilla.Core.UI</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
     <Deterministic>false</Deterministic>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
     <OutputPath>..\..\..\build\debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
     <AllowedReferenceRelatedFileExtensions>
     *.pdb;
     *.xml
-	</AllowedReferenceRelatedFileExtensions>
+	  </AllowedReferenceRelatedFileExtensions>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
     <OutputPath>..\..\..\build\release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
     <AllowedReferenceRelatedFileExtensions>
     *.pdb;
     *.xml
-	</AllowedReferenceRelatedFileExtensions>
+	  </AllowedReferenceRelatedFileExtensions>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.Data.Desktop.v20.1">
@@ -62,86 +46,18 @@
     <Reference Include="DevExpress.XtraLayout.v20.1">
       <HintPath>..\..\..\external\ui\DevExpress.XtraLayout.v20.1.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\BaseDeviceControl.cs">
+    <Compile Update="Controls\BaseDeviceControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\BaseDeviceControl.designer.cs">
-      <DependentUpon>BaseDeviceControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\RemarkControl.cs">
+    <Compile Update="Controls\RemarkControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\RemarkControl.designer.cs">
-      <DependentUpon>RemarkControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Base\EControlCommand.cs" />
-    <Compile Include="Forms\Base\IDataAccessControl.cs" />
-    <Compile Include="Forms\Base\IBindableControl.cs" />
-    <Compile Include="Forms\DataAccessForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\DataAccessForm.Designer.cs">
-      <DependentUpon>DataAccessForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\LicenseAdminForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\LicenseAdminForm.Designer.cs">
-      <DependentUpon>LicenseAdminForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\LicenseClientForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\LicenseClientForm.Designer.cs">
-      <DependentUpon>LicenseClientForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Listeners\ListBoxTraceListener.cs" />
-    <Compile Include="Models\Progress\EProgressReportMode.cs" />
-    <Compile Include="Models\Progress\IProgressReportable.cs" />
-    <Compile Include="Models\Progress\ProgressExtension.cs" />
-    <Compile Include="Models\Progress\ProgressReportModel.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Utils\DialogHelper.cs" />
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Controls\BaseDeviceControl.resx">
-      <DependentUpon>BaseDeviceControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\RemarkControl.resx">
-      <DependentUpon>RemarkControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DataAccessForm.resx">
-      <DependentUpon>DataAccessForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LicenseAdminForm.resx">
-      <DependentUpon>LicenseAdminForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LicenseClientForm.resx">
-      <DependentUpon>LicenseClientForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\assemble.png" />
@@ -168,13 +84,10 @@
     <Content Include="Resources\worker.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Jankilla.Core\Jankilla.Core.csproj">
-      <Project>{25992354-99a9-4e9e-96a3-2572770dd01b}</Project>
-      <Name>Jankilla.Core</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\Jankilla.Core\Jankilla.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

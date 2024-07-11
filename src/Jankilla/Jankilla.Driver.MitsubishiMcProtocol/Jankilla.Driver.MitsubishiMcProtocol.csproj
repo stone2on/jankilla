@@ -1,73 +1,25 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D2746111-A152-40B2-A49E-777483EAC0E6}</ProjectGuid>
+    <TargetFrameworks>net8.0;net472;netstandard2.0;netstandard2.1</TargetFrameworks>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Jankilla.Driver.MitsubishiMcProtocol</RootNamespace>
-    <AssemblyName>Jankilla.Driver.MitsubishiMcProtocol</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AssemblyTitle>Jankilla.Driver.MitsubishiMcProtocol</AssemblyTitle>
+    <Product>Jankilla.Driver.MitsubishiMcProtocol</Product>
+    <Copyright>Copyright ©  2024</Copyright>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <OutputPath>..\..\..\build\debug\$(AssemblyName)</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <OutputPath>..\..\..\build\release\$(AssemblyName)</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Defines\EDeviceCode.cs" />
-    <Compile Include="Defines\EFrame.cs" />
-    <Compile Include="Defines\EProtocol.cs" />
-    <Compile Include="Defines\Union.cs" />
-    <Compile Include="EDeviceNumber.cs" />
-    <Compile Include="EDeviceType.cs" />
-    <Compile Include="Interfaces\IPLC.cs" />
-    <Compile Include="MitsubishiMcProtocolBlock.cs" />
-    <Compile Include="MitsubishiMcProtocolDevice.cs" />
-    <Compile Include="MitsubishiMcProtocolDriver.cs" />
-    <Compile Include="MitsubishiMcProtocolTagWrapper.cs" />
-    <Compile Include="Models\McCommand.cs" />
-    <Compile Include="Models\McProtocolBase.cs" />
-    <Compile Include="Models\McProtocolErrorCode.cs" />
-    <Compile Include="Models\McProtocolTcp.cs" />
-    <Compile Include="Models\PLCData.cs" />
-    <Compile Include="Models\Union.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <ProjectReference Include="..\Jankilla.Core\Jankilla.Core.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Jankilla.Core\Jankilla.Core.csproj">
-      <Project>{25992354-99a9-4e9e-96a3-2572770dd01b}</Project>
-      <Name>Jankilla.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
