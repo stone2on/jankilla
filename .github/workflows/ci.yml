@@ -53,13 +53,13 @@ jobs:
       # run: nuget pack src/Jankilla/Jankilla.Core/Jankilla.Core.csproj -Properties Configuration=Release
 
     - name: Publish NuGet package - Core
-      run: nuget push Jankilla.Core*.nupkg -Source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json -ApiKey ${{ secrets.GITHUB_TOKEN }}
+      run: nuget push /build/release/Jankilla.Core*.nupkg -Source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json -ApiKey ${{ secrets.GITHUB_TOKEN }}
 
     # - name: Pack NuGet package - Driver - MxComponent
       # run: nuget pack src/Jankilla/Jankilla.Driver.MitsubishiMxComponent/Jankilla.Driver.MitsubishiMxComponent.csproj -Properties Configuration=Release
 
     - name: Publish NuGet package - Driver - MxComponent
-      run: nuget push Jankilla.Driver.MitsubishiMxComponent*.nupkg -Source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json -ApiKey ${{ secrets.GITHUB_TOKEN }}
+      run: nuget push /build/release/Jankilla.Driver.MitsubishiMxComponent*.nupkg -Source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json -ApiKey ${{ secrets.GITHUB_TOKEN }}
  
     # - name: Publish artifacts
       # uses: actions/upload-artifact@v4
