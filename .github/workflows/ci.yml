@@ -18,6 +18,7 @@ jobs:
       
     - name: List directory contents
       run: |
+        Write-Output ($GITHUB_WORKSPACE)
         $items = Get-ChildItem -Path . -Recurse
         $items | ForEach-Object {
           if ($_.PSIsContainer) {
