@@ -20,11 +20,7 @@
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="Converters\Csv\MitsubishiMxComponentDeviceMap.cs" />
-    <Compile Remove="Converters\Csv\MitsubishiMxComponentDriverMap.cs" />
-    <Compile Remove="Converters\MitsubishiMxComponentCsvConvertGenerator.cs" />
-  </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Jankilla.Core\Jankilla.Core.csproj" />
   </ItemGroup>

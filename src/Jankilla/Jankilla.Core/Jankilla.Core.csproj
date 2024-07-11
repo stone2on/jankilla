@@ -6,7 +6,7 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AssemblyTitle>Jankilla.Core</AssemblyTitle>
     <Product>Jankilla.Core</Product>
-    <Copyright>Copyright © stone2on  2024</Copyright>
+    <Copyright>Copyright © stone2on 2024</Copyright>
     <AssemblyVersion>1.0.*</AssemblyVersion>
     <Title>Jankilla.Core</Title>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
