@@ -38,8 +38,8 @@ jobs:
       run: |
         & 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin\MSBuild.exe' src/Jankilla/Jankilla.sln /p:Configuration=Release
  
-     - name: List directory contents
-       run: |
+    - name: List directory contents
+      run: |
         $items = Get-ChildItem -Path . -Recurse
         $items | ForEach-Object {
           if ($_.PSIsContainer) {

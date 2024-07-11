@@ -8,6 +8,7 @@
     <Product>Jankilla.Driver.MitsubishiMxComponent</Product>
     <Copyright>Copyright © stone2on 2024</Copyright>
     <AssemblyVersion>1.0.*</AssemblyVersion>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>..\..\..\build\debug\$(AssemblyName)</OutputPath>
