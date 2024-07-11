@@ -54,8 +54,21 @@ jobs:
     # - name: Pack NuGet package - Core
       # run: nuget pack src/Jankilla/Jankilla.Core/Jankilla.Core.csproj -Properties Configuration=Release
 
-    - name: Publish NuGet package - Core
-      run: nuget push "*.nupkg" -Source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json -ApiKey ${{ secrets.GITHUB_TOKEN }}
+    # - name: Publish NuGet package - Core
+    #   run: nuget push "*.nupkg" -Source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json -ApiKey ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Find and push NuGet packages
+      run: |
+          # 재귀적으로 모든 .nupkg 파일 찾기
+          $packages = Get-ChildItem -Path -Recurse -Filter *.nupkg
+
+          # 각 nupkg 파일을 NuGet 저장소에 push
+          foreach ($package in $packages) {
+            Write-Host "Pushing package: $($package.FullName)"
+            nuget push $package.FullName -Source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json -ApiKey ${{ secrets.GITHUB_TOKEN }}
+          }
+      shell: pwsh  # PowerShell 사용 설정
+      working-directory: ${{ github.workspace }}  # 작업 디렉토리 설정
 
     # - name: Pack NuGet package - Driver - MxComponent
       # run: nuget pack src/Jankilla/Jankilla.Driver.MitsubishiMxComponent/Jankilla.Driver.MitsubishiMxComponent.csproj -Properties Configuration=Release
