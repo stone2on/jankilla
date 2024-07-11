@@ -60,7 +60,7 @@ jobs:
     - name: Find and push NuGet packages
       run: |
           # 재귀적으로 모든 .nupkg 파일 찾기
-          $packages = Get-ChildItem -Path -Recurse -Filter *.nupkg
+          $packages = Get-ChildItem -Path . -Recurse -Filter *.nupkg
 
           # 각 nupkg 파일을 NuGet 저장소에 push
           foreach ($package in $packages) {
