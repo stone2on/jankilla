@@ -49,31 +49,6 @@ namespace Jankilla.Core.Converters
                 Converters = new List<JsonConverter>()
             };
 
-            _jsonSerializerSettings.Converters.Add(JsonSubtypesConverterBuilder
-               .Of<Tag>("Discriminator")
-               .RegisterSubtype<IntTag>(ETagDiscriminator.Int)
-               .Build());
-
-            _jsonSerializerSettings.Converters.Add(JsonSubtypesConverterBuilder
-                .Of<Tag>("Discriminator")
-                .RegisterSubtype<ShortTag>(ETagDiscriminator.Short)
-                .Build());
-
-            _jsonSerializerSettings.Converters.Add(JsonSubtypesConverterBuilder
-                .Of<Tag>("Discriminator")
-                .RegisterSubtype<StringTag>(ETagDiscriminator.String)
-                .Build());
-
-            _jsonSerializerSettings.Converters.Add(JsonSubtypesConverterBuilder
-                .Of<Tag>("Discriminator")
-                .RegisterSubtype<FloatTag>(ETagDiscriminator.Float)
-                .Build());
-
-            _jsonSerializerSettings.Converters.Add(JsonSubtypesConverterBuilder
-                .Of<Tag>("Discriminator")
-                .RegisterSubtype<BooleanTag>(ETagDiscriminator.Boolean)
-                .Build());
-
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
 
             var driverType = typeof(Driver);
@@ -81,45 +56,57 @@ namespace Jankilla.Core.Converters
                 .SelectMany(assembly => assembly.GetTypes())
                 .Where(type => driverType.IsAssignableFrom(type) && type.IsClass && !type.IsAbstract);
 
+            JsonSubtypesConverterBuilder drvBuilder = JsonSubtypesConverterBuilder.Of<Driver>("Discriminator");
             foreach (var type in drvTypes)
             {
-                var drv = (Driver)ObjectResolver.Current.Resolve(type);
-
-                _jsonSerializerSettings.Converters.Add(JsonSubtypesConverterBuilder
-                    .Of<Driver>("Discriminator")
-                    .RegisterSubtype(type, drv.Discriminator)
-                    .Build());
+                var driver = (Driver)ObjectResolver.Current.Resolve(type);
+                drvBuilder.RegisterSubtype(type, driver.Discriminator);
             }
+
+            _jsonSerializerSettings.Converters.Add(drvBuilder.Build());
+ 
 
             var deviceType = typeof(Device);
             var dvcTypes = assemblies
                 .SelectMany(assembly => assembly.GetTypes())
                 .Where(type => deviceType.IsAssignableFrom(type) && type.IsClass && !type.IsAbstract);
 
+            JsonSubtypesConverterBuilder dvcBuilder = JsonSubtypesConverterBuilder.Of<Device>("Discriminator");
             foreach (var type in dvcTypes)
             {
-                var dvc = (Device)ObjectResolver.Current.Resolve(type);
-
-                _jsonSerializerSettings.Converters.Add(JsonSubtypesConverterBuilder
-                    .Of<Device>("Discriminator")
-                    .RegisterSubtype(type, dvc.Discriminator)
-                    .Build());
+                var device = (Device)ObjectResolver.Current.Resolve(type);
+                dvcBuilder.RegisterSubtype(type, device.Discriminator);
             }
+
+            _jsonSerializerSettings.Converters.Add(dvcBuilder.Build());
 
             var blockType = typeof(Block);
             var blkTypes = assemblies
                 .SelectMany(assembly => assembly.GetTypes())
                 .Where(type => blockType.IsAssignableFrom(type) && type.IsClass && !type.IsAbstract);
 
+            JsonSubtypesConverterBuilder blkBuilder = JsonSubtypesConverterBuilder.Of<Block>("Discriminator");
             foreach (var type in blkTypes)
             {
-                var blk = (Block)ObjectResolver.Current.Resolve(type);
-
-                _jsonSerializerSettings.Converters.Add(JsonSubtypesConverterBuilder
-                    .Of<Block>("Discriminator")
-                    .RegisterSubtype(type, blk.Discriminator)
-                    .Build());
+                var block = (Block)ObjectResolver.Current.Resolve(type);
+                blkBuilder.RegisterSubtype(type, block.Discriminator);
             }
+
+            _jsonSerializerSettings.Converters.Add(blkBuilder.Build());
+
+            var tagType = typeof(Tag);
+            var tagTypes = assemblies
+                .SelectMany(assembly => assembly.GetTypes())
+                .Where(type => tagType.IsAssignableFrom(type) && type.IsClass && !type.IsAbstract);
+
+            JsonSubtypesConverterBuilder tagBuilder = JsonSubtypesConverterBuilder.Of<Tag>("Discriminator");
+            foreach (var type in tagTypes)
+            {
+                var tag = (Tag)ObjectResolver.Current.Resolve(type);
+                tagBuilder.RegisterSubtype(type, tag.Discriminator);
+            }
+
+            _jsonSerializerSettings.Converters.Add(tagBuilder.Build());
         }
 
         public Project OpenProjectFile(string path)

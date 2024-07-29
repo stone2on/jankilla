@@ -62,7 +62,7 @@ namespace Jankilla.Core.DB.Repositories
         {
             var blocks = new List<MitsubishiMxComponentBlock>();
 
-            var sql = $"SELECT d.*, mx.StationNo FROM Blocks d LEFT JOIN MitsubishiMxComponentBlocks mx ON d.ID = mx.ID  WHERE d.Discriminator = {(int)EDriverDiscriminator.MitsubishiMxComponent}";
+            var sql = $"SELECT d.*, mx.StationNo FROM Blocks d LEFT JOIN MitsubishiMxComponentBlocks mx ON d.ID = mx.ID  WHERE d.Discriminator = {(int)0/*EDriverDiscriminator.MitsubishiMxComponent*/}";
             using (var connection = new SqlConnection(ConnectionString))
             {   
                 connection.Open();
@@ -76,7 +76,7 @@ namespace Jankilla.Core.DB.Repositories
         {
             var blocks = new List<MitsubishiMxComponentBlock>();
 
-            var sql = $"SELECT d.*, mx.StationNo FROM Blocks d LEFT JOIN MitsubishiMxComponentBlocks mx ON d.ID = mx.ID  WHERE d.Discriminator = {(int)EDriverDiscriminator.MitsubishiMxComponent} AND d.DeviceID = '{parent.ID}'";
+            var sql = $"SELECT d.*, mx.StationNo FROM Blocks d LEFT JOIN MitsubishiMxComponentBlocks mx ON d.ID = mx.ID  WHERE d.Discriminator = {(int)0/*EDriverDiscriminator.MitsubishiMxComponent*/} AND d.DeviceID = '{parent.ID}'";
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();

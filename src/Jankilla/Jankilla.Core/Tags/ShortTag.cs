@@ -1,5 +1,6 @@
 ﻿using Jankilla.Core.Contracts.Tags.Base;
 using Jankilla.Core.Tags.Base;
+using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -12,9 +13,9 @@ namespace Jankilla.Core.Contracts.Tags
         public override event EventHandler<TagEventArgs> Writed;
 
         public override event PropertyChangedEventHandler PropertyChanged;
-
+        [JsonIgnore]
         public short ShortValue { get; private set; }
-
+        [JsonIgnore]
         public override object Value
         {
             get => ShortValue;
@@ -36,7 +37,7 @@ namespace Jankilla.Core.Contracts.Tags
                 this.NotifyPropertyChanged(this.PropertyChanged, nameof(Value));
             }
         }
-
+        [JsonIgnore]
         private double _calibratedVal;
         public override object CalibratedValue
         {

@@ -5,6 +5,7 @@ using Jankilla.Core.Converters;
 using Jankilla.Driver.MitsubishiMxComponent;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.IO;
 
 namespace Jankilla.Driver.Test
 {
@@ -63,6 +64,21 @@ namespace Jankilla.Driver.Test
             CsvProjectHelper.Instance.SaveProjectFile("project.csv", _project1);
         }
 
-      
+        [TestMethod]
+        public void File_ShouldSaved()
+        {
+            Assert.IsTrue(File.Exists("project.json"));
+            Assert.IsTrue(File.Exists("project.csv"));
+        }
+
+        [TestMethod]
+        public void Project_ShouldNotNull()
+        {
+            Project p = JsonProjectHelper.Instance.OpenProjectFile("project.json");
+            Assert.IsNotNull(p);
+
+            p = CsvProjectHelper.Instance.OpenProjectFile("project.csv");
+            Assert.IsNotNull(p);
+        }
     }
 }

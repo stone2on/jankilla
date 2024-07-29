@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Jankilla.Driver.MitsubishiMxComponent
 {
-    public class MitsubishiMxComponentBlock : Block, IDisposable
+    public class MitsubishiMxComponentBlock : Block
     {
         #region Public Properties
 
@@ -130,10 +130,7 @@ namespace Jankilla.Driver.MitsubishiMxComponent
 
         #region Constructor
 
-        public MitsubishiMxComponentBlock()
-        {
-            _tags.CollectionChanged += tags_CollectionChanged;
-        }
+        
 
 
         #endregion
@@ -187,7 +184,7 @@ namespace Jankilla.Driver.MitsubishiMxComponent
 
         #region Events
 
-        private void tags_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        protected override void tags_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             var tags = sender as ObservableCollection<Tag>;
             switch (e.Action)
@@ -369,11 +366,6 @@ namespace Jankilla.Driver.MitsubishiMxComponent
             }
 
             _tags.Clear();
-        }
-
-        public void Dispose()
-        {
-            _tags.CollectionChanged -= tags_CollectionChanged;
         }
 
 

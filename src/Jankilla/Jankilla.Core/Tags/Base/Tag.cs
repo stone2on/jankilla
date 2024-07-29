@@ -1,5 +1,6 @@
 ﻿using Jankilla.Core.Contracts.Tags.Base;
 using Jankilla.Core.Tags.Base;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

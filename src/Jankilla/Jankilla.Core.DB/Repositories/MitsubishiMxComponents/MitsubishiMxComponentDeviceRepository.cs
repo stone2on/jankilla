@@ -23,7 +23,7 @@ namespace Jankilla.Core.DB.Repositories
         {
             var devices = new List<MitsubishiMxComponentDevice>();
 
-            var sql = $"SELECT d.* FROM Devices d LEFT JOIN MitsubishiMxComponentDevices mx ON d.ID = mx.ID WHERE d.Discriminator = {(int)EDriverDiscriminator.MitsubishiMxComponent}";
+            var sql = $"SELECT d.* FROM Devices d LEFT JOIN MitsubishiMxComponentDevices mx ON d.ID = mx.ID WHERE d.Discriminator = {(int)0}";
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
@@ -37,7 +37,7 @@ namespace Jankilla.Core.DB.Repositories
         {
             var devices = new List<MitsubishiMxComponentDevice>();
 
-            var sql = $"SELECT d.* FROM Devices d LEFT JOIN MitsubishiMxComponentDevices mx ON d.ID = mx.ID WHERE d.Discriminator = {(int)EDriverDiscriminator.MitsubishiMxComponent} AND d.DeviceID = '{parent.ID}'";
+            var sql = $"SELECT d.* FROM Devices d LEFT JOIN MitsubishiMxComponentDevices mx ON d.ID = mx.ID WHERE d.Discriminator = {(int)0} AND d.DeviceID = '{parent.ID}'";
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();

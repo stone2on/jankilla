@@ -1,5 +1,6 @@
 ﻿using Jankilla.Core.Contracts.Tags.Base;
 using Jankilla.Core.Tags.Base;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,9 +33,9 @@ namespace Jankilla.Core.Contracts.Tags
                 _bitIndex = value; 
             }
         }
-
+        [JsonIgnore]
         public bool BooleanValue { get; private set; }
-
+        [JsonIgnore]
         public override object Value
         {
             get => (object)this.BooleanValue;
@@ -54,6 +55,7 @@ namespace Jankilla.Core.Contracts.Tags
         public override ETagDiscriminator Discriminator => ETagDiscriminator.Boolean;
 
         private bool _calibratedVal;
+        [JsonIgnore]
         public override object CalibratedValue
         {
             get => _calibratedVal;

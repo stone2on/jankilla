@@ -15,15 +15,15 @@ namespace Jankilla.Core.Converters.ClassMaps
         {
             Map(m => m.Discriminator).Index(++i);
             Map(m => m.ID).Index(++i);
-            Map(m => m.No).Index(++i);
             Map(m => m.Name).Index(++i);
+            Map(m => m.Path).Index(++i);
+            Map(m => m.No).Index(++i);
             Map(m => m.Direction).Index(++i);
             Map(m => m.ByteSize).Index(++i);
             Map(m => m.ReadOnly).Index(++i);
             Map(m => m.Address).Index(++i);
             Map(m => m.Category).Index(++i);
             Map(m => m.Description).Index(++i);
-            Map(m => m.Path).Index(++i);
             Map(m => m.BlockID).Index(++i);
             Map(m => m.Unit).Index(++i);
             Map(m => m.UseFactor).Index(++i);

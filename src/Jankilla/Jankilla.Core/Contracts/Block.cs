@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Jankilla.Core.Contracts
 {
-    public abstract class Block : BaseContract
+    public abstract class Block : BaseContract, IDisposable
     {
 
         #region Public Properties
@@ -18,7 +18,7 @@ namespace Jankilla.Core.Contracts
         public virtual string StartAddress { get; set; }
         public virtual int BufferSize { get; set; }
 
-        public virtual ObservableCollection<Tag> Tags
+        public virtual IReadOnlyList<Tag> Tags
         {
             get
             {
@@ -43,7 +43,14 @@ namespace Jankilla.Core.Contracts
         #endregion
 
         #region Constructor
-      
+
+        protected Block()
+        {
+            _tags.CollectionChanged += tags_CollectionChanged;
+        }
+
+        protected abstract void tags_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e);
+
         #endregion
 
         #region Public Methods
@@ -88,6 +95,11 @@ namespace Jankilla.Core.Contracts
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(StartAddress);
             hashCode = hashCode * -1521134295 + BufferSize.GetHashCode();
             return hashCode;
+        }
+
+        public void Dispose()
+        {
+            _tags.CollectionChanged -= tags_CollectionChanged;
         }
 
         #endregion

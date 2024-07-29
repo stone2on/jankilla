@@ -1,6 +1,7 @@
 ﻿using Jankilla.Core.Contracts.Tags;
 using Jankilla.Core.Contracts.Tags.Base;
 using Jankilla.Core.Tags.Base;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,9 +17,9 @@ namespace Jankilla.Core.Contracts.Tags
         public override event EventHandler<TagEventArgs> Writed;
 
         public override event PropertyChangedEventHandler PropertyChanged;
-
+        [JsonIgnore]
         public float FloatValue { get; private set; }
-
+        [JsonIgnore]
         public override object Value
         {
             get => (object)this.FloatValue;
@@ -44,6 +45,7 @@ namespace Jankilla.Core.Contracts.Tags
         }
 
         private double _calibratedVal;
+        [JsonIgnore]
         public override object CalibratedValue 
         {
             get => _calibratedVal;
