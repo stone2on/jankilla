@@ -5,6 +5,7 @@ using Jankilla.Driver.MitsubishiMcProtocol.Models;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -210,5 +211,9 @@ namespace Jankilla.Driver.MitsubishiMcProtocol
             _writeEventQueue.Enqueue(e);
         }
 
+        protected override void tags_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
