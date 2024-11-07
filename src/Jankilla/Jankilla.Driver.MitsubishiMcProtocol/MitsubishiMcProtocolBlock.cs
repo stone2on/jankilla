@@ -103,7 +103,7 @@ namespace Jankilla.Driver.MitsubishiMcProtocol
                 return false;
             }
 
-            tag.Path = Path;
+            tag.Path = $"{Path}.{tag.Name}";
             tag.BlockID = ID;
 
             _tags.Add(tag);

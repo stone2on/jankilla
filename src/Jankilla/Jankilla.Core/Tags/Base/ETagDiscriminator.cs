@@ -12,6 +12,8 @@ namespace Jankilla.Core.Tags.Base
         Int,
         Short,
         String,
-        Float
+        Float,
+        UShort,
+        UInt
     }
 }

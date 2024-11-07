@@ -1,8 +1,13 @@
-﻿using Jankilla.Core.Contracts.Tags;
+﻿using Jankilla.Core.Collections;
+using Jankilla.Core.Contracts.Tags;
+using Jankilla.Core.Contracts.Tags.Base;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,9 +16,8 @@ namespace Jankilla.Core.Contracts
 {
     public abstract class Block : BaseContract, IDisposable
     {
-
         #region Public Properties
-
+    
         public Guid DeviceID { get; set; }
         public virtual string StartAddress { get; set; }
         public virtual int BufferSize { get; set; }
@@ -29,8 +33,10 @@ namespace Jankilla.Core.Contracts
         #endregion
 
         #region Fields
+        protected ConcurrentQueue<TagEventArgs> _writeEventQueue = new ConcurrentQueue<TagEventArgs>();
+        protected UniqueObservableCollection<Tag> _tags = new UniqueObservableCollection<Tag>();
 
-        protected ObservableCollection<Tag> _tags = new ObservableCollection<Tag>();
+        private bool disposedValue;
 
         #endregion
 
@@ -48,21 +54,78 @@ namespace Jankilla.Core.Contracts
         {
             _tags.CollectionChanged += tags_CollectionChanged;
         }
-
-        protected abstract void tags_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e);
-
+      
         #endregion
 
         #region Public Methods
+        public virtual bool ValidateTag(Tag tag)
+        {
+            if (tag == null)
+            {
+                return false;
+            }
 
-        public abstract bool ValidateTag(Tag tag);
+            if (string.IsNullOrEmpty(tag.Name))
+            {
+                return false;
+            }
 
-        public abstract bool AddTag(Tag tag);
+            if (_tags.Contains(tag))
+            {
+                return false;
+            }
 
-        public abstract bool RemoveTag(Tag tag);
+            return true;
+        }
 
-        public abstract void RemoveAllTags();
+        public virtual bool AddTag(Tag tag)
+        {
+            bool bValidated = ValidateTag(tag);
 
+            if (bValidated == false)
+            {
+                return false;
+            }
+
+            tag.Path = $"{Path}.{tag.Name}";
+            tag.BlockID = ID;
+
+            _tags.Add(tag);
+
+            tag.Writed += Tag_Writed;
+
+            return true;
+        }
+
+        public virtual bool RemoveTag(Tag tag)
+        {
+            tag.Writed -= Tag_Writed;
+
+            return _tags.Remove(tag);
+        }
+
+        public virtual void RemoveAllTags()
+        {
+            foreach (var tag in _tags)
+            {
+                tag.Writed -= Tag_Writed;
+            }
+
+            _tags.Clear();
+        }
+
+        public void ReplaceTag(int index, Tag tag)
+        {
+            _tags[index] = tag;
+        }
+
+        public void SuppressTagEvents(bool suppress)
+        {
+            foreach (Tag tag in Tags)
+            {
+                tag.SuppressEvents(suppress);
+            }
+        }
         #endregion
 
         #region Overrides
@@ -97,9 +160,90 @@ namespace Jankilla.Core.Contracts
             return hashCode;
         }
 
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    _tags.CollectionChanged -= tags_CollectionChanged;
+                }
+
+                disposedValue = true;
+            }
+        }
+
         public void Dispose()
         {
-            _tags.CollectionChanged -= tags_CollectionChanged;
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
+
+
+        #endregion
+
+        #region Events
+
+        protected virtual void tags_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
+                    if (e.NewItems != null)
+                    {
+                        foreach (Tag tag in e.NewItems)
+                        {
+                            tag.Path = $"{Path}.{tag.Name}";
+                            tag.BlockID = ID;
+                            tag.Writed += Tag_Writed;
+                        }
+                    }
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Replace:
+                    if (e.OldItems != null)
+                    {
+                        foreach (Tag tag in e.OldItems)
+                        {
+                            tag.Writed -= Tag_Writed;
+                        }
+                    }
+                    if (e.NewItems != null)
+                    {
+                        foreach (Tag tag in e.NewItems)
+                        {
+                            tag.Path = $"{Path}.{tag.Name}";
+                            tag.BlockID = ID;
+                            tag.Writed += Tag_Writed;
+                        }
+                    }
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
+                    if (e.OldItems != null)
+                    {
+                        foreach (Tag tag in e.OldItems)
+                        {
+                            tag.Writed -= Tag_Writed;
+                        }
+                    }
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Move:
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Reset:
+                    foreach (Tag tag in _tags)
+                    {
+                        tag.Writed -= Tag_Writed;
+                    }
+                    break;
+                default:
+                    break;
+
+            }
+        }
+
+        private void Tag_Writed(object sender, TagEventArgs e)
+        {
+            _writeEventQueue.Enqueue(e);
         }
 
         #endregion

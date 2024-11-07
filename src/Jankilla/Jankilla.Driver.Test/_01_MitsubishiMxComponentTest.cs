@@ -1,3 +1,4 @@
+using Jankilla.Core.Alarms;
 using Jankilla.Core.Contracts;
 using Jankilla.Core.Contracts.Tags;
 using Jankilla.Core.Contracts.Tags.Base;
@@ -44,8 +45,11 @@ namespace Jankilla.Driver.Test
             myBlock.AddTag(new StringTag() { Name = "SAMPLE_STR_DATA_002", Address = "D0010", Direction = EDirection.In, ByteSize = 10, No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
             myBlock.AddTag(new StringTag() { Name = "SAMPLE_STR_DATA_003", Address = "D0020", Direction = EDirection.In, ByteSize = 10, No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
             myBlock.AddTag(new StringTag() { Name = "SAMPLE_STR_DATA_004", Address = "D0030", Direction = EDirection.In, ByteSize = 10, No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
+            var sTag = new StringTag() { Name = "TAG FOR ALARM TEST", Address = "D0040", Direction = EDirection.In, ByteSize = 10, No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() };
+            myBlock.AddTag(sTag);
 
-            myBlock.AddTag(new ShortTag() { Name = "SAMPLE_SRT_DATA_005", Address = "D0100", Direction = EDirection.In, No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
+            var srtTag = new ShortTag() { Name = "SAMPLE_SRT_DATA_005", Address = "D0100", Direction = EDirection.In, No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() };
+            myBlock.AddTag(srtTag);
             myBlock.AddTag(new ShortTag() { Name = "SAMPLE_SRT_DATA_006", Address = "D0101", Direction = EDirection.In, No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
             myBlock.AddTag(new ShortTag() { Name = "SAMPLE_SRT_DATA_007", Address = "D0102", Direction = EDirection.In, No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
             myBlock.AddTag(new ShortTag() { Name = "SAMPLE_SRT_DATA_008", Address = "D0103", Direction = EDirection.In, No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
@@ -59,6 +63,21 @@ namespace Jankilla.Driver.Test
             bitBlock.AddTag(new BooleanTag() { Name = "SAMPLE_BOOL_DATA_014", Address = "M0001", Direction = EDirection.In, BitIndex = 1, No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
             bitBlock.AddTag(new BooleanTag() { Name = "SAMPLE_BOOL_DATA_015", Address = "M0002", Direction = EDirection.In, BitIndex = 2, No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
             bitBlock.AddTag(new BooleanTag() { Name = "SAMPLE_BOOL_DATA_016", Address = "M0003", Direction = EDirection.In, BitIndex = 3, No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
+
+            var myAlarm = new TextTagAlarm() { Name = "TTA", ValueA = "HELLO" };
+            myAlarm.SetTag(sTag);
+            _project1.AddAlarm(myAlarm);
+
+            var a1 = new TextTagAlarm() { ValueA = "ABC", AlarmCondition = ETextAlarmCondition.Equals };
+            a1.SetTag(sTag);
+            var a2 = new NumericTagAlarm() { ValueA = 3, AlarmCondition = ENumericAlarmCondition.GreaterThan };
+            a2.SetTag(srtTag);
+
+            var c1 = new ComplexAlarm() { ID = Guid.NewGuid(), Name = "COMPLEX TEST ALARM" };
+            c1.AddAlarm(a1);
+            c1.AddAlarm(a2);
+
+            _project1.AddAlarm(c1);
 
             JsonProjectHelper.Instance.SaveProjectFile("project.json", _project1);
             CsvProjectHelper.Instance.SaveProjectFile("project.csv", _project1);

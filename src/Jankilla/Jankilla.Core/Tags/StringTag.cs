@@ -1,4 +1,5 @@
-﻿using Jankilla.Core.Contracts.Tags.Base;
+﻿using Jankilla.Core.Alarms;
+using Jankilla.Core.Contracts.Tags.Base;
 using Jankilla.Core.Tags.Base;
 using Newtonsoft.Json;
 using System;
@@ -13,8 +14,8 @@ namespace Jankilla.Core.Contracts.Tags
     public class StringTag : Tag
     {
         public override event EventHandler<TagEventArgs> Writed;
-
         public override event PropertyChangedEventHandler PropertyChanged;
+
         [JsonIgnore]
         public string StringValue { get; private set; } = string.Empty;
         [JsonIgnore]

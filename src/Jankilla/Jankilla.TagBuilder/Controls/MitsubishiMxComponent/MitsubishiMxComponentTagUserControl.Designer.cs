@@ -45,6 +45,7 @@ namespace Jankilla.TagBuilder.Controls.MitsubishiMxComponent
             this.checkEditUseFactor = new DevExpress.XtraEditors.CheckEdit();
             this.textEditOffset = new DevExpress.XtraEditors.SpinEdit();
             this.textEditFactor = new DevExpress.XtraEditors.SpinEdit();
+            this.textEditPath = new DevExpress.XtraEditors.TextEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.ItemForID = new DevExpress.XtraLayout.LayoutControlItem();
@@ -62,7 +63,6 @@ namespace Jankilla.TagBuilder.Controls.MitsubishiMxComponent
             this.itemForUseFactor = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlOffset = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlFactor = new DevExpress.XtraLayout.LayoutControlItem();
-            this.textEditPath = new DevExpress.XtraEditors.TextEdit();
             this.layoutControlPath = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
             this.dataLayoutControl1.SuspendLayout();
@@ -81,6 +81,7 @@ namespace Jankilla.TagBuilder.Controls.MitsubishiMxComponent
             ((System.ComponentModel.ISupportInitialize)(this.checkEditUseFactor.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditOffset.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditFactor.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditPath.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForID)).BeginInit();
@@ -98,12 +99,12 @@ namespace Jankilla.TagBuilder.Controls.MitsubishiMxComponent
             ((System.ComponentModel.ISupportInitialize)(this.itemForUseFactor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlFactor)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEditPath.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlPath)).BeginInit();
             this.SuspendLayout();
             // 
             // dataLayoutControl1
             // 
+            this.dataLayoutControl1.AllowCustomization = false;
             this.dataLayoutControl1.Controls.Add(this.textEditID);
             this.dataLayoutControl1.Controls.Add(this.textEditNo);
             this.dataLayoutControl1.Controls.Add(this.textEditName);
@@ -220,7 +221,9 @@ namespace Jankilla.TagBuilder.Controls.MitsubishiMxComponent
             new DevExpress.XtraEditors.Controls.ImageComboBoxItem("Int", Jankilla.Core.Tags.Base.ETagDiscriminator.Int, 1),
             new DevExpress.XtraEditors.Controls.ImageComboBoxItem("Short", Jankilla.Core.Tags.Base.ETagDiscriminator.Short, 2),
             new DevExpress.XtraEditors.Controls.ImageComboBoxItem("String", Jankilla.Core.Tags.Base.ETagDiscriminator.String, 3),
-            new DevExpress.XtraEditors.Controls.ImageComboBoxItem("Float", Jankilla.Core.Tags.Base.ETagDiscriminator.Float, 4)});
+            new DevExpress.XtraEditors.Controls.ImageComboBoxItem("Float", Jankilla.Core.Tags.Base.ETagDiscriminator.Float, 4),
+            new DevExpress.XtraEditors.Controls.ImageComboBoxItem("UShort", "UShort", -1),
+            new DevExpress.XtraEditors.Controls.ImageComboBoxItem("UInt", "UInt", -1)});
             this.imageComboBoxEditDiscriminator.Properties.UseCtrlScroll = true;
             this.imageComboBoxEditDiscriminator.Size = new System.Drawing.Size(107, 22);
             this.imageComboBoxEditDiscriminator.StyleController = this.dataLayoutControl1;
@@ -357,6 +360,15 @@ namespace Jankilla.TagBuilder.Controls.MitsubishiMxComponent
             this.textEditFactor.Size = new System.Drawing.Size(107, 22);
             this.textEditFactor.StyleController = this.dataLayoutControl1;
             this.textEditFactor.TabIndex = 21;
+            // 
+            // textEditPath
+            // 
+            this.textEditPath.Location = new System.Drawing.Point(79, 64);
+            this.textEditPath.Name = "textEditPath";
+            this.textEditPath.Properties.ReadOnly = true;
+            this.textEditPath.Size = new System.Drawing.Size(285, 22);
+            this.textEditPath.StyleController = this.dataLayoutControl1;
+            this.textEditPath.TabIndex = 22;
             // 
             // Root
             // 
@@ -535,15 +547,6 @@ namespace Jankilla.TagBuilder.Controls.MitsubishiMxComponent
             this.layoutControlFactor.Text = "Factor";
             this.layoutControlFactor.TextSize = new System.Drawing.Size(64, 15);
             // 
-            // textEditPath
-            // 
-            this.textEditPath.Location = new System.Drawing.Point(79, 64);
-            this.textEditPath.Name = "textEditPath";
-            this.textEditPath.Properties.ReadOnly = true;
-            this.textEditPath.Size = new System.Drawing.Size(285, 22);
-            this.textEditPath.StyleController = this.dataLayoutControl1;
-            this.textEditPath.TabIndex = 22;
-            // 
             // layoutControlPath
             // 
             this.layoutControlPath.Control = this.textEditPath;
@@ -577,6 +580,7 @@ namespace Jankilla.TagBuilder.Controls.MitsubishiMxComponent
             ((System.ComponentModel.ISupportInitialize)(this.checkEditUseFactor.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditOffset.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditFactor.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditPath.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForID)).EndInit();
@@ -594,7 +598,6 @@ namespace Jankilla.TagBuilder.Controls.MitsubishiMxComponent
             ((System.ComponentModel.ISupportInitialize)(this.itemForUseFactor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlOffset)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlFactor)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEditPath.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlPath)).EndInit();
             this.ResumeLayout(false);
 

@@ -1,4 +1,5 @@
-﻿using Jankilla.Core.Contracts.Tags;
+﻿using Jankilla.Core.Alarms;
+using Jankilla.Core.Contracts.Tags;
 using Jankilla.Core.Contracts.Tags.Base;
 using Jankilla.Core.Tags.Base;
 using Newtonsoft.Json;
@@ -15,8 +16,8 @@ namespace Jankilla.Core.Contracts.Tags
     public class FloatTag : Tag
     {
         public override event EventHandler<TagEventArgs> Writed;
-
         public override event PropertyChangedEventHandler PropertyChanged;
+
         [JsonIgnore]
         public float FloatValue { get; private set; }
         [JsonIgnore]
@@ -56,8 +57,7 @@ namespace Jankilla.Core.Contracts.Tags
             }
         }
 
-
-
+ 
         public override ETagDiscriminator Discriminator => ETagDiscriminator.Float;
 
         public FloatTag()
@@ -76,6 +76,17 @@ namespace Jankilla.Core.Contracts.Tags
             this.Value = BitConverter.ToSingle(_readbuffer, 0);
         }
 
+        public override void Read(byte[] buffer, int startIndex)
+        {
+            if (CompareByteArrays(_readbuffer, 0, buffer, startIndex, _readbuffer.Length))
+            {
+                return;
+            }
+
+            this.Copy(buffer, startIndex);
+            this.Value = BitConverter.ToSingle(this._readbuffer, 0);
+        }
+
         public override void Write(object val)
         {
             float num = (float)val;
@@ -87,19 +98,13 @@ namespace Jankilla.Core.Contracts.Tags
             if (writed == null)
                 return;
 
-            writed((object)this, new TagEventArgs()
+            writed(this, new TagEventArgs()
             {
                 Address = this.Address,
                 Buffer = this._writebuffer
             });
 
         }
-
-        public override void Read(byte[] buffer, int startIndex)
-        {
-            throw new NotImplementedException();
-        }
-
 
     }
 }

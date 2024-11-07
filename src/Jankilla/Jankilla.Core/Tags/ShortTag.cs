@@ -1,4 +1,5 @@
-﻿using Jankilla.Core.Contracts.Tags.Base;
+﻿using Jankilla.Core.Alarms;
+using Jankilla.Core.Contracts.Tags.Base;
 using Jankilla.Core.Tags.Base;
 using Newtonsoft.Json;
 using System;
@@ -11,8 +12,8 @@ namespace Jankilla.Core.Contracts.Tags
     public class ShortTag : Tag
     {
         public override event EventHandler<TagEventArgs> Writed;
-
         public override event PropertyChangedEventHandler PropertyChanged;
+
         [JsonIgnore]
         public short ShortValue { get; private set; }
         [JsonIgnore]
@@ -64,8 +65,20 @@ namespace Jankilla.Core.Contracts.Tags
             }
 
             this.Copy(buffer, startIndex);
-            this.Value = (object)buffer[startIndex];
+            this.Value = buffer[startIndex];
         }
+
+        public override void Read(byte[] buffer, int startIndex)
+        {
+            if (CompareByteArrays(_readbuffer, 0, buffer, startIndex, _readbuffer.Length))
+            {
+                return;
+            }
+
+            this.Copy(buffer, startIndex);
+            this.Value = buffer[startIndex];
+        }
+
 
         public override void Write(object val)
         {
@@ -85,10 +98,6 @@ namespace Jankilla.Core.Contracts.Tags
 
         }
 
-        public override void Read(byte[] buffer, int startIndex)
-        {
-            throw new NotImplementedException();
-        }
 
        
     }

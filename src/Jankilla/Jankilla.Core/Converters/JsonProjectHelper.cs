@@ -13,6 +13,9 @@ using Jankilla.Core.Tags.Base;
 using JsonSubTypes;
 using CsvHelper.TypeConversion;
 using CsvHelper;
+using System.Reflection;
+using Jankilla.Core.Utils;
+using Jankilla.Core.Alarms;
 
 namespace Jankilla.Core.Converters
 {
@@ -36,6 +39,8 @@ namespace Jankilla.Core.Converters
 
         private JsonProjectHelper()
         {
+            AssemblyHelper.LoadDlls();
+
             _jsonSerializerSettings = new JsonSerializerSettings()
             {
                 ContractResolver = new DefaultContractResolver
@@ -107,23 +112,53 @@ namespace Jankilla.Core.Converters
             }
 
             _jsonSerializerSettings.Converters.Add(tagBuilder.Build());
+
+            //var alarmType = typeof(TagAlarm);
+            //var alarmTypes = assemblies
+            //    .SelectMany(assembly => assembly.GetTypes())
+            //    .Where(type => alarmType.IsAssignableFrom(type) && type.IsClass && !type.IsAbstract);
+
+            //JsonSubtypesConverterBuilder alarmBuilder = JsonSubtypesConverterBuilder.Of<TagAlarm>("Discriminator");
+            //foreach (var type in alarmTypes)
+            //{
+            //    var alarm = (TagAlarm)ObjectResolver.Current.Resolve(type);
+            //    alarmBuilder.RegisterSubtype(type, alarm.Discriminator);
+            //}
+
+            //_jsonSerializerSettings.Converters.Add(alarmBuilder.Build());
+
+            JsonSubtypesConverterBuilder alarmBuilder = JsonSubtypesConverterBuilder.Of<BaseAlarm>("Discriminator");
+            alarmBuilder.RegisterSubtype(typeof(ComplexAlarm), nameof(ComplexAlarm));
+            alarmBuilder.RegisterSubtype(typeof(NumericTagAlarm), nameof(NumericTagAlarm));
+            alarmBuilder.RegisterSubtype(typeof(TextTagAlarm), nameof(TextTagAlarm));
+
+            _jsonSerializerSettings.Converters.Add(alarmBuilder.Build());
         }
 
         public Project OpenProjectFile(string path)
         {
             Debug.Assert(path != null);
-            Project project = null;
             try
             {
                 var dat = File.ReadAllText(path);
-                project = JsonConvert.DeserializeObject<Project>(dat, _jsonSerializerSettings);
+                Project project = JsonConvert.DeserializeObject<Project>(dat, _jsonSerializerSettings);
+
+                if (project == null)
+                {
+                    return null;
+                }
+
+                var processor = new AlarmProcessor(project);
+                processor.ProcessAlarms();
+
+                return project;
             }
             catch (Exception e)
             {
                 Debug.WriteLine(e.Message);
             }
 
-            return project;
+            return null;
         }
 
         public void SaveProjectFile(string path, Project project)

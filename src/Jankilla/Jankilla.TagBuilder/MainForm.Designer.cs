@@ -39,7 +39,6 @@ namespace Jankilla.TagBuilder
             this.barButtonItemFileSave = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemCreateSample = new DevExpress.XtraBars.BarButtonItem();
             this.barSubItem2 = new DevExpress.XtraBars.BarSubItem();
-            this.barSubItem4 = new DevExpress.XtraBars.BarSubItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.barSubItem3 = new DevExpress.XtraBars.BarSubItem();
             this.bar3 = new DevExpress.XtraBars.Bar();
@@ -102,7 +101,6 @@ namespace Jankilla.TagBuilder
             this.barSubItem1,
             this.barSubItem2,
             this.barSubItem3,
-            this.barSubItem4,
             this.barButtonItem1,
             this.barButtonItemFileNew,
             this.barButtonItemFileOpen,
@@ -177,17 +175,7 @@ namespace Jankilla.TagBuilder
             // 
             this.barSubItem2.Caption = "Edit";
             this.barSubItem2.Id = 1;
-            this.barSubItem2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem4)});
             this.barSubItem2.Name = "barSubItem2";
-            // 
-            // barSubItem4
-            // 
-            this.barSubItem4.Caption = "Tags";
-            this.barSubItem4.Id = 6;
-            this.barSubItem4.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem1)});
-            this.barSubItem4.Name = "barSubItem4";
             // 
             // barButtonItem1
             // 
@@ -558,7 +546,6 @@ namespace Jankilla.TagBuilder
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItemTags;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn2;
         private DevExpress.XtraBars.BarButtonItem barButtonItemFileNew;
-        private DevExpress.XtraBars.BarSubItem barSubItem4;
         private DevExpress.XtraBars.BarButtonItem barButtonItem1;
         private DevExpress.XtraBars.BarButtonItem barButtonItemFileOpen;
         private DevExpress.Utils.SvgImageCollection svgImageCollection1;

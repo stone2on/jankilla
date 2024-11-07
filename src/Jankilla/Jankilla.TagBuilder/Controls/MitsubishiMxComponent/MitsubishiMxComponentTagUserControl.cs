@@ -4,6 +4,7 @@ using Jankilla.Core.Contracts.Tags;
 using Jankilla.Core.Contracts.Tags.Base;
 using Jankilla.Core.Tags.Base;
 using Jankilla.Core.UI.Forms.Base;
+using Jankilla.Core.Utils;
 using Jankilla.Driver.MitsubishiMxComponent;
 using System;
 using System.Collections.Generic;
@@ -202,8 +203,32 @@ namespace Jankilla.TagBuilder.Controls.MitsubishiMxComponent
                         Offset = (double)textEditOffset.Value,
                     };
                     break;
+                case ETagDiscriminator.UInt:
+                    tmp = new UIntTag()
+                    {
+                        Name = name,
+                        Address = address,
+                        Direction = tagDirection,
+                        UseFactor = checkEditUseFactor.Checked,
+                        Factor = (double)textEditFactor.Value,
+                        UseOffset = checkEditUseOffset.Checked,
+                        Offset = (double)textEditOffset.Value,
+                    };
+                    break;
                 case ETagDiscriminator.Short:
                     tmp = new ShortTag()
+                    {
+                        Name = name,
+                        Address = address,
+                        Direction = tagDirection,
+                        UseFactor = checkEditUseFactor.Checked,
+                        Factor = (double)textEditFactor.Value,
+                        UseOffset = checkEditUseOffset.Checked,
+                        Offset = (double)textEditOffset.Value,
+                    };
+                    break;
+                case ETagDiscriminator.UShort:
+                    tmp = new UShortTag()
                     {
                         Name = name,
                         Address = address,
@@ -283,6 +308,14 @@ namespace Jankilla.TagBuilder.Controls.MitsubishiMxComponent
         {
             Debug.Assert(_result != null);
 
+            var bExists = Block.Tags.Any(t => t == tmp);
+            if (!bExists)
+            {
+                errorMessage = "The tag doesn't exist.";
+                return null;
+            }
+            
+
             int index = Block.Tags.IndexOf(_result);
             if (index < 0)
             {
@@ -290,7 +323,7 @@ namespace Jankilla.TagBuilder.Controls.MitsubishiMxComponent
                 return null;
             }
 
-            Block.Tags[index] = tmp;
+            Block.ReplaceTag(index, tmp);
 
             _result = tmp;
             return _result;
@@ -331,6 +364,7 @@ namespace Jankilla.TagBuilder.Controls.MitsubishiMxComponent
                     break;
                 case ETagDiscriminator.Float:
                 case ETagDiscriminator.Int:
+                case ETagDiscriminator.UInt:
                     spinEditByteSize.Value = 4;
                     spinEditByteSize.Enabled = false;
                     spinEditBitIndex.Enabled = false;
@@ -338,6 +372,7 @@ namespace Jankilla.TagBuilder.Controls.MitsubishiMxComponent
                     checkEditUseOffset.Enabled = true;
                     break;
                 case ETagDiscriminator.Short:
+                case ETagDiscriminator.UShort:
                     spinEditByteSize.Value = 2;
                     spinEditByteSize.Enabled = false;
                     spinEditBitIndex.Enabled = false;

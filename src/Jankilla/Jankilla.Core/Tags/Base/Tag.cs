@@ -1,22 +1,27 @@
-﻿using Jankilla.Core.Contracts.Tags.Base;
+﻿using Jankilla.Core.Alarms;
+using Jankilla.Core.Contracts.Tags.Base;
 using Jankilla.Core.Tags.Base;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Security.Claims;
+using System.Xml.Linq;
 
 namespace Jankilla.Core.Contracts.Tags
 {
-    public abstract class Tag : IBufferRead, IBufferWrite, INotifyPropertyChanged
+    public abstract class Tag : IBufferRead, IBufferWrite, INotifyPropertyChanged, IDisposable, IIdentifiable
     {
-
         #region Event Handlers
 
         public abstract event EventHandler<TagEventArgs> Writed;
         public abstract event PropertyChangedEventHandler PropertyChanged;
-
+ 
         #endregion
 
         #region Public Properties
@@ -70,18 +75,49 @@ namespace Jankilla.Core.Contracts.Tags
         #endregion
 
         #region Fields
-
+        protected ObservableCollection<TagAlarm> _alarms = new ObservableCollection<TagAlarm>();
 
         protected byte[] _readbuffer;
         protected byte[] _writebuffer;
+        protected bool _disposedValue;
 
+        private Queue<Tuple<PropertyChangedEventHandler, PropertyChangedEventArgs>> _eventQueue = new Queue<Tuple<PropertyChangedEventHandler, PropertyChangedEventArgs>>();
+        private bool _suppressEvents = false;
         private int _byteSize;
 
         #endregion
 
         #region Constructor
 
-        protected Tag() { }
+        protected Tag() 
+        {
+            _alarms.CollectionChanged += alarms_CollectionChanged;
+
+
+        }
+
+
+
+        protected virtual void alarms_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                case NotifyCollectionChangedAction.Replace:
+                    handleNewItems(e.NewItems);
+                    if (e.Action == NotifyCollectionChangedAction.Replace)
+                        handleOldItems(e.OldItems);
+                    break;
+
+                case NotifyCollectionChangedAction.Remove:
+                    handleOldItems(e.OldItems);
+                    break;
+
+                case NotifyCollectionChangedAction.Reset:
+                    handleReset();
+                    break;
+            }
+        }
 
         #endregion
 
@@ -132,6 +168,32 @@ namespace Jankilla.Core.Contracts.Tags
         public abstract void Read(byte[] buffer, int startIndex);
         public abstract void Write(object val);
 
+        public void ForceWrite(object val)
+        {
+            Value = val;
+        }
+
+
+
+   
+
+        public void SuppressEvents(bool suppress)
+        {
+            _suppressEvents = suppress;
+
+            if (!_suppressEvents)
+            {
+                while (_eventQueue.Count > 0)
+                {
+                    Tuple<PropertyChangedEventHandler, PropertyChangedEventArgs> tuple = _eventQueue.Dequeue();
+                    PropertyChangedEventHandler handler = tuple.Item1;
+                    PropertyChangedEventArgs args = tuple.Item2;
+
+                    handler(this, args);
+                }
+            }
+        }
+
         #endregion
 
         #region Overrides
@@ -180,6 +242,31 @@ namespace Jankilla.Core.Contracts.Tags
             return hashCode;
         }
 
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    _alarms.CollectionChanged -= alarms_CollectionChanged;
+                 
+                    foreach (var alarm in _alarms)
+                    {
+                        PropertyChanged -= alarm.OnTagPropertyChanged;
+                    }
+                }
+              
+                _disposedValue = true;
+            }
+        }
+
+
+        public void Dispose()
+        {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
         #endregion
 
         #region Protected Helpers
@@ -192,21 +279,67 @@ namespace Jankilla.Core.Contracts.Tags
             Buffer.BlockCopy(buffer, startIndex * 2, _readbuffer, 0, this.ByteSize);
         }
 
+        protected void Copy(byte[] buffer, int startIndex)
+        {
+            Debug.Assert(buffer != null);
+            Debug.Assert(buffer.Length != 0);
+
+            Buffer.BlockCopy(buffer, startIndex, _readbuffer, 0, this.ByteSize);
+        }
+
+        #endregion
+
+        #region Privates
+        private void handleNewItems(System.Collections.IList items)
+        {
+            if (items == null) return;
+
+            foreach (TagAlarm alarm in items)
+            {
+                PropertyChanged += alarm.OnTagPropertyChanged;
+            }
+        }
+
+        private void handleOldItems(System.Collections.IList items)
+        {
+            if (items == null) return;
+
+            foreach (TagAlarm alarm in items)
+            {
+                PropertyChanged -= alarm.OnTagPropertyChanged;
+            }
+        }
+
+        private void handleReset()
+        {
+            foreach (TagAlarm alarm in _alarms)
+            {
+                PropertyChanged -= alarm.OnTagPropertyChanged;
+            }
+        }
+
         #endregion
 
         #region Events
 
-        protected void NotifyPropertyChanged(PropertyChangedEventHandler handler, string name)
+        protected virtual void NotifyPropertyChanged(PropertyChangedEventHandler handler, string name)
         {
             if (handler == null)
             {
                 return;
             }
 
-            handler(this, new PropertyChangedEventArgs(name));
+            if (_suppressEvents)
+            {
+                _eventQueue.Enqueue(new Tuple<PropertyChangedEventHandler, PropertyChangedEventArgs>(handler, new PropertyChangedEventArgs(name)));
+            }
+            else
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
         }
 
-  
+    
 
         #endregion
 

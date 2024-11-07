@@ -8,14 +8,14 @@
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>..\..\..\build\debug\</OutputPath>
+    <OutputPath>..\..\..\build\debug\$(AssemblyName)</OutputPath>
     <AllowedReferenceRelatedFileExtensions>
     *.pdb;
     *.xml
 	  </AllowedReferenceRelatedFileExtensions>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <OutputPath>..\..\..\build\release\</OutputPath>
+    <OutputPath>..\..\..\build\release\$(AssemblyName)</OutputPath>
     <AllowedReferenceRelatedFileExtensions>
     *.pdb;
     *.xml

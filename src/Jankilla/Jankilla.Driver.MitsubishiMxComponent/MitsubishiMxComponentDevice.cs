@@ -19,65 +19,19 @@ namespace Jankilla.Driver.MitsubishiMxComponent
 
         public override string Discriminator => "MitsubishiMxComponent";
 
-        public override IReadOnlyList<Block> Blocks
-        {
-            get
-            {
-                return (IReadOnlyList<Block>)_blocks;
-            }
-        }
-
         #endregion
 
         #region Fields
 
-        protected IList<MitsubishiMxComponentBlock> _blocks = new List<MitsubishiMxComponentBlock>();
-
+  
         #endregion
-
-
-        public override bool Open()
-        {
-            foreach (var block in _blocks)
-            {
-                block.Open();
-            }
-
-            IsOpened = !_blocks.Any(b => b.IsOpened == false);
-
-            return IsOpened;
-        }
-
-        public override void Close()
-        {
-            foreach (var block in _blocks)
-            {
-                block.Close();
-            }
-
-            IsOpened = false;
-        }
+  
 
         public override bool ValidateBlock(Block block)
         {
-            bool bValidated = ValidateContract(block);
+            bool bValidated = base.ValidateBlock(block);
 
             if (bValidated == false)
-            {
-                return false;
-            }
-
-            if (block.Discriminator != "MitsubishiMxComponent")
-            {
-                return false;
-            }
-
-            if (_blocks.Contains(block))
-            {
-                return false;
-            }
-
-            if (string.IsNullOrEmpty(block.StartAddress))
             {
                 return false;
             }
@@ -112,42 +66,6 @@ namespace Jankilla.Driver.MitsubishiMxComponent
             return true;
         }
 
-        public override bool AddBlock(Block block)
-        {
-            bool bValidated = ValidateBlock(block);
-
-            if (bValidated == false)
-            {
-                return false;
-            }
-
-            block.Path = $"{Path}.{block.Name}";
-            block.DeviceID = ID;
-
-            _blocks.Add((MitsubishiMxComponentBlock)block);
-
-            return true;
-        }
-
-        public override bool RemoveBlock(Block block)
-        {
-            block.RemoveAllTags();
-            
-            return _blocks.Remove((MitsubishiMxComponentBlock)block);
-        }
-
-        public override void RemoveAllBlocks()
-        {
-            foreach (var block in _blocks)
-            {
-                block.RemoveAllTags();
-            }
-            _blocks.Clear();
-        }
-
-        public override void ReplaceBlock(int index, Block block)
-        {
-            _blocks[index] = (MitsubishiMxComponentBlock)block;
-        }
+    
     }
 }

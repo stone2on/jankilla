@@ -1,4 +1,5 @@
 ﻿
+using Jankilla.Core.Alarms;
 using Jankilla.Core.Contracts.Tags.Base;
 using Jankilla.Core.Tags.Base;
 using Newtonsoft.Json;
@@ -12,8 +13,8 @@ namespace Jankilla.Core.Contracts.Tags
     public class IntTag : Tag
     {
         public override event EventHandler<TagEventArgs> Writed;
-
         public override event PropertyChangedEventHandler PropertyChanged;
+
         [JsonIgnore]
         public int IntValue { get; private set; }
         [JsonIgnore]
@@ -70,6 +71,17 @@ namespace Jankilla.Core.Contracts.Tags
             this.Value = BitConverter.ToInt32(this._readbuffer, 0);
         }
 
+        public override void Read(byte[] buffer, int startIndex)
+        {
+            if (CompareByteArrays(_readbuffer, 0, buffer, startIndex, _readbuffer.Length))
+            {
+                return;
+            }
+
+            this.Copy(buffer, startIndex);
+            this.Value = BitConverter.ToInt32(this._readbuffer, 0);
+        }
+
         public override void Write(object val)
         {
             int num = (int)val;
@@ -88,10 +100,7 @@ namespace Jankilla.Core.Contracts.Tags
 
         }
 
-        public override void Read(byte[] buffer, int startIndex)
-        {
-            throw new NotImplementedException();
-        }
+
 
    
     }

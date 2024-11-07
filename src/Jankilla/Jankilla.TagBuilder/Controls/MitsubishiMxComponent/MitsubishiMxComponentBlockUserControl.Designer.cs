@@ -66,6 +66,7 @@ namespace Jankilla.TagBuilder.Controls.MitsubishiMxComponent
             // 
             // layoutControl1
             // 
+            this.layoutControl1.AllowCustomization = false;
             this.layoutControl1.Controls.Add(this.textEditBlockName);
             this.layoutControl1.Controls.Add(this.textEditDescription);
             this.layoutControl1.Controls.Add(this.spinEditStationNo);
@@ -83,17 +84,17 @@ namespace Jankilla.TagBuilder.Controls.MitsubishiMxComponent
             // 
             // textEditBlockName
             // 
-            this.textEditBlockName.Location = new System.Drawing.Point(139, 14);
+            this.textEditBlockName.Location = new System.Drawing.Point(137, 12);
             this.textEditBlockName.Name = "textEditBlockName";
-            this.textEditBlockName.Size = new System.Drawing.Size(307, 22);
+            this.textEditBlockName.Size = new System.Drawing.Size(311, 22);
             this.textEditBlockName.StyleController = this.layoutControl1;
             this.textEditBlockName.TabIndex = 4;
             // 
             // textEditDescription
             // 
-            this.textEditDescription.Location = new System.Drawing.Point(139, 144);
+            this.textEditDescription.Location = new System.Drawing.Point(137, 142);
             this.textEditDescription.Name = "textEditDescription";
-            this.textEditDescription.Size = new System.Drawing.Size(307, 22);
+            this.textEditDescription.Size = new System.Drawing.Size(311, 22);
             this.textEditDescription.StyleController = this.layoutControl1;
             this.textEditDescription.TabIndex = 5;
             // 
@@ -104,7 +105,7 @@ namespace Jankilla.TagBuilder.Controls.MitsubishiMxComponent
             0,
             0,
             0});
-            this.spinEditStationNo.Location = new System.Drawing.Point(139, 40);
+            this.spinEditStationNo.Location = new System.Drawing.Point(137, 38);
             this.spinEditStationNo.Name = "spinEditStationNo";
             this.spinEditStationNo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -120,7 +121,7 @@ namespace Jankilla.TagBuilder.Controls.MitsubishiMxComponent
             0,
             0,
             0});
-            this.spinEditStationNo.Size = new System.Drawing.Size(307, 22);
+            this.spinEditStationNo.Size = new System.Drawing.Size(311, 22);
             this.spinEditStationNo.StyleController = this.layoutControl1;
             this.spinEditStationNo.TabIndex = 6;
             // 
@@ -131,45 +132,45 @@ namespace Jankilla.TagBuilder.Controls.MitsubishiMxComponent
             0,
             0,
             0});
-            this.spinEditWordSize.Location = new System.Drawing.Point(139, 66);
+            this.spinEditWordSize.Location = new System.Drawing.Point(137, 64);
             this.spinEditWordSize.Name = "spinEditWordSize";
             this.spinEditWordSize.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.spinEditWordSize.Properties.IsFloatValue = false;
             this.spinEditWordSize.Properties.Mask.EditMask = "N00";
-            this.spinEditWordSize.Size = new System.Drawing.Size(307, 22);
+            this.spinEditWordSize.Size = new System.Drawing.Size(311, 22);
             this.spinEditWordSize.StyleController = this.layoutControl1;
             this.spinEditWordSize.TabIndex = 8;
             // 
             // comboBoxEditDeviceType
             // 
-            this.comboBoxEditDeviceType.Location = new System.Drawing.Point(139, 92);
+            this.comboBoxEditDeviceType.Location = new System.Drawing.Point(137, 90);
             this.comboBoxEditDeviceType.Name = "comboBoxEditDeviceType";
             this.comboBoxEditDeviceType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.comboBoxEditDeviceType.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.comboBoxEditDeviceType.Size = new System.Drawing.Size(89, 22);
+            this.comboBoxEditDeviceType.Size = new System.Drawing.Size(91, 22);
             this.comboBoxEditDeviceType.StyleController = this.layoutControl1;
             this.comboBoxEditDeviceType.TabIndex = 9;
             // 
             // checkEditIsBitArea
             // 
-            this.checkEditIsBitArea.Location = new System.Drawing.Point(232, 92);
+            this.checkEditIsBitArea.Location = new System.Drawing.Point(232, 90);
             this.checkEditIsBitArea.Name = "checkEditIsBitArea";
             this.checkEditIsBitArea.Properties.Caption = "Bit Area";
-            this.checkEditIsBitArea.Size = new System.Drawing.Size(214, 19);
+            this.checkEditIsBitArea.Size = new System.Drawing.Size(216, 19);
             this.checkEditIsBitArea.StyleController = this.layoutControl1;
             this.checkEditIsBitArea.TabIndex = 10;
             this.checkEditIsBitArea.CheckedChanged += new System.EventHandler(this.checkEditIsBitArea_CheckedChanged);
             // 
             // textEditAddress
             // 
-            this.textEditAddress.Location = new System.Drawing.Point(139, 118);
+            this.textEditAddress.Location = new System.Drawing.Point(137, 116);
             this.textEditAddress.Name = "textEditAddress";
             this.textEditAddress.Properties.Mask.EditMask = "[0-9a-fA-F]{0,5}";
             this.textEditAddress.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.textEditAddress.Properties.NullText = "0000";
-            this.textEditAddress.Size = new System.Drawing.Size(307, 22);
+            this.textEditAddress.Size = new System.Drawing.Size(311, 22);
             this.textEditAddress.StyleController = this.layoutControl1;
             this.textEditAddress.TabIndex = 11;
             // 
@@ -194,7 +195,7 @@ namespace Jankilla.TagBuilder.Controls.MitsubishiMxComponent
             this.layoutControlItem1.Control = this.textEditBlockName;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(436, 26);
+            this.layoutControlItem1.Size = new System.Drawing.Size(440, 26);
             this.layoutControlItem1.Text = "* Block Name";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(122, 15);
             // 
@@ -203,7 +204,7 @@ namespace Jankilla.TagBuilder.Controls.MitsubishiMxComponent
             this.layoutControlItem3.Control = this.spinEditStationNo;
             this.layoutControlItem3.Location = new System.Drawing.Point(0, 26);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(436, 26);
+            this.layoutControlItem3.Size = new System.Drawing.Size(440, 26);
             this.layoutControlItem3.Text = "* Station No";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(122, 15);
             // 
@@ -212,16 +213,16 @@ namespace Jankilla.TagBuilder.Controls.MitsubishiMxComponent
             this.layoutControlItem5.Control = this.spinEditWordSize;
             this.layoutControlItem5.Location = new System.Drawing.Point(0, 52);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(436, 26);
+            this.layoutControlItem5.Size = new System.Drawing.Size(440, 26);
             this.layoutControlItem5.Text = "* Word Size (0 ~ 1000)";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(122, 15);
             // 
             // layoutControlItem6
             // 
             this.layoutControlItem6.Control = this.checkEditIsBitArea;
-            this.layoutControlItem6.Location = new System.Drawing.Point(218, 78);
+            this.layoutControlItem6.Location = new System.Drawing.Point(220, 78);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(218, 26);
+            this.layoutControlItem6.Size = new System.Drawing.Size(220, 26);
             this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem6.TextVisible = false;
             // 
@@ -230,7 +231,7 @@ namespace Jankilla.TagBuilder.Controls.MitsubishiMxComponent
             this.layoutControlItem4.Control = this.comboBoxEditDeviceType;
             this.layoutControlItem4.Location = new System.Drawing.Point(0, 78);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(218, 26);
+            this.layoutControlItem4.Size = new System.Drawing.Size(220, 26);
             this.layoutControlItem4.Text = "* Device Type";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(122, 15);
             // 
@@ -239,7 +240,7 @@ namespace Jankilla.TagBuilder.Controls.MitsubishiMxComponent
             this.layoutControlItem2.Control = this.textEditDescription;
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 130);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(436, 203);
+            this.layoutControlItem2.Size = new System.Drawing.Size(440, 207);
             this.layoutControlItem2.Text = "Description";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(122, 15);
             // 
@@ -248,7 +249,7 @@ namespace Jankilla.TagBuilder.Controls.MitsubishiMxComponent
             this.layoutControlItem7.Control = this.textEditAddress;
             this.layoutControlItem7.Location = new System.Drawing.Point(0, 104);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(436, 26);
+            this.layoutControlItem7.Size = new System.Drawing.Size(440, 26);
             this.layoutControlItem7.Text = "* Address";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(122, 15);
             // 

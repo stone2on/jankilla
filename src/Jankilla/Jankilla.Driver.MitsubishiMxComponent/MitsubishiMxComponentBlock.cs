@@ -122,8 +122,7 @@ namespace Jankilla.Driver.MitsubishiMxComponent
         private ActUtlType64 _plc = new ActUtlType64();
 
         private IList<MitsubishiMxComponentTagWrapper> _mxTags = new List<MitsubishiMxComponentTagWrapper>();
-        private ConcurrentQueue<TagEventArgs> _writeEventQueue = new ConcurrentQueue<TagEventArgs>();
-
+       
         private int _shortBufferSize;
 
         #endregion
@@ -131,8 +130,6 @@ namespace Jankilla.Driver.MitsubishiMxComponent
         #region Constructor
 
         
-
-
         #endregion
 
         #region Public Methods
@@ -164,6 +161,42 @@ namespace Jankilla.Driver.MitsubishiMxComponent
 
         public override bool ValidateTag(Tag tag)
         {
+            string strNum = tag.Address.Substring(DeviceCode.Length);
+
+            bool bParsed;
+            int num;
+
+            if (DeviceNumber != EDeviceNumber.Hex)
+            {
+                bParsed = int.TryParse(strNum, out num);
+            }
+            else
+            {
+                bParsed = int.TryParse(strNum, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out num);
+            }
+
+            if (!bParsed)
+            {
+                return false;
+            }
+
+            if (!tag.Address.StartsWith(this.DeviceCode))
+            {
+                return false;
+            }
+
+            if (DeviceType == EDeviceType.Word)
+            {
+                if (num < StartAddressNo || num + (tag.ByteSize / 2) > StartAddressNo + _shortBufferSize)
+                {
+                    return false;
+                }
+            }
+            else if (num < StartAddressNo || num > StartAddressNo + (_shortBufferSize * 16))
+            {
+                return false;
+            }
+
             return true;
         }
      
@@ -186,6 +219,8 @@ namespace Jankilla.Driver.MitsubishiMxComponent
 
         protected override void tags_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
+            base.tags_CollectionChanged(sender, e);
+
             var tags = sender as ObservableCollection<Tag>;
             switch (e.Action)
             {
@@ -229,11 +264,6 @@ namespace Jankilla.Driver.MitsubishiMxComponent
                 default:
                     break;
             }
-        }
-
-        private void Tag_Writed(object sender, TagEventArgs e)
-        {
-            _writeEventQueue.Enqueue(e);
         }
 
         public override void Read()
@@ -281,7 +311,7 @@ namespace Jankilla.Driver.MitsubishiMxComponent
                 }
                 else
                 {
-                    Console.WriteLine($"{result.Address} : SIZE {lSize} FAILED");
+                    Debug.WriteLine($"{result.Address} : SIZE {lSize} FAILED");
                 }
             }
         }
@@ -294,78 +324,6 @@ namespace Jankilla.Driver.MitsubishiMxComponent
             {
                 mxTag.Tag.Read(this._readbuffer, mxTag.BufferStartIndex);
             }
-        }
-
-        public override bool AddTag(Tag tag)
-        {
-            bool bValidated = ValidateTag(tag);
-
-            if (bValidated == false)
-            {
-                return false;
-            }
-
-            string strNum = tag.Address.Substring(DeviceCode.Length);
-
-            bool bParsed;
-            int num;
-
-            if (DeviceNumber != EDeviceNumber.Hex)
-            {
-                bParsed = int.TryParse(strNum, out num);
-            }
-            else
-            {
-                bParsed = int.TryParse(strNum, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out num);
-            }
-
-            if (!bParsed)
-            {
-                return false;
-            }
-
-            if (!tag.Address.StartsWith(this.DeviceCode))
-            {
-                return false;
-            }
-
-            if (DeviceType == EDeviceType.Word)
-            {
-                if (num < StartAddressNo || num + (tag.ByteSize / 2) > StartAddressNo + _shortBufferSize)
-                {
-                    return false;
-                }
-            }
-            else if (num < StartAddressNo || num > StartAddressNo + (_shortBufferSize * 16))
-            {
-                return false;
-            }
-
-            tag.Path = Path;
-            tag.BlockID = ID;
-
-            _tags.Add(tag);
-
-            tag.Writed += Tag_Writed;
-
-            return true;
-        }
-
-        public override bool RemoveTag(Tag tag)
-        {
-            tag.Writed -= Tag_Writed;
-
-            return _tags.Remove(tag);
-        }
-
-        public override void RemoveAllTags()
-        {
-            foreach (var tag in _tags)
-            {
-                tag.Writed -= Tag_Writed;
-            }
-
-            _tags.Clear();
         }
 
 

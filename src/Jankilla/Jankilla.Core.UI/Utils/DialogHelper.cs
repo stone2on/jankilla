@@ -99,6 +99,8 @@ namespace Jankilla.Core.UI.Utils
             return XtraMessageBox.Show(args2);
         }
 
+       
+
         public static object ShowInputComboMessageBox<T>(string caption, string prompt) where T : Enum
         {
             var values = Enum.GetValues(typeof(T)).Cast<T>();

@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 
 namespace Jankilla.Core.Contracts
 {
-    public abstract class BaseContract
+    public abstract class BaseContract : IIdentifiable
     {
         #region Public Properties
         public Guid ID { get; set; }
         public string Name { get; set; }
         public string Path { get; set; }
         public string Description { get; set; }
+        [JsonIgnore]
         public bool IsOpened { get; protected set; }
         #endregion
 

@@ -3,6 +3,7 @@ using Jankilla.Driver.MitsubishiMcProtocol.Defines;
 using Jankilla.Driver.MitsubishiMcProtocol.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -15,7 +16,7 @@ namespace Jankilla.Driver.MitsubishiMcProtocol
         #region Public Properties
 
         public override string Discriminator => "MitsubishiMcProtocol";
-        public override IReadOnlyList<Block> Blocks => (IReadOnlyList<Block>)_blocks;
+      
         public EProtocol Protocol => EProtocol.TCP;
 
         public string IPAddress { get; set; }
@@ -25,8 +26,7 @@ namespace Jankilla.Driver.MitsubishiMcProtocol
         #endregion
 
         #region Fields
-
-        protected IList<MitsubishiMcProtocolBlock> _blocks = new List<MitsubishiMcProtocolBlock>();
+        protected ObservableCollection<MitsubishiMcProtocolBlock> _blocks = new ObservableCollection<MitsubishiMcProtocolBlock>();
 
         private McProtocolTcp _protocol;
 
@@ -60,43 +60,6 @@ namespace Jankilla.Driver.MitsubishiMcProtocol
             IsOpened = false;
         }
 
-        public override bool AddBlock(Block block)
-        {
-            bool bValidated = ValidateBlock(block);
-
-            if (bValidated == false)
-            {
-                return false;
-            }
-
-            block.Path = $"{Path}.{block.Name}";
-            block.DeviceID = ID;
-
-            _blocks.Add((MitsubishiMcProtocolBlock)block);
-
-            return true;
-        }
-
-        public override void RemoveAllBlocks()
-        {
-            foreach (var block in _blocks)
-            {
-                block.RemoveAllTags();
-            }
-            _blocks.Clear();
-        }
-
-        public override bool RemoveBlock(Block block)
-        {
-            block.RemoveAllTags();
-
-            return _blocks.Remove((MitsubishiMcProtocolBlock)block);
-        }
-
-        public override void ReplaceBlock(int index, Block block)
-        {
-            _blocks[index] = (MitsubishiMcProtocolBlock)block;
-        }
 
         public override bool ValidateBlock(Block block)
         {

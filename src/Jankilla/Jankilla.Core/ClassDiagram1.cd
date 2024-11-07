@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Jankilla.Core.Contracts.BaseContract" Collapsed="true">
+    <Position X="5.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAgoAIEAAAAAAQAAAAAEAAAAAAAAgCAAAA=</HashCode>
+      <FileName>Contracts\BaseContract.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jankilla.Core.Contracts.Block">
+    <Position X="3" Y="4.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AgAACAQEACAAIAEEiAAAAAAgIACCEMAAAAAAEkEAAAI=</HashCode>
+      <FileName>Contracts\Block.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Jankilla.Core.Contracts.Device">
+    <Position X="5.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IBAEAAgggCAAIAAAgAAAAAAAAAAAQIAAAAACBgCAAAA=</HashCode>
+      <FileName>Contracts\Device.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Jankilla.Core.Contracts.Driver">
+    <Position X="7.5" Y="4.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAACAAIAEEgAAAAAAAQAoAIIAAAAAAAgCAAAA=</HashCode>
+      <FileName>Contracts\Driver.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Jankilla.Core.Contracts.Project" Collapsed="true">
+    <Position X="16.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>hAAAAQAAAAAAACAAAAAEABAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Contracts\Project.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jankilla.Core.Converters.ClassMaps.BlockMap&lt;T&gt;" Collapsed="true">
+    <Position X="14.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Converters\ClassMaps\BlockMap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jankilla.Core.Converters.ClassMaps.DeviceMap&lt;T&gt;" Collapsed="true">
+    <Position X="19.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Converters\ClassMaps\DeviceMap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jankilla.Core.Converters.ClassMaps.DriverMap&lt;T&gt;" Collapsed="true">
+    <Position X="14.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Converters\ClassMaps\DriverMap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jankilla.Core.Converters.ClassMaps.TagMap&lt;T&gt;" Collapsed="true">
+    <Position X="14.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Converters\ClassMaps\TagMap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jankilla.Core.Converters.CsvProjectHelper" Collapsed="true">
+    <Position X="18" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAMAAAAEAAAAAAAAAAAAAAAAIAAABAAQAAAAAAAgAA=</HashCode>
+      <FileName>Converters\CsvProjectHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jankilla.Core.Converters.JsonProjectHelper" Collapsed="true">
+    <Position X="19.75" Y="1.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAEAAAAAAAAAAAAAAAAAAAABAQQAAAAAAAAAA=</HashCode>
+      <FileName>Converters\JsonProjectHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jankilla.Core.Contracts.Tags.Base.TagEventArgs" Collapsed="true">
+    <Position X="19.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAQAA=</HashCode>
+      <FileName>Tags\Base\TagEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jankilla.Core.Contracts.Tags.Tag" Collapsed="true">
+    <Position X="7.5" Y="0.75" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>ACJAQCDIACQggsIA4CAAAAQggiQAgKCCAIBsAgEQyAg=</HashCode>
+      <FileName>Tags\Base\Tag.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Jankilla.Core.Contracts.Tags.BooleanTag">
+    <Position X="12" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAABACAIAAEEAAAAgCAAAAIggAgAAIIAAAAgAAEAAAA=</HashCode>
+      <FileName>Tags\BooleanTag.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jankilla.Core.Contracts.Tags.FloatTag" Collapsed="true">
+    <Position X="3" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>IAAAACAIAAAEAAAAAAAAAAAggAAAAAAAAAAgAAEAAAA=</HashCode>
+      <FileName>Tags\FloatTag.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jankilla.Core.Contracts.Tags.IntTag" Collapsed="true">
+    <Position X="5.25" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAIAAAEAAAEAAAAAAAggAAAAAAAAAAgAAEAAAA=</HashCode>
+      <FileName>Tags\IntTag.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jankilla.Core.Contracts.Tags.ShortTag">
+    <Position X="7.5" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAIAAAEAAAAAAAAAAAggAAAAAAAAACgAAEAAAA=</HashCode>
+      <FileName>Tags\ShortTag.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jankilla.Core.Contracts.Tags.StringTag" Collapsed="true">
+    <Position X="9.75" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAIAAAEAAAAAAAAAAAggAAAAAAgAAAgAAEAAAA=</HashCode>
+      <FileName>Tags\StringTag.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jankilla.Core.Utils.CryptoHelper" Collapsed="true">
+    <Position X="16.25" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AQACAACCAAAAAASYAAAAQAAAAAAAAAAABAgAAAAAAAA=</HashCode>
+      <FileName>Utils\CryptoHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jankilla.Core.Utils.FileHelper" Collapsed="true">
+    <Position X="16.25" Y="1.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAABAAAAAQAAAAAAAABAAAIAQAAAAQAAAAA=</HashCode>
+      <FileName>Utils\FileHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jankilla.Core.Utils.IniFile" Collapsed="true">
+    <Position X="18" Y="1.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAEAIQAAAAAAAgAACgAAAAAAAAAAMAAAA=</HashCode>
+      <FileName>Utils\IniFile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jankilla.Core.Utils.MemberMapExtension" Collapsed="true">
+    <Position X="14.5" Y="2.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utils\MemberMapExtension.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jankilla.Core.Utils.StringExtension" Collapsed="true">
+    <Position X="18" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAABAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utils\StringExtension.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Jankilla.Core.Contracts.Tags.Base.IBufferRead" Collapsed="true">
+    <Position X="14.5" Y="4.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Tags\Base\IBufferRead.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Jankilla.Core.Contracts.Tags.Base.IBufferWrite" Collapsed="true">
+    <Position X="16.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Tags\Base\IBufferWrite.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Jankilla.Core.Contracts.Tags.Base.EDirection" Collapsed="true">
+    <Position X="14.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Tags\Base\EDirection.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Jankilla.Core.Tags.Base.ETagDiscriminator" Collapsed="true">
+    <Position X="16.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAACAQQAAAAAAAAAAAAAAAAAAAAAgCCA=</HashCode>
+      <FileName>Tags\Base\ETagDiscriminator.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="맑은 고딕" Size="9" />
+</ClassDiagram>

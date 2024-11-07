@@ -70,11 +70,26 @@ namespace Jankilla.TagBuilder
 
         private void openFile(string path)
         {
+            Debug.Assert(File.Exists(path));
+
             IOverlaySplashScreenHandle handle = DialogHelper.ShowProgressPanel(this);
             treeListChannels.ClearNodes();
             tagBindingSource.Clear();
 
-            _loadedProject = JsonProjectHelper.Instance.OpenProjectFile(path);
+            if (path.EndsWith(".csv"))
+            {
+                _loadedProject = CsvProjectHelper.Instance.OpenProjectFile(path);
+
+            }
+            else if (path.EndsWith(".json"))
+            {
+                _loadedProject = JsonProjectHelper.Instance.OpenProjectFile(path);
+            }
+            else
+            {
+                Debug.Assert(false, "Not supported file format.");
+            }
+
             if (_loadedProject == null)
             {
                 DialogHelper.CloseProgressPanel(handle);
@@ -104,7 +119,14 @@ namespace Jankilla.TagBuilder
 
         private void saveFile(string path)
         {
-            JsonProjectHelper.Instance.SaveProjectFile(path, _loadedProject);
+            if (path.EndsWith(".csv"))
+            {
+                CsvProjectHelper.Instance.SaveProjectFile(path, _loadedProject);
+            }
+            else if (path.EndsWith(".json"))
+            {
+                JsonProjectHelper.Instance.SaveProjectFile(path, _loadedProject);
+            }
 
         }
 
@@ -162,7 +184,7 @@ namespace Jankilla.TagBuilder
             mxDevice.AddBlock(new MitsubishiMxComponentBlock { ID = Guid.NewGuid(), Name = "BLOCK 02", StationNo = 1, StartAddress = "D1000", BufferSize = 2000 });
             mxDevice.AddBlock(new MitsubishiMxComponentBlock { ID = Guid.NewGuid(), Name = "BLOCK 03", StationNo = 1, StartAddress = "D2000", BufferSize = 2000 });
 
-            var bitBlock = new MitsubishiMxComponentBlock { ID = Guid.NewGuid(), Name = "BLOCK 04", StationNo = 1, StartAddress = "M1000", BufferSize = 10 };
+            var bitBlock = new MitsubishiMxComponentBlock { ID = Guid.NewGuid(), Name = "BLOCK 04", StationNo = 1, StartAddress = "M000", BufferSize = 10 };
             mxDevice.AddBlock(bitBlock);
 
             int noCount = 0;
@@ -187,7 +209,7 @@ namespace Jankilla.TagBuilder
             bitBlock.AddTag(new BooleanTag() { Name = "SAMPLE_BOOL_DATA_015", Address = "M0002", Direction = EDirection.In, BitIndex = 2, No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
             bitBlock.AddTag(new BooleanTag() { Name = "SAMPLE_BOOL_DATA_016", Address = "M0003", Direction = EDirection.In, BitIndex = 3, No = ++noCount, Category = "CDAT01", ID = Guid.NewGuid() });
 
-            string path = DialogHelper.ShowSaveFileDialog(DialogHelper.FILTER_STR_JSON);
+            string path = DialogHelper.ShowSaveFileDialog($"CSV Files (.csv)|*.csv|JSON Files (.json)|*.json");
             if (string.IsNullOrEmpty(path))
             {
                 return;
@@ -271,7 +293,7 @@ namespace Jankilla.TagBuilder
 
         private void barButtonItemFileOpen_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var path = DialogHelper.ShowOpenFileDialog(DialogHelper.FILTER_STR_JSON);
+            var path = DialogHelper.ShowOpenFileDialog($"CSV Files (.csv)|*.csv|JSON Files (.json)|*.json");
             if (string.IsNullOrEmpty(path))
             {
                 return;
@@ -282,7 +304,7 @@ namespace Jankilla.TagBuilder
 
         private void barButtonItemFileSave_ItemClick(object sender, ItemClickEventArgs e)
         {
-            string path = DialogHelper.ShowSaveFileDialog(DialogHelper.FILTER_STR_JSON);
+            string path = DialogHelper.ShowSaveFileDialog($"CSV Files (.csv)|*.csv|JSON Files (.json)|*.json");
             if (string.IsNullOrEmpty(path))
             {
                 return;
@@ -356,19 +378,22 @@ namespace Jankilla.TagBuilder
 
         private void addDriverMenuItem_Click(object sender, EventArgs e)
         {
-            var obj = DialogHelper.ShowInputComboMessageBox<EDriverDiscriminator>("Add Driver", "select the type of driver you want to add");
+            var obj = DialogHelper.ShowInputComboMessageBox("Add Driver", "select the type of driver you want to add", new List<string>
+            {
+                nameof(MitsubishiMxComponentDriver),
+            });
             if (obj == null)
             {
                 return;
             }
 
-            var driverType = (EDriverDiscriminator)obj;
+            var driverType = (string)obj;
 
             IDataAccessControl control = null;
 
             switch (driverType)
             {
-                case EDriverDiscriminator.MitsubishiMxComponent:
+                case nameof(MitsubishiMxComponentDriver):
                     control = new MitsubishiMxComponentDriverUserControl()
                     {
                         Project = _loadedProject,

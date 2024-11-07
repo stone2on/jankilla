@@ -1,4 +1,5 @@
-﻿using Jankilla.Core.Contracts.Tags.Base;
+﻿using Jankilla.Core.Alarms;
+using Jankilla.Core.Contracts.Tags.Base;
 using Jankilla.Core.Tags.Base;
 using Newtonsoft.Json;
 using System;
@@ -11,7 +12,6 @@ namespace Jankilla.Core.Contracts.Tags
     public class BooleanTag : Tag
     {
         public override event EventHandler<TagEventArgs> Writed;
-
         public override event PropertyChangedEventHandler PropertyChanged;
 
         private int _bitIndex;
@@ -80,6 +80,11 @@ namespace Jankilla.Core.Contracts.Tags
             this.Value = ((uint)buffer[startIndex] & (uint)(1 << BitIndex)) > 0U;
         }
 
+        public override void Read(byte[] buffer, int startIndex)
+        {
+            this.Copy(buffer, startIndex);
+        }
+
         public override void Write(object val)
         {
             Buffer.BlockCopy(_readbuffer, 0, _writebuffer, 0, ByteSize);
@@ -96,11 +101,6 @@ namespace Jankilla.Core.Contracts.Tags
                 Address = _modifiedAddress,
                 Buffer = this._writebuffer
             });
-        }
-
-        public override void Read(byte[] buffer, int startIndex)
-        {
-            throw new NotImplementedException();
         }
 
         public void SetModifiedAddress(string addr)
@@ -123,5 +123,6 @@ namespace Jankilla.Core.Contracts.Tags
             hashCode = hashCode * -1521134295 + BitIndex.GetHashCode();
             return hashCode;
         }
+
     }
 }

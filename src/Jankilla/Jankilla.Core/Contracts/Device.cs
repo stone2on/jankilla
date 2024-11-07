@@ -1,11 +1,21 @@
-﻿using System;
+﻿using Jankilla.Core.Collections;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Jankilla.Core.Contracts
 {
-    public abstract class Device : BaseContract
+    public abstract class Device : BaseContract, IDisposable
     {
         #region Public Properties
+        public IReadOnlyList<Block> Blocks
+        {
+            get
+            {
+                return _blocks;
+            }
+        }
 
         public Guid DriverID { get; set; }
 
@@ -13,26 +23,167 @@ namespace Jankilla.Core.Contracts
 
         #region Fields
 
+        protected UniqueObservableCollection<Block> _blocks = new UniqueObservableCollection<Block>();
+        private bool disposedValue;
 
         #endregion
 
         #region Constructor
 
+        protected Device()
+        {
+            _blocks.CollectionChanged += blocks_CollectionChanged;
+        }
+
+        protected virtual void blocks_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
+                    if (e.NewItems != null)
+                    {
+                        foreach (Block block in e.NewItems)
+                        {
+                            block.Path = $"{Path}.{block.Name}";
+                            block.DeviceID = ID;
+                        }
+                    }
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Replace:
+                    if (e.OldItems != null)
+                    {
+       
+                    }
+                    if (e.NewItems != null)
+                    {
+                        foreach (Block block in e.NewItems)
+                        {
+                            block.Path = $"{Path}.{block.Name}";
+                            block.DeviceID = ID;
+                        }
+                    }
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
+                    if (e.OldItems != null)
+                    {
+                        foreach (Block block in e.OldItems)
+                        {
+                            block.RemoveAllTags();
+                        }
+                    }
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Move:
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Reset:
+                    RemoveAllBlocks();
+                    break;
+                default:
+                    break;
+
+            }
+        }
+
         #endregion
 
         #region Public Methods
 
-        public abstract IReadOnlyList<Block> Blocks { get; }
+        public virtual bool ValidateBlock(Block block)
+        {
+            bool bValidated = ValidateContract(block);
 
-        public abstract bool ValidateBlock(Block block);
+            if (bValidated == false)
+            {
+                return false;
+            }
 
-        public abstract bool AddBlock(Block block);
-        
-        public abstract bool RemoveBlock(Block block);
+            if (block.Discriminator != Discriminator)
+            {
+                return false;
+            }
 
-        public abstract void RemoveAllBlocks();
+            if (_blocks.Contains(block))
+            {
+                return false;
+            }
 
-        public abstract void ReplaceBlock(int index, Block block);
+            if (string.IsNullOrEmpty(block.StartAddress))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public virtual bool AddBlock(Block block)
+        {
+            bool bValidated = ValidateBlock(block);
+
+            if (bValidated == false)
+            {
+                return false;
+            }
+
+            block.Path = $"{Path}.{block.Name}";
+            block.DeviceID = ID;
+
+            _blocks.Add(block);
+
+            return true;
+        }
+
+        public virtual bool RemoveBlock(Block block)
+        {
+            block.RemoveAllTags();
+
+            return _blocks.Remove(block);
+        }
+
+        public virtual void RemoveAllBlocks()
+        {
+            foreach (var block in _blocks)
+            {
+                block.RemoveAllTags();
+            }
+            _blocks.Clear();
+        }
+
+        public virtual bool ReplaceBlock(int index, Block block)
+        {
+            bool bValidated = ValidateBlock(block);
+            if (bValidated == false)
+            {
+                return false;
+            }
+
+            _blocks[index] = block;
+            return true;
+        }
+
+        #endregion
+
+        #region Overrides
+
+        public override bool Open()
+        {
+            foreach (var block in _blocks)
+            {
+                block.Open();
+            }
+
+            IsOpened = !_blocks.Any(b => b.IsOpened == false);
+
+            return IsOpened;
+        }
+
+        public override void Close()
+        {
+            foreach (var block in _blocks)
+            {
+                block.Close();
+            }
+
+            IsOpened = false;
+        }
 
         public override bool Equals(object obj)
         {
@@ -55,10 +206,25 @@ namespace Jankilla.Core.Contracts
             return hashCode;
         }
 
-        #endregion
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    _blocks.CollectionChanged -= blocks_CollectionChanged;
+                }
 
-        #region Overrides
+                disposedValue = true;
+            }
+        }
 
+
+        public void Dispose()
+        {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
 
 
         #endregion

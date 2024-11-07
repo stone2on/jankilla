@@ -380,6 +380,7 @@ GO
                             break;
                         case Tags.Base.ETagDiscriminator.Int:
                         case Tags.Base.ETagDiscriminator.Short:
+                        case Tags.Base.ETagDiscriminator.UShort:
                         case Tags.Base.ETagDiscriminator.Float:
                             dataType = "FLOAT";
                             break;
