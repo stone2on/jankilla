@@ -17,9 +17,7 @@ namespace Jankilla.Driver.MitsubishiMcProtocol
 
         #region Fields
 
-        protected IList<MitsubishiMcProtocolDevice> _devices = new List<MitsubishiMcProtocolDevice>();
-
-
+   
         #endregion
 
         public override bool Open()

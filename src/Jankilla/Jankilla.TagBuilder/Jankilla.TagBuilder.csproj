@@ -25,34 +25,37 @@
     <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevExpress.BonusSkins.v20.1">
-      <HintPath>..\..\..\external\ui\DevExpress.BonusSkins.v20.1.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.Data.Desktop.v20.1">
-      <HintPath>..\..\..\external\ui\DevExpress.Data.Desktop.v20.1.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.Data.v20.1">
-      <HintPath>..\..\..\external\ui\DevExpress.Data.v20.1.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.Utils.v20.1">
-      <HintPath>..\..\..\external\ui\DevExpress.Utils.v20.1.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.XtraBars.v20.1">
-      <HintPath>..\..\..\external\ui\DevExpress.XtraBars.v20.1.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.XtraEditors.v20.1">
-      <HintPath>..\..\..\external\ui\DevExpress.XtraEditors.v20.1.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.XtraGrid.v20.1">
-      <HintPath>..\..\..\external\ui\DevExpress.XtraGrid.v20.1.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.XtraLayout.v20.1">
-      <HintPath>..\..\..\external\ui\DevExpress.XtraLayout.v20.1.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.XtraTreeList.v20.1">
-      <HintPath>..\..\..\external\ui\DevExpress.XtraTreeList.v20.1.dll</HintPath>
-    </Reference>
     <Reference Include="Accessibility" />
+    <Reference Include="DevExpress.Data.Desktop.v24.1">
+      <HintPath>..\..\..\..\..\..\..\Program Files\DevExpress 24.1\Components\Bin\Framework\DevExpress.Data.Desktop.v24.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Data.v24.1">
+      <HintPath>..\..\..\..\..\..\..\Program Files\DevExpress 24.1\Components\Bin\Framework\DevExpress.Data.v24.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Drawing.v24.1">
+      <HintPath>..\..\..\..\..\..\..\Program Files\DevExpress 24.1\Components\Bin\Framework\DevExpress.Drawing.v24.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v24.1.Core">
+      <HintPath>..\..\..\..\..\..\..\Program Files\DevExpress 24.1\Components\Bin\Framework\DevExpress.Printing.v24.1.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v24.1">
+      <HintPath>..\..\..\..\..\..\..\Program Files\DevExpress 24.1\Components\Bin\Framework\DevExpress.Utils.v24.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraBars.v24.1">
+      <HintPath>..\..\..\..\..\..\..\Program Files\DevExpress 24.1\Components\Bin\Framework\DevExpress.XtraBars.v24.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v24.1">
+      <HintPath>..\..\..\..\..\..\..\Program Files\DevExpress 24.1\Components\Bin\Framework\DevExpress.XtraEditors.v24.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraGrid.v24.1">
+      <HintPath>..\..\..\..\..\..\..\Program Files\DevExpress 24.1\Components\Bin\Framework\DevExpress.XtraGrid.v24.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraLayout.v24.1">
+      <HintPath>..\..\..\..\..\..\..\Program Files\DevExpress 24.1\Components\Bin\Framework\DevExpress.XtraLayout.v24.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraTreeList.v24.1">
+      <HintPath>..\..\..\..\..\..\..\Program Files\DevExpress 24.1\Components\Bin\Framework\DevExpress.XtraTreeList.v24.1.dll</HintPath>
+    </Reference>
     <Reference Include="Jankilla.Core, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\build\debug\Jankilla.Core\net472\Jankilla.Core.dll</HintPath>

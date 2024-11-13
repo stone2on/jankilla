@@ -21,7 +21,6 @@ namespace Jankilla.Driver.MitsubishiMxComponent
 
         public override string Discriminator => "MitsubishiMxComponent";
 
-        private string _startAddress;
         public override string StartAddress 
         { 
             get => _startAddress; 
@@ -72,7 +71,6 @@ namespace Jankilla.Driver.MitsubishiMxComponent
             }
         }
 
-        private int _bufferSize;
         public override int BufferSize 
         {
             get => _bufferSize;
@@ -89,7 +87,6 @@ namespace Jankilla.Driver.MitsubishiMxComponent
                 _shortBufferSize = shortBuffSize;
             }
         }
-
         public int StationNo 
         {
             get { return _stationNo; }
@@ -118,7 +115,8 @@ namespace Jankilla.Driver.MitsubishiMxComponent
 
         private short[] _readbuffer;
         private short[] _writeBuffer;
-
+        private int _bufferSize;
+        private string _startAddress;
         private ActUtlType64 _plc = new ActUtlType64();
 
         private IList<MitsubishiMxComponentTagWrapper> _mxTags = new List<MitsubishiMxComponentTagWrapper>();

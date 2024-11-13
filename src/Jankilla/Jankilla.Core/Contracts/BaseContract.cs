@@ -16,12 +16,12 @@ namespace Jankilla.Core.Contracts
         public string Description { get; set; }
         [JsonIgnore]
         public bool IsOpened { get; protected set; }
+
         #endregion
 
         #region Abstracts
 
         public abstract string Discriminator { get; }
-
         public abstract bool Open();
         public abstract void Close();
 

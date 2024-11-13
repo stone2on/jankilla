@@ -26,8 +26,7 @@ namespace Jankilla.Driver.MitsubishiMcProtocol
         #endregion
 
         #region Fields
-        protected ObservableCollection<MitsubishiMcProtocolBlock> _blocks = new ObservableCollection<MitsubishiMcProtocolBlock>();
-
+    
         private McProtocolTcp _protocol;
 
         #endregion
@@ -40,7 +39,7 @@ namespace Jankilla.Driver.MitsubishiMcProtocol
             foreach (var block in _blocks)
             {
                 block.Open();
-                block.DeviceProtocol = _protocol;
+                //block.DeviceProtocol = _protocol;
             }
 
             IsOpened = !_blocks.Any(b => b.IsOpened == false);

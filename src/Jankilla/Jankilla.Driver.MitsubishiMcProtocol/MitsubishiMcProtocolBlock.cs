@@ -50,8 +50,7 @@ namespace Jankilla.Driver.MitsubishiMcProtocol
 #pragma warning restore CS0649 // 'MitsubishiMcProtocolBlock._writeBuffer' 필드에는 할당되지 않으므로 항상 null 기본값을 사용합니다.
 
         private IList<MitsubishiMcProtocolTagWrapper> _mcTags = new List<MitsubishiMcProtocolTagWrapper>();
-        private ConcurrentQueue<TagEventArgs> _writeEventQueue = new ConcurrentQueue<TagEventArgs>();
-
+    
 #pragma warning disable CS0649 // 'MitsubishiMcProtocolBlock._shortBufferSize' 필드에는 할당되지 않으므로 항상 0 기본값을 사용합니다.
         private int _shortBufferSize;
 #pragma warning restore CS0649 // 'MitsubishiMcProtocolBlock._shortBufferSize' 필드에는 할당되지 않으므로 항상 0 기본값을 사용합니다.

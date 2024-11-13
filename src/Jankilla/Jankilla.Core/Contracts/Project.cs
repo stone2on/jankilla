@@ -11,17 +11,23 @@ using System.Threading.Tasks;
 
 namespace Jankilla.Core.Contracts
 {
-    public sealed class Project
+    public sealed class Project : IIdentifiable
     {
         #region Public Properties
+
+        public Guid ID { get; set; }
 
         public IReadOnlyList<Driver> Drivers => _drivers;
        
         public IReadOnlyList<BaseAlarm> Alarms => _alarms;
 
+        public IReadOnlyList<Project> Remotes => _remotes;
+
         #endregion
 
         #region Fields
+
+        private UniqueObservableCollection<Project> _remotes = new UniqueObservableCollection<Project>();
 
         private UniqueObservableCollection<BaseAlarm> _alarms = new UniqueObservableCollection<BaseAlarm>();
         private UniqueObservableCollection<Driver> _drivers = new UniqueObservableCollection<Driver>();
