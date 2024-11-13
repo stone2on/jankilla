@@ -1,14 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net8.0;net472;netstandard2.0;netstandard2.1</TargetFrameworks>
+    <TargetFrameworks>net472;</TargetFrameworks>
     <OutputType>Library</OutputType>
     <Deterministic>false</Deterministic>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <AssemblyTitle>Jankilla.Driver.MitsubishiMxComponent</AssemblyTitle>
-    <Product>Jankilla.Driver.MitsubishiMxComponent</Product>
-    <Copyright>Copyright © stone2on 2024</Copyright>
-    <AssemblyVersion>1.0.*</AssemblyVersion>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <AssemblyTitle>Jankilla.Core.DB</AssemblyTitle>
+    <Product>Jankilla.Core.DB</Product>
+    <Copyright>Copyright © stone.youn 2024</Copyright>
+    <AssemblyVersion>1.0.%2a</AssemblyVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>..\..\..\build\debug\$(AssemblyName)</OutputPath>
@@ -17,20 +16,20 @@
     <OutputPath>..\..\..\build\release\$(AssemblyName)</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Jankilla.Core\Jankilla.Core.csproj" />
+    <ProjectReference Include="..\Jankilla.Driver.MitsubishiMxComponent\Jankilla.Driver.MitsubishiMxComponent.csproj" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Costura.Fody" Version="5.7.0">
       <PrivateAssets>all</PrivateAssets>
       <!--<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>-->
     </PackageReference>
+    <PackageReference Include="Dapper" Version="2.1.28" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Jankilla.Core\Jankilla.Core.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Interop.ActUtlType64Lib">
-      <HintPath>..\..\..\external\driver\Interop.ActUtlType64Lib.dll</HintPath>
-    </Reference>
   </ItemGroup>
 </Project>

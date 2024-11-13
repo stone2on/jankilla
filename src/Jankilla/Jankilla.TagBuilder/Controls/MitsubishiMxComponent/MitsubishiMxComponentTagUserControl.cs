@@ -3,7 +3,7 @@ using Jankilla.Core.Contracts;
 using Jankilla.Core.Contracts.Tags;
 using Jankilla.Core.Contracts.Tags.Base;
 using Jankilla.Core.Tags.Base;
-using Jankilla.Core.UI.Forms.Base;
+using Jankilla.Core.UI.WinForms.Forms.Base;
 using Jankilla.Core.Utils;
 using Jankilla.Driver.MitsubishiMxComponent;
 using System;

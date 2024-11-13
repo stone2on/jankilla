@@ -1,6 +1,6 @@
 ﻿using DevExpress.XtraEditors;
 using Jankilla.Core.Contracts;
-using Jankilla.Core.UI.Forms.Base;
+using Jankilla.Core.UI.WinForms.Forms.Base;
 using Jankilla.Driver.MitsubishiMxComponent;
 using System;
 using System.Collections.Generic;
