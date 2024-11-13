@@ -92,7 +92,5 @@
   <ItemGroup>
 
     <ProjectReference Include="..\Jankilla.Core.UI.Winforms\Jankilla.Core.UI.WinForms.csproj" />
-
-    <ProjectReference Include="..\Jankilla.Core\Jankilla.Core.csproj" />
   </ItemGroup>
 </Project>
