@@ -1,6 +1,7 @@
 ﻿using Jankilla.Core.Alarms;
 using Jankilla.Core.Collections;
 using Jankilla.Core.Contracts.Tags;
+using Jankilla.Core.Tags;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -67,11 +68,45 @@ namespace Jankilla.Core.Contracts
 
         public Tag FindTagOrNull(Guid id)
         {
-            return Drivers
-                .SelectMany(driver => driver.Devices)
-                .SelectMany(device => device.Blocks)
-                .SelectMany(block => block.Tags)
-                .FirstOrDefault(tag => tag.ID == id);
+            return FindTagRecursive(
+                Drivers
+                    .SelectMany(driver => driver.Devices)
+                    .SelectMany(device => device.Blocks)
+                    .SelectMany(block => block.Tags),
+                id);
+        }
+
+        private Tag FindTagRecursive(IEnumerable<Tag> tags, Guid id)
+        {
+            foreach (var tag in tags)
+            {
+                if (tag.ID == id)
+                {
+                    return tag;
+                }
+
+                if (tag.Discriminator == Core.Tags.Base.ETagDiscriminator.Complex)
+                {
+                    ComplexTag complexTag = (ComplexTag)tag;
+                    var innerTag = FindTagRecursive(complexTag.Tags.Values, id);
+                    if (innerTag != null)
+                    {
+                        return innerTag;
+                    }
+                }
+
+                if (tag.Discriminator == Core.Tags.Base.ETagDiscriminator.Array)
+                {
+                    IArrayTag arrayTag = (IArrayTag)tag;
+                    var innerTag = FindTagRecursive(arrayTag.Tags, id);
+                    if (innerTag != null)
+                    {
+                        return innerTag;
+                    }
+                }
+            }
+
+            return null;
         }
 
         public BaseAlarm FindAlarmOrNull(Guid id)

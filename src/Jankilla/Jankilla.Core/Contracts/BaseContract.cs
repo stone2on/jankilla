@@ -33,6 +33,7 @@ namespace Jankilla.Core.Contracts
 
         #region Protected Helpers
 
+
         protected bool ValidateContract(BaseContract contract)
         {
             if (contract == null)
@@ -44,16 +45,6 @@ namespace Jankilla.Core.Contracts
             {
                 return false;
             }
-
-            //if (string.IsNullOrEmpty(contract.ParentPath) || string.IsNullOrEmpty(contract.Path))
-            //{
-            //    return false;
-            //}
-
-            //if (Path != contract.ParentPath)
-            //{
-            //    return false;
-            //}
 
             return true;
         }

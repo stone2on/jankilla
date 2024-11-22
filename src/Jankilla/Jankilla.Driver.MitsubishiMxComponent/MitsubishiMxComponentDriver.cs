@@ -13,7 +13,7 @@ namespace Jankilla.Driver.MitsubishiMxComponent
     {
         #region Statics
 
-        public static List<string> AllDevices = new List<string>()
+        public static readonly List<string> AllDevices = new List<string>()
         {
           "SM",
           "SB",
@@ -37,7 +37,7 @@ namespace Jankilla.Driver.MitsubishiMxComponent
           "R",
         };
 
-        public static HashSet<string> BitDeviceTypes = new HashSet<string>()
+        public static readonly HashSet<string> BitDeviceTypes = new HashSet<string>()
         {
           "B",
           "Y",
@@ -53,7 +53,7 @@ namespace Jankilla.Driver.MitsubishiMxComponent
           "FY",
         };
 
-        public static HashSet<string> WordDeviceTypes = new HashSet<string>()
+        public static readonly HashSet<string> WordDeviceTypes = new HashSet<string>()
         {
           "W",
           "C",
@@ -65,7 +65,7 @@ namespace Jankilla.Driver.MitsubishiMxComponent
           "FD"
         };
 
-        public static HashSet<string> HexDeviceTypes = new HashSet<string>()
+        public static readonly HashSet<string> HexDeviceTypes = new HashSet<string>()
         {
           "X",
           "Y",
@@ -80,7 +80,7 @@ namespace Jankilla.Driver.MitsubishiMxComponent
           "MF"
         };
 
-        public static HashSet<string> DecimalDeviceTypes = new HashSet<string>()
+        public static readonly HashSet<string> DecimalDeviceTypes = new HashSet<string>()
         {
           "FX",
           "FY",
@@ -108,6 +108,57 @@ namespace Jankilla.Driver.MitsubishiMxComponent
           "ZR"
         };
 
+        public static readonly Dictionary<(ECpuType cpu, string device), int> MaxAddresses = new Dictionary<(ECpuType cpu, string device), int>()
+        {
+            {(ECpuType.FX5U, "X"), 377},
+            {(ECpuType.FX5U, "Y"), 377},
+            {(ECpuType.FX5U, "M"), 32767},
+            {(ECpuType.FX5U, "L"), 32767},
+            {(ECpuType.FX5U, "B"), 0x7FFF},
+            {(ECpuType.FX5U, "D"), 32767},
+            {(ECpuType.FX5U, "R"), 32767},
+            {(ECpuType.FX5U, "W"), 0x7FFF},
+
+            {(ECpuType.RSeries, "X"), 0x1FFF},
+            {(ECpuType.RSeries, "Y"), 0x1FFF},
+            {(ECpuType.RSeries, "M"), 61439},
+            {(ECpuType.RSeries, "L"), 32767},
+            {(ECpuType.RSeries, "B"), 0xEFFF},
+            {(ECpuType.RSeries, "F"), 32767},
+            {(ECpuType.RSeries, "V"), 32767},
+            {(ECpuType.RSeries, "D"), 4194303},
+            {(ECpuType.RSeries, "W"), 0xEFFF},
+            {(ECpuType.RSeries, "R"), 32767},
+            {(ECpuType.RSeries, "ZR"), 4194303},
+
+            {(ECpuType.QSeries, "X"), 0x1FFF},
+            {(ECpuType.QSeries, "Y"), 0x1FFF},
+            {(ECpuType.QSeries, "M"), 61439},
+            {(ECpuType.QSeries, "L"), 32767},
+            {(ECpuType.QSeries, "B"), 0xEFFF},
+            {(ECpuType.QSeries, "D"), 12287},
+            {(ECpuType.QSeries, "W"), 0xEFFF},
+            {(ECpuType.QSeries, "R"), 32767},
+
+            {(ECpuType.LSeries, "X"), 0x7FF},
+            {(ECpuType.LSeries, "Y"), 0x7FF},
+            {(ECpuType.LSeries, "M"), 61439},
+            {(ECpuType.LSeries, "L"), 32767},
+            {(ECpuType.LSeries, "B"), 0xEFFF},
+            {(ECpuType.LSeries, "D"), 12287},
+            {(ECpuType.LSeries, "W"), 0xEFFF},
+            {(ECpuType.LSeries, "R"), 32767},
+
+            {(ECpuType.FX5U, "SM"), 32767},
+            {(ECpuType.FX5U, "SD"), 32767},
+            {(ECpuType.RSeries, "SM"), 32767},
+            {(ECpuType.RSeries, "SD"), 32767},
+            {(ECpuType.QSeries, "SM"), 32767},
+            {(ECpuType.QSeries, "SD"), 32767},
+            {(ECpuType.LSeries, "SM"), 32767},
+            {(ECpuType.LSeries, "SD"), 32767}
+        };
+
         #endregion
 
         #region Public Properties
@@ -116,7 +167,7 @@ namespace Jankilla.Driver.MitsubishiMxComponent
 
         #endregion
 
-    
+
 
 
 

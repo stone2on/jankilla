@@ -17,6 +17,8 @@ namespace Jankilla.Driver.MitsubishiMxComponent
     {
         #region Public Properties
 
+        public ECpuType CpuType { get; set; }
+
         public override string Discriminator => "MitsubishiMxComponent";
 
         #endregion
@@ -38,15 +40,6 @@ namespace Jankilla.Driver.MitsubishiMxComponent
 
             var mxBlock = (MitsubishiMxComponentBlock)block;
 
-            if (string.IsNullOrEmpty(mxBlock.StartAddress))
-            {
-                return false;
-            }
-
-            if (mxBlock.StationNo < 1)
-            {
-                return false;
-            }
 
             if (mxBlock.DeviceType == EDeviceType.Unknown)
             {
@@ -61,6 +54,36 @@ namespace Jankilla.Driver.MitsubishiMxComponent
             if (mxBlock.DeviceType == EDeviceType.Bit && mxBlock.StartAddressNo % 16 != 0)
             {
                 return false;
+            }
+
+
+            if (string.IsNullOrEmpty(mxBlock.StartAddress) || mxBlock.StationNo < 1)
+            {
+                return false;
+            }
+
+            string deviceType = new string(mxBlock.StartAddress.TakeWhile(char.IsLetter).ToArray());
+
+            // Validate device type exists
+            if (!MitsubishiMxComponentDriver.BitDeviceTypes.Contains(deviceType) && !MitsubishiMxComponentDriver.WordDeviceTypes.Contains(deviceType))
+            {
+                return false;
+            }
+
+            // Word alignment check for bit devices
+            if (MitsubishiMxComponentDriver.BitDeviceTypes.Contains(deviceType) && mxBlock.StartAddressNo % 16 != 0)
+            {
+                return false;
+            }
+
+            // Address range validation
+            if (MitsubishiMxComponentDriver.MaxAddresses.TryGetValue((CpuType, deviceType), out int maxAddress))
+            {
+                int endAddress = mxBlock.StartAddressNo + (mxBlock.BufferSize * 2) - 1;
+                if (endAddress > maxAddress)
+                {
+                    return false;
+                }
             }
 
             return true;

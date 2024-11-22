@@ -14,6 +14,11 @@ namespace Jankilla.Core.Tags.Base
         String,
         Float,
         UShort,
-        UInt
+        UInt,
+        Long,
+        ULong,
+        Double,
+        Complex,
+        Array
     }
 }

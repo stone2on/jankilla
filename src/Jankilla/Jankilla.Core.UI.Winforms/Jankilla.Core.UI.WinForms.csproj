@@ -67,34 +67,37 @@
     </PackageReference>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
+    <PackageReference Include="System.Runtime" Version="4.3.1" />
+    <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="DevExpress.Data.Desktop.v24.1">
-      <HintPath>..\..\..\..\..\..\..\Program Files\DevExpress 24.1\Components\Bin\Framework\DevExpress.Data.Desktop.v24.1.dll</HintPath>
+      <HintPath>..\..\..\external\ui\DevExpress.Data.Desktop.v24.1.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Data.v24.1">
-      <HintPath>..\..\..\..\..\..\..\Program Files\DevExpress 24.1\Components\Bin\Framework\DevExpress.Data.v24.1.dll</HintPath>
+      <HintPath>..\..\..\external\ui\DevExpress.Data.v24.1.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Drawing.v24.1">
-      <HintPath>..\..\..\..\..\..\..\Program Files\DevExpress 24.1\Components\Bin\Framework\DevExpress.Drawing.v24.1.dll</HintPath>
+      <HintPath>..\..\..\external\ui\DevExpress.Drawing.v24.1.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Printing.v24.1.Core">
-      <HintPath>..\..\..\..\..\..\..\Program Files\DevExpress 24.1\Components\Bin\Framework\DevExpress.Printing.v24.1.Core.dll</HintPath>
+      <HintPath>..\..\..\external\ui\DevExpress.Printing.v24.1.Core.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Utils.v24.1">
-      <HintPath>..\..\..\..\..\..\..\Program Files\DevExpress 24.1\Components\Bin\Framework\DevExpress.Utils.v24.1.dll</HintPath>
+      <HintPath>..\..\..\external\ui\DevExpress.Utils.v24.1.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.XtraBars.v24.1">
-      <HintPath>..\..\..\..\..\..\..\Program Files\DevExpress 24.1\Components\Bin\Framework\DevExpress.XtraBars.v24.1.dll</HintPath>
+      <HintPath>..\..\..\external\ui\DevExpress.XtraBars.v24.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraDialogs.v24.1">
+      <HintPath>..\..\..\external\ui\DevExpress.XtraDialogs.v24.1.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.XtraEditors.v24.1">
-      <HintPath>..\..\..\..\..\..\..\Program Files\DevExpress 24.1\Components\Bin\Framework\DevExpress.XtraEditors.v24.1.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.XtraGrid.v24.1">
-      <HintPath>..\..\..\..\..\..\..\Program Files\DevExpress 24.1\Components\Bin\Framework\DevExpress.XtraGrid.v24.1.dll</HintPath>
+      <HintPath>..\..\..\external\ui\DevExpress.XtraEditors.v24.1.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.XtraLayout.v24.1">
-      <HintPath>..\..\..\..\..\..\..\Program Files\DevExpress 24.1\Components\Bin\Framework\DevExpress.XtraLayout.v24.1.dll</HintPath>
+      <HintPath>..\..\..\external\ui\DevExpress.XtraLayout.v24.1.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>
