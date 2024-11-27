@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Jankilla.Core.Contracts;
 using Jankilla.Core.Contracts.Tags;
+using Jankilla.Core.Tags;
 using Jankilla.Core.Tags.Base;
 using System;
 using System.Collections.Generic;

@@ -39,10 +39,12 @@ namespace Jankilla.Core.Contracts.Tags
             get {  return _byteSize; } 
             set
             {
-                if (value <= 0)
-                    throw new ArgumentOutOfRangeException(nameof(ByteSize));
-
                 _byteSize = value;
+
+                if (value <= 0)
+                {
+                    return;
+                }
 
                 _readbuffer = new byte[value];
                 _writebuffer = new byte[value];
@@ -172,10 +174,6 @@ namespace Jankilla.Core.Contracts.Tags
         {
             Value = val;
         }
-
-
-
-   
 
         public void SuppressEvents(bool suppress)
         {

@@ -1,5 +1,5 @@
 ﻿using Jankilla.Core.Contracts;
-using Jankilla.Driver.MitsubishiMxComponent;
+using Jankilla.Driver.Mitsubishi.MxComponent;
 using System;
 using System.Collections.Generic;
 using System.Linq;

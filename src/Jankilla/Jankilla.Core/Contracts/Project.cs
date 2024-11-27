@@ -135,15 +135,15 @@ namespace Jankilla.Core.Contracts
             return null;
         }
 
-        public bool AddDriver(Driver driver)
+        public Jankilla.Core.Utils.ValidationResult AddDriver(Driver driver)
         {
             if (_drivers.Contains(driver))
             {
-                return false;
+                return new Jankilla.Core.Utils.ValidationResult(false, "Driver already exists.");
             }
 
             _drivers.Add(driver);
-            return true;
+            return new Jankilla.Core.Utils.ValidationResult(true, "Driver added successfully.");
         }
 
         public bool RemoveDriver(Driver driver)
@@ -190,6 +190,7 @@ namespace Jankilla.Core.Contracts
             _alarms.Clear();
         }
 
+  
         #endregion
 
         #region Events

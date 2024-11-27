@@ -1,9 +1,11 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration;
+using CsvHelper.TypeConversion;
 using Jankilla.Core.Alarms;
 using Jankilla.Core.Contracts;
 using Jankilla.Core.Contracts.Tags;
 using Jankilla.Core.Converters.ClassMaps;
+using Jankilla.Core.Tags;
 using Jankilla.Core.Utils;
 using JsonSubTypes;
 using Newtonsoft.Json;
@@ -121,11 +123,16 @@ namespace Jankilla.Core.Converters
             var tagType = typeof(Tag);
             var tagTypes = assemblies
                 .SelectMany(assembly => assembly.GetTypes())
-                .Where(type => tagType.IsAssignableFrom(type) && type.IsClass && !type.IsAbstract);
+                .Where(type => tagType.IsAssignableFrom(type) && type.IsClass && !type.IsAbstract && type != typeof(ComplexTag));
 
             foreach (var type in tagTypes)
             {
-                var classMap = ObjectResolver.Current.Resolve(typeof(TagMap<>).MakeGenericType(type)) as ClassMap;
+                if (type.ContainsGenericParameters)
+                {
+                    continue;
+                }
+
+                ClassMap classMap = ObjectResolver.Current.Resolve(typeof(TagMap<>).MakeGenericType(type)) as ClassMap;
                 classMap.Map().Index(0).ConstantFixed(classMap.ClassType.Name);
 
                 var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
@@ -139,6 +146,23 @@ namespace Jankilla.Core.Converters
 
                 _classMaps.Add(classMap);
             }
+
+            var complexTagMap = new ComplexTagMap();
+            complexTagMap.Map().Index(0).ConstantFixed(complexTagMap.ClassType.Name);
+            _classMaps.Add(complexTagMap);
+
+            _classMaps.Add(new BooleanArrayTagMap<ArrayTag<BooleanTag>>());
+            _classMaps.Add(new StringArrayTagMap<ArrayTag<StringTag>>());
+            _classMaps.Add(new ShortArrayTagMap<ArrayTag<ShortTag>>());
+            _classMaps.Add(new IntArrayTagMap<ArrayTag<IntTag>>());
+            _classMaps.Add(new UIntArrayTagMap<ArrayTag<UIntTag>>());
+            _classMaps.Add(new FloatArrayTagMap<ArrayTag<FloatTag>>());
+            _classMaps.Add(new DoubleArrayTagMap<ArrayTag<DoubleTag>>());
+            _classMaps.Add(new UShortArrayTagMap<ArrayTag<UShortTag>>());
+            _classMaps.Add(new LongArrayTagMap<ArrayTag<LongTag>>());
+            _classMaps.Add(new ULongArrayTagMap<ArrayTag<ULongTag>>());
+            _classMaps.Add(new ComplexArrayTagMap<ArrayTag<ComplexTag>>());
+
 
             var tagAlarmType = typeof(TagAlarm);
             var tagAlarmTypes = assemblies
@@ -162,11 +186,19 @@ namespace Jankilla.Core.Converters
                 _classMaps.Add(classMap);
             }
 
-            _classMaps.Add(new ComplexAlarmMap());
+            var complexAlarmMap = new ComplexAlarmMap();
+            complexAlarmMap.Map().Index(0).ConstantFixed(nameof(ComplexAlarm));
+            _classMaps.Add(complexAlarmMap);
 
-            foreach (var cm in _classMaps)
+            foreach (ClassMap cm in _classMaps)
             {
-                _classTypeMap.Add(cm.ClassType.Name, cm.ClassType);
+                string key = cm.ClassType.Name;
+                if (cm.ClassType.Name.StartsWith("ArrayTag"))
+                {
+                    key += $"<{cm.ClassType.GetGenericArguments()[0].Name}>";
+                }
+                
+                _classTypeMap.Add(key, cm.ClassType);
             }
         }
 
@@ -189,7 +221,7 @@ namespace Jankilla.Core.Converters
                     Device device = null;
                     Block block = null;
                     Tag tag = null;
-                    TagAlarm alarm = null;
+                    BaseAlarm alarm = null;
 
                     while (csv.Read())
                     {
@@ -217,6 +249,8 @@ namespace Jankilla.Core.Converters
                                 tag = (Tag)record;
                                 block?.AddTag(tag);
                                 break;
+
+                                
                             case nameof(TagAlarm):
                                 alarm = (TagAlarm)record;
                                 string tagIdStr = csv.GetField(TagAlarmMap<TagAlarm>.TAG_ID_INDEX);
@@ -226,10 +260,14 @@ namespace Jankilla.Core.Converters
                                     var targetTag = project.FindTagOrNull(tagId);
                                     if (targetTag != null)
                                     {
-                                        alarm.SetTag(targetTag);
+                                        ((TagAlarm)alarm).SetTag(targetTag);
                                         project.AddAlarm(alarm);
                                     }
                                 }
+                                break;
+                            case nameof(BaseAlarm):
+                                alarm = (BaseAlarm)record;
+                                project.AddAlarm(alarm);
                                 break;
                         }
 
@@ -255,6 +293,8 @@ namespace Jankilla.Core.Converters
                 using (var writer = new StreamWriter(stream))
                 using (var csv = new CsvWriter(writer, _config))
                 {
+                    //csv.Context.TypeConverterCache.AddConverter<Tag>(new IEnumerableConverter());
+
                     foreach (var cm in _classMaps)
                     {
                         csv.Context.RegisterClassMap(cm);
@@ -274,6 +314,26 @@ namespace Jankilla.Core.Converters
                                 csv.NextRecord();
                                 foreach (var tag in block.Tags)
                                 {
+                                    if (tag.Discriminator == Tags.Base.ETagDiscriminator.Complex)
+                                    {
+                                        var cTag = (ComplexTag)tag;
+                                        var stack = new Stack<Tag>(cTag.Tags.Values);
+                                        while (stack.Count > 0)
+                                        {
+                                            var subTag = stack.Pop();
+                                            if (subTag.Discriminator == Tags.Base.ETagDiscriminator.Complex)
+                                            {
+                                                ComplexTag cSubTag = (ComplexTag)subTag;
+                                                foreach (var item in cSubTag.Tags)
+                                                {
+                                                    stack.Push(item.Value);
+                                                }
+                                            }
+                                            csv.WriteRecord((object)subTag);
+                                            csv.NextRecord();
+                                        }
+                                    }
+
                                     csv.WriteRecord((object)tag);
                                     csv.NextRecord();
                                 }

@@ -16,6 +16,7 @@ using CsvHelper;
 using System.Reflection;
 using Jankilla.Core.Utils;
 using Jankilla.Core.Alarms;
+using Jankilla.Core.Tags;
 
 namespace Jankilla.Core.Converters
 {
@@ -61,7 +62,7 @@ namespace Jankilla.Core.Converters
                 .SelectMany(assembly => assembly.GetTypes())
                 .Where(type => driverType.IsAssignableFrom(type) && type.IsClass && !type.IsAbstract);
 
-            JsonSubtypesConverterBuilder drvBuilder = JsonSubtypesConverterBuilder.Of<Driver>("Discriminator");
+            JsonSubtypesConverterBuilder drvBuilder = JsonSubtypesConverterBuilder.Of<Driver>("discriminator");
             foreach (var type in drvTypes)
             {
                 var driver = (Driver)ObjectResolver.Current.Resolve(type);
@@ -69,14 +70,14 @@ namespace Jankilla.Core.Converters
             }
 
             _jsonSerializerSettings.Converters.Add(drvBuilder.Build());
- 
+
 
             var deviceType = typeof(Device);
             var dvcTypes = assemblies
                 .SelectMany(assembly => assembly.GetTypes())
                 .Where(type => deviceType.IsAssignableFrom(type) && type.IsClass && !type.IsAbstract);
 
-            JsonSubtypesConverterBuilder dvcBuilder = JsonSubtypesConverterBuilder.Of<Device>("Discriminator");
+            JsonSubtypesConverterBuilder dvcBuilder = JsonSubtypesConverterBuilder.Of<Device>("discriminator");
             foreach (var type in dvcTypes)
             {
                 var device = (Device)ObjectResolver.Current.Resolve(type);
@@ -90,7 +91,7 @@ namespace Jankilla.Core.Converters
                 .SelectMany(assembly => assembly.GetTypes())
                 .Where(type => blockType.IsAssignableFrom(type) && type.IsClass && !type.IsAbstract);
 
-            JsonSubtypesConverterBuilder blkBuilder = JsonSubtypesConverterBuilder.Of<Block>("Discriminator");
+            JsonSubtypesConverterBuilder blkBuilder = JsonSubtypesConverterBuilder.Of<Block>("discriminator");
             foreach (var type in blkTypes)
             {
                 var block = (Block)ObjectResolver.Current.Resolve(type);
@@ -104,11 +105,25 @@ namespace Jankilla.Core.Converters
                 .SelectMany(assembly => assembly.GetTypes())
                 .Where(type => tagType.IsAssignableFrom(type) && type.IsClass && !type.IsAbstract);
 
-            JsonSubtypesConverterBuilder tagBuilder = JsonSubtypesConverterBuilder.Of<Tag>("Discriminator");
+            JsonSubtypesConverterBuilder tagBuilder = JsonSubtypesConverterBuilder.Of<Tag>("discriminator");
             foreach (var type in tagTypes)
             {
-                var tag = (Tag)ObjectResolver.Current.Resolve(type);
-                tagBuilder.RegisterSubtype(type, tag.Discriminator);
+                if (type.IsGenericTypeDefinition)
+                {
+                    // 제네릭 형식 정의를 구체적인 형식으로 변환
+                    Type[] genericArguments = tagTypes.Where(tt => !tt.IsGenericTypeDefinition).ToArray();
+                    foreach (var arg in genericArguments)
+                    {
+                        var constructedType = type.MakeGenericType(arg);
+                        var tag = (Tag)ObjectResolver.Current.Resolve(constructedType);
+                        //tagBuilder.RegisterSubtype(constructedType, $"{tag.Discriminator}<{arg.Name}>");
+                    }
+                }
+                else
+                {
+                    var tag = (Tag)ObjectResolver.Current.Resolve(type);
+                    tagBuilder.RegisterSubtype(type, tag.Discriminator);
+                }
             }
 
             _jsonSerializerSettings.Converters.Add(tagBuilder.Build());
@@ -127,7 +142,7 @@ namespace Jankilla.Core.Converters
 
             //_jsonSerializerSettings.Converters.Add(alarmBuilder.Build());
 
-            JsonSubtypesConverterBuilder alarmBuilder = JsonSubtypesConverterBuilder.Of<BaseAlarm>("Discriminator");
+            JsonSubtypesConverterBuilder alarmBuilder = JsonSubtypesConverterBuilder.Of<BaseAlarm>("discriminator");
             alarmBuilder.RegisterSubtype(typeof(ComplexAlarm), nameof(ComplexAlarm));
             alarmBuilder.RegisterSubtype(typeof(NumericTagAlarm), nameof(NumericTagAlarm));
             alarmBuilder.RegisterSubtype(typeof(TextTagAlarm), nameof(TextTagAlarm));

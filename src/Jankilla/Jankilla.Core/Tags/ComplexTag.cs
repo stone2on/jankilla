@@ -21,7 +21,6 @@ namespace Jankilla.Core.Tags
         public override event EventHandler<TagEventArgs> Writed;
         public override event PropertyChangedEventHandler PropertyChanged;
 
-        [JsonIgnore]
         public IReadOnlyDictionary<Guid, Tag> Tags => _tags;
 
         [JsonIgnore]
@@ -51,7 +50,6 @@ namespace Jankilla.Core.Tags
         public ComplexTag()
         {
             _tags = new Dictionary<Guid, Tag>();
-            ByteSize = 0; // 초기 크기는 0, AddTag 메서드에서 동적으로 계산
         }
 
         public void AddTag(Tag tag)

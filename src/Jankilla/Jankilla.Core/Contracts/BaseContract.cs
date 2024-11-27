@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Jankilla.Core.Utils;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,28 +26,19 @@ namespace Jankilla.Core.Contracts
         public abstract bool Open();
         public abstract void Close();
 
-        #endregion
-
-        #region Constructors
-
-        #endregion
-
-        #region Protected Helpers
-
-
-        protected bool ValidateContract(BaseContract contract)
+        protected ValidationResult ValidateContract(BaseContract contract)
         {
             if (contract == null)
             {
-                return false;
+                return new ValidationResult(false, "Contract is null");
             }
 
             if (string.IsNullOrEmpty(contract.Name))
             {
-                return false;
+                return new ValidationResult(false, "Contract name is null or empty");
             }
 
-            return true;
+            return new ValidationResult(true, "Contract is valid");
         }
 
         #endregion

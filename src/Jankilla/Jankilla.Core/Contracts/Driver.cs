@@ -1,4 +1,5 @@
 ﻿using Jankilla.Core.Collections;
+using Jankilla.Core.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
@@ -16,7 +17,7 @@ namespace Jankilla.Core.Contracts
     {
         #region Public Properties
 
-        public IReadOnlyList<Device> Devices => Devices;
+        public IReadOnlyList<Device> Devices => _devices;
       
         #endregion
 
@@ -87,35 +88,30 @@ namespace Jankilla.Core.Contracts
 
         #region Public Methods
 
-        public virtual bool ValidateDevice(Device device)
+        public virtual ValidationResult ValidateDevice(Device device)
         {
-            bool bValidated = ValidateContract(device);
+            ValidationResult validationResult = ValidateContract(device);
 
-            if (bValidated == false)
+            if (!validationResult.IsValid)
             {
-                return false;
-            }
-
-            if (device.Discriminator != Discriminator)
-            {
-                return false;
+                return validationResult;
             }
 
             if (_devices.Contains(device))
             {
-                return false;
+                return new ValidationResult(false, "Device already exists in the collection.");
             }
 
-            return true;
+            return new ValidationResult(true, "Device is valid.");
         }
 
-        public virtual bool AddDevice(Device device)
+        public virtual ValidationResult AddDevice(Device device)
         {
-            bool bValidated = ValidateDevice(device);
+            ValidationResult validationResult = ValidateDevice(device);
 
-            if (bValidated == false)
+            if (!validationResult.IsValid)
             {
-                return false;
+                return validationResult;
             }
 
             device.Path = $"{Path}.{device.Name}";
@@ -123,7 +119,7 @@ namespace Jankilla.Core.Contracts
 
             _devices.Add(device);
 
-            return true;
+            return new ValidationResult(true, "Device added successfully.");
         }
 
         public virtual bool RemoveDevice(Device device)

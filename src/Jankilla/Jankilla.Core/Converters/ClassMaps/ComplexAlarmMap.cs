@@ -1,4 +1,5 @@
 ﻿using CsvHelper.Configuration;
+using CsvHelper.TypeConversion;
 using Jankilla.Core.Alarms;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,8 @@ namespace Jankilla.Core.Converters.ClassMaps
             Map(m => m.No).Index(++i);
             Map(m => m.AlarmLevel).Index(++i);
             Map(m => m.AlarmMessage).Index(++i);
+            Map(m => m.ComplexAlarmCondition).Index(++i);
+            //Map(m => m.SubAlarms).Index(++i);
         }
     }
 }

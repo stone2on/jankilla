@@ -20,7 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Jankilla.Core\Jankilla.Core.csproj" />
-    <ProjectReference Include="..\Jankilla.Driver.MitsubishiMxComponent\Jankilla.Driver.MitsubishiMxComponent.csproj" />
+    <ProjectReference Include="..\Jankilla.Driver.Mitsubishi.MxComponent\Jankilla.Driver.Mitsubishi.MxComponent.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Costura.Fody" Version="5.7.0">

@@ -25,7 +25,23 @@ namespace Jankilla.Core.Tags
         [JsonIgnore]
         IEnumerable<Tag> IArrayTag.Tags => _tags;
 
-        public int Length { get; private set; }
+        private int _length;
+        public int Length
+        {
+            get => _length;
+            set
+            {
+                if (value <= 0)
+                {
+                    throw new ArgumentException("Length must be greater than 0", nameof(value));
+                }
+
+                if (_length != value)
+                {
+                    Initialize(value);
+                }
+            }
+        }
 
         [JsonIgnore]
         public override object Value
@@ -49,24 +65,28 @@ namespace Jankilla.Core.Tags
 
         public override ETagDiscriminator Discriminator => ETagDiscriminator.Array;
 
-      
-
-        public ArrayTag(int length)
-        {
-            if (length <= 0)
-                throw new ArgumentException("Length must be greater than 0", nameof(length));
-
-            Initialize(length);
-        }
 
         private void Initialize(int length)
         {
-            Length = length;
+            if (_tags != null)
+            {
+                foreach (var tag in _tags)
+                {
+                    tag.Writed -= OnElementWrited;
+                    tag.PropertyChanged -= OnElementPropertyChanged;
+                }
+            }
+
+            _length = length;
             _tags = new T[length];
 
             for (int i = 0; i < length; i++)
             {
                 _tags[i] = new T();
+                _tags[i].ID = Guid.NewGuid();
+                _tags[i].Name = $"{Name}[{i + 1}]";
+                _tags[i].Category = Category;
+                _tags[i].Address = $"{Address}[{i}]";
                 _tags[i].Writed += OnElementWrited;
                 _tags[i].PropertyChanged += OnElementPropertyChanged;
             }
@@ -211,18 +231,7 @@ namespace Jankilla.Core.Tags
 
         public void Resize(int newLength)
         {
-            if (newLength <= 0)
-            {
-                throw new ArgumentException("Length must be greater than 0", nameof(newLength));
-            }
-
-            foreach (var tag in _tags)
-            {
-                tag.Writed -= OnElementWrited;
-                tag.PropertyChanged -= OnElementPropertyChanged;
-            }
-
-            Initialize(newLength);
+            Length = newLength;
         }
     }
 }

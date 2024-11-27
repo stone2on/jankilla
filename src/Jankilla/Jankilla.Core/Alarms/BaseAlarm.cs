@@ -11,7 +11,7 @@ namespace Jankilla.Core.Alarms
     public abstract class BaseAlarm : IIdentifiable, ICloneable 
     {
         public Guid ID { get; set; }
-        public Guid? Parent { get; set; }
+        public Guid Parent { get; set; } 
         public int No { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
