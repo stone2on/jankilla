@@ -1,0 +1,140 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <OutputType>WinExe</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>..\..\..\build\debug\$(AssemblyName)</OutputPath>
+    <AllowedReferenceRelatedFileExtensions>
+      *.pdb;
+      *.xml
+    </AllowedReferenceRelatedFileExtensions>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>..\..\..\build\release\$(AssemblyName)</OutputPath>
+    <AllowedReferenceRelatedFileExtensions>
+      *.pdb;
+      *.xml
+    </AllowedReferenceRelatedFileExtensions>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Charts.v24.1.Core">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\external\ui\DevExpress.Charts.v24.1.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Data.Desktop.v24.1">
+      <HintPath>..\..\..\external\ui\DevExpress.Data.Desktop.v24.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Data.v24.1">
+      <HintPath>..\..\..\external\ui\DevExpress.Data.v24.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Drawing.v24.1">
+      <HintPath>..\..\..\external\ui\DevExpress.Drawing.v24.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v24.1.Core">
+      <HintPath>..\..\..\external\ui\DevExpress.Printing.v24.1.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v24.1">
+      <HintPath>..\..\..\external\ui\DevExpress.Utils.v24.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraBars.v24.1">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\external\ui\DevExpress.XtraBars.v24.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v24.1">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\external\ui\DevExpress.XtraCharts.v24.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v24.1.UI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\external\ui\DevExpress.XtraCharts.v24.1.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v24.1.Wizard">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\external\ui\DevExpress.XtraCharts.v24.1.Wizard.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v24.1">
+      <HintPath>..\..\..\external\ui\DevExpress.XtraEditors.v24.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraGrid.v24.1">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\external\ui\DevExpress.XtraGrid.v24.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraLayout.v24.1">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\external\ui\DevExpress.XtraLayout.v24.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraNavBar.v24.1">
+      <HintPath>..\..\..\external\ui\DevExpress.XtraNavBar.v24.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraTreeList.v24.1">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\external\ui\DevExpress.XtraTreeList.v24.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraVerticalGrid.v24.1">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\external\ui\DevExpress.XtraVerticalGrid.v24.1.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\assemble.png" />
+    <Content Include="Resources\baking-tray.png" />
+    <Content Include="Resources\barcode.png" />
+    <Content Include="Resources\cloud.png" />
+    <Content Include="Resources\cool.png" />
+    <Content Include="Resources\free-icon-computer-10161109.png" />
+    <Content Include="Resources\free-icon-pc-4330711.png" />
+    <Content Include="Resources\frost.png" />
+    <Content Include="Resources\hourglass.png" />
+    <Content Include="Resources\ice-tray.png" />
+    <Content Include="Resources\medium.png" />
+    <Content Include="Resources\monitor.png" />
+    <Content Include="Resources\north.png" />
+    <Content Include="Resources\oven-tray.png" />
+    <Content Include="Resources\plc.png" />
+    <Content Include="Resources\power-button.png" />
+    <Content Include="Resources\power-button1.png" />
+    <Content Include="Resources\power-on-button.png" />
+    <Content Include="Resources\temperature.png" />
+    <Content Include="Resources\tester.png" />
+    <Content Include="Resources\top-10.png" />
+    <Content Include="Resources\top-5.png" />
+    <Content Include="Resources\worker.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controls\Common\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Jankilla.Core.DB.SqlServer\Jankilla.Core.DB.SqlServer.csproj" />
+    <ProjectReference Include="..\Jankilla.Core.UI.Winforms\Jankilla.Core.UI.WinForms.csproj" />
+    <ProjectReference Include="..\Jankilla.Core\Jankilla.Core.csproj" />
+    <ProjectReference Include="..\Jankilla.Driver.Mitsubishi.MxComponent\Jankilla.Driver.Mitsubishi.MxComponent.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.35" />
+    <PackageReference Include="DevExpress.Win.Design" Version="24.1.3" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+    <PackageReference Include="System.ObjectModel" Version="4.3.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

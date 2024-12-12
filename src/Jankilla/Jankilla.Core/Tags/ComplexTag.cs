@@ -70,6 +70,8 @@ namespace Jankilla.Core.Tags
             }
 
             _tags[tag.ID] = tag;
+            tag.Path = $"{Path}.{tag.Name}";
+            tag.BlockID = BlockID;
 
             ByteSize += tag.ByteSize;
 

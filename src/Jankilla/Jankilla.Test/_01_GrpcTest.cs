@@ -147,9 +147,9 @@ namespace Jankilla.Test
             Assert.AreEqual("Cat1", tags[0].Category);
             Assert.AreEqual("Cat2", tags[1].Category);
             Assert.AreEqual("Cat3", tags[2].Category);
-            Assert.IsInstanceOfType(tags[0], typeof(IntTag));
-            Assert.IsInstanceOfType(tags[1], typeof(StringTag));
-            Assert.IsInstanceOfType(tags[2], typeof(IntTag));
+            Assert.IsTrue(tags[0].Kind == TagKind.Int);
+            Assert.IsTrue(tags[1].Kind == TagKind.String);
+            Assert.IsTrue(tags[2].Kind == TagKind.Int);
         }
 
      

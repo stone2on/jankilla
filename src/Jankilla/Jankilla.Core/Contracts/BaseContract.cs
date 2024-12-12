@@ -23,7 +23,7 @@ namespace Jankilla.Core.Contracts
         #region Abstracts
 
         public abstract string Discriminator { get; }
-        public abstract bool Open();
+        public abstract bool Open(); 
         public abstract void Close();
 
         protected ValidationResult ValidateContract(BaseContract contract)

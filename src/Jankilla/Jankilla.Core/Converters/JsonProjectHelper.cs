@@ -17,6 +17,7 @@ using System.Reflection;
 using Jankilla.Core.Utils;
 using Jankilla.Core.Alarms;
 using Jankilla.Core.Tags;
+using Newtonsoft.Json.Converters;
 
 namespace Jankilla.Core.Converters
 {
@@ -44,7 +45,7 @@ namespace Jankilla.Core.Converters
 
             _jsonSerializerSettings = new JsonSerializerSettings()
             {
-                ContractResolver = new DefaultContractResolver
+                ContractResolver = new PriorityBasedContractResolver
                 {
                     NamingStrategy = new CamelCaseNamingStrategy
                     {
@@ -52,7 +53,7 @@ namespace Jankilla.Core.Converters
                     }
                 },
                 Formatting = Formatting.Indented,
-                Converters = new List<JsonConverter>()
+                Converters = new List<JsonConverter>() { new StringEnumConverter() }
             };
 
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
@@ -116,7 +117,7 @@ namespace Jankilla.Core.Converters
                     {
                         var constructedType = type.MakeGenericType(arg);
                         var tag = (Tag)ObjectResolver.Current.Resolve(constructedType);
-                        //tagBuilder.RegisterSubtype(constructedType, $"{tag.Discriminator}<{arg.Name}>");
+                        tagBuilder.RegisterSubtype(constructedType, tag.Discriminator);
                     }
                 }
                 else
@@ -127,20 +128,6 @@ namespace Jankilla.Core.Converters
             }
 
             _jsonSerializerSettings.Converters.Add(tagBuilder.Build());
-
-            //var alarmType = typeof(TagAlarm);
-            //var alarmTypes = assemblies
-            //    .SelectMany(assembly => assembly.GetTypes())
-            //    .Where(type => alarmType.IsAssignableFrom(type) && type.IsClass && !type.IsAbstract);
-
-            //JsonSubtypesConverterBuilder alarmBuilder = JsonSubtypesConverterBuilder.Of<TagAlarm>("Discriminator");
-            //foreach (var type in alarmTypes)
-            //{
-            //    var alarm = (TagAlarm)ObjectResolver.Current.Resolve(type);
-            //    alarmBuilder.RegisterSubtype(type, alarm.Discriminator);
-            //}
-
-            //_jsonSerializerSettings.Converters.Add(alarmBuilder.Build());
 
             JsonSubtypesConverterBuilder alarmBuilder = JsonSubtypesConverterBuilder.Of<BaseAlarm>("discriminator");
             alarmBuilder.RegisterSubtype(typeof(ComplexAlarm), nameof(ComplexAlarm));
