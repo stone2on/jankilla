@@ -20,7 +20,7 @@ namespace Jankilla.Core.Contracts.Tags
         #region Event Handlers
 
         public abstract event EventHandler<TagEventArgs> Writed;
-        public abstract event PropertyChangedEventHandler PropertyChanged;
+        public virtual event PropertyChangedEventHandler PropertyChanged;
  
         #endregion
 
@@ -30,7 +30,19 @@ namespace Jankilla.Core.Contracts.Tags
 
         public int No { get; set; }
 
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                if (_name != value)
+                {
+                    _name = value;
+                    UpdatePath();
+                    this.NotifyPropertyChanged(this.PropertyChanged, nameof(Value));
+                }
+            }
+        }
 
         public EDirection Direction { get; set; }
 
@@ -39,10 +51,12 @@ namespace Jankilla.Core.Contracts.Tags
             get {  return _byteSize; } 
             set
             {
-                if (value <= 0)
-                    throw new ArgumentOutOfRangeException(nameof(ByteSize));
-
                 _byteSize = value;
+
+                if (value <= 0)
+                {
+                    return;
+                }
 
                 _readbuffer = new byte[value];
                 _writebuffer = new byte[value];
@@ -57,7 +71,18 @@ namespace Jankilla.Core.Contracts.Tags
 
         public string Description { get; set; }
 
-        public string Path { get; set; }
+        public string Path
+        {
+            get { return _path; }
+            set
+            {
+                if (_path != value)
+                {
+                    _path = value;
+                    NotifyPropertyChanged(PropertyChanged, nameof(Path));
+                }
+            }
+        }
 
         public Guid BlockID { get; set; }
 
@@ -85,6 +110,8 @@ namespace Jankilla.Core.Contracts.Tags
         private bool _suppressEvents = false;
         private int _byteSize;
 
+        private string _name;
+        private string _path;
         #endregion
 
         #region Constructor
@@ -104,17 +131,17 @@ namespace Jankilla.Core.Contracts.Tags
             {
                 case NotifyCollectionChangedAction.Add:
                 case NotifyCollectionChangedAction.Replace:
-                    handleNewItems(e.NewItems);
+                    HandleNewAlarms(e.NewItems);
                     if (e.Action == NotifyCollectionChangedAction.Replace)
-                        handleOldItems(e.OldItems);
+                        HandleOldAlarms(e.OldItems);
                     break;
 
                 case NotifyCollectionChangedAction.Remove:
-                    handleOldItems(e.OldItems);
+                    HandleOldAlarms(e.OldItems);
                     break;
 
                 case NotifyCollectionChangedAction.Reset:
-                    handleReset();
+                    ResetAllAlarms();
                     break;
             }
         }
@@ -172,10 +199,6 @@ namespace Jankilla.Core.Contracts.Tags
         {
             Value = val;
         }
-
-
-
-   
 
         public void SuppressEvents(bool suppress)
         {
@@ -287,10 +310,25 @@ namespace Jankilla.Core.Contracts.Tags
             Buffer.BlockCopy(buffer, startIndex, _readbuffer, 0, this.ByteSize);
         }
 
+        protected void UpdatePath()
+        {
+            if (!string.IsNullOrEmpty(Path))
+            {
+                var pathParts = Path.Split('.');
+                if (pathParts.Length > 0)
+                {
+                    pathParts[pathParts.Length - 1] = Name;
+                    Path = string.Join(".", pathParts);
+                }
+            }
+        }
+
+
         #endregion
 
-        #region Privates
-        private void handleNewItems(System.Collections.IList items)
+        #region Private Helpers
+
+        private void HandleNewAlarms(System.Collections.IList items)
         {
             if (items == null) return;
 
@@ -300,7 +338,7 @@ namespace Jankilla.Core.Contracts.Tags
             }
         }
 
-        private void handleOldItems(System.Collections.IList items)
+        private void HandleOldAlarms(System.Collections.IList items)
         {
             if (items == null) return;
 
@@ -310,7 +348,7 @@ namespace Jankilla.Core.Contracts.Tags
             }
         }
 
-        private void handleReset()
+        private void ResetAllAlarms()
         {
             foreach (TagAlarm alarm in _alarms)
             {

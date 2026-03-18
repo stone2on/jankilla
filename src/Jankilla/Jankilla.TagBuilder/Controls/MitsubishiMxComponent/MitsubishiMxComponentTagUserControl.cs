@@ -2,6 +2,7 @@
 using Jankilla.Core.Contracts;
 using Jankilla.Core.Contracts.Tags;
 using Jankilla.Core.Contracts.Tags.Base;
+using Jankilla.Core.Tags;
 using Jankilla.Core.Tags.Base;
 using Jankilla.Core.UI.WinForms.Forms.Base;
 using Jankilla.Core.Utils;
@@ -294,10 +295,10 @@ namespace Jankilla.TagBuilder.Controls.MitsubishiMxComponent
 
             _result = tmp;
 
-            bool bAdded = Block.AddTag(_result);
-            if (!bAdded)
+            var validationResult = Block.AddTag(_result);
+            if (!validationResult.IsValid)
             {
-                errorMessage = "Unable to add tag due to internal issues.";
+                errorMessage = $"Unable to add tag due to internal issues : {validationResult.Message}";
                 return null;
             }
 

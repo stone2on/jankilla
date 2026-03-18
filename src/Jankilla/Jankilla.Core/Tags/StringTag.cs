@@ -1,4 +1,5 @@
 ﻿using Jankilla.Core.Alarms;
+using Jankilla.Core.Contracts.Tags;
 using Jankilla.Core.Contracts.Tags.Base;
 using Jankilla.Core.Tags.Base;
 using Newtonsoft.Json;
@@ -9,7 +10,7 @@ using System.Diagnostics;
 using System.Text;
 using System.Threading;
 
-namespace Jankilla.Core.Contracts.Tags
+namespace Jankilla.Core.Tags
 {
     public class StringTag : Tag
     {

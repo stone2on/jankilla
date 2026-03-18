@@ -121,15 +121,15 @@ namespace Jankilla.TagBuilder.Controls.MitsubishiMxComponent
             var dType = comboBoxEditDeviceType.SelectedItem.ToString();
             var address = textEditAddress.Text;
 
-            var block = new MitsubishiMxComponentBlock{ ID = Guid.NewGuid(), Name = name, StationNo = sNo, StartAddress = $"{dType}{address}", BufferSize = byteSize };
+            var block = new MitsubishiMxComponentBlock { ID = Guid.NewGuid(), Name = name, StationNo = sNo, StartAddress = $"{dType}{address}", BufferSize = byteSize };
             block.Description = desc;
 
             _result = block;
 
-            bool bAdded = Device.AddBlock(_result);
-            if (!bAdded)
+            var validationResult = Device.AddBlock(_result);
+            if (!validationResult.IsValid)
             {
-                errorMessage = "Unable to add block due to internal issues.";
+                errorMessage = $"Unable to add block due to internal issues : {validationResult.Message}";
                 return null;
             }
 

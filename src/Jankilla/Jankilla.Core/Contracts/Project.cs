@@ -19,7 +19,7 @@ namespace Jankilla.Core.Contracts
         public Guid ID { get; set; }
 
         public IReadOnlyList<Driver> Drivers => _drivers;
-       
+
         public IReadOnlyList<BaseAlarm> Alarms => _alarms;
 
         public IReadOnlyList<Project> Remotes => _remotes;
@@ -95,7 +95,17 @@ namespace Jankilla.Core.Contracts
                     }
                 }
 
-                if (tag.Discriminator == Core.Tags.Base.ETagDiscriminator.Array)
+                if (tag.Discriminator == Core.Tags.Base.ETagDiscriminator.ComplexArray ||
+                    tag.Discriminator == Core.Tags.Base.ETagDiscriminator.BooleanArray ||
+                    tag.Discriminator == Core.Tags.Base.ETagDiscriminator.IntArray ||
+                    tag.Discriminator == Core.Tags.Base.ETagDiscriminator.ShortArray ||
+                    tag.Discriminator == Core.Tags.Base.ETagDiscriminator.StringArray ||
+                    tag.Discriminator == Core.Tags.Base.ETagDiscriminator.FloatArray ||
+                    tag.Discriminator == Core.Tags.Base.ETagDiscriminator.UShortArray ||
+                    tag.Discriminator == Core.Tags.Base.ETagDiscriminator.UIntArray ||
+                    tag.Discriminator == Core.Tags.Base.ETagDiscriminator.LongArray ||
+                    tag.Discriminator == Core.Tags.Base.ETagDiscriminator.ULongArray ||
+                    tag.Discriminator == Core.Tags.Base.ETagDiscriminator.DoubleArray)
                 {
                     IArrayTag arrayTag = (IArrayTag)tag;
                     var innerTag = FindTagRecursive(arrayTag.Tags, id);
@@ -135,15 +145,15 @@ namespace Jankilla.Core.Contracts
             return null;
         }
 
-        public bool AddDriver(Driver driver)
+        public Jankilla.Core.Utils.ValidationResult AddDriver(Driver driver)
         {
             if (_drivers.Contains(driver))
             {
-                return false;
+                return new Jankilla.Core.Utils.ValidationResult(false, "Driver already exists.");
             }
 
             _drivers.Add(driver);
-            return true;
+            return new Jankilla.Core.Utils.ValidationResult(true, "Driver added successfully.");
         }
 
         public bool RemoveDriver(Driver driver)
@@ -190,6 +200,7 @@ namespace Jankilla.Core.Contracts
             _alarms.Clear();
         }
 
+
         #endregion
 
         #region Events
@@ -223,13 +234,13 @@ namespace Jankilla.Core.Contracts
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
                     if (e.OldItems != null)
                     {
-                      
+
                     }
                     break;
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Move:
                     break;
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Reset:
-  
+
                     break;
                 default:
                     break;

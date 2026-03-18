@@ -10,5 +10,6 @@ namespace Jankilla.Core.Tags
     public interface IArrayTag
     {
         IEnumerable<Tag> Tags { get; }
+        void SetTags(IEnumerable<Tag> tags);
     }
 }

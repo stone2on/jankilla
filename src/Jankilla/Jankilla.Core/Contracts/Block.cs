@@ -1,6 +1,7 @@
 ﻿using Jankilla.Core.Collections;
 using Jankilla.Core.Contracts.Tags;
 using Jankilla.Core.Contracts.Tags.Base;
+using Jankilla.Core.Utils;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Concurrent;
@@ -58,33 +59,34 @@ namespace Jankilla.Core.Contracts
         #endregion
 
         #region Public Methods
-        public virtual bool ValidateTag(Tag tag)
+
+        public virtual ValidationResult ValidateTag(Tag tag)
         {
             if (tag == null)
             {
-                return false;
+                return new ValidationResult(false, "Tag is null");
             }
 
             if (string.IsNullOrEmpty(tag.Name))
             {
-                return false;
+                return new ValidationResult(false, "Tag name is null or empty");
             }
 
             if (_tags.Contains(tag))
             {
-                return false;
+                return new ValidationResult(false, "Tag already exists in the collection");
             }
 
-            return true;
+            return new ValidationResult(true, "Tag is valid");
         }
 
-        public virtual bool AddTag(Tag tag)
+        public virtual ValidationResult AddTag(Tag tag)
         {
-            bool bValidated = ValidateTag(tag);
+            ValidationResult validationResult = ValidateTag(tag);
 
-            if (bValidated == false)
+            if (!validationResult.IsValid)
             {
-                return false;
+                return validationResult;
             }
 
             tag.Path = $"{Path}.{tag.Name}";
@@ -94,7 +96,7 @@ namespace Jankilla.Core.Contracts
 
             tag.Writed += Tag_Writed;
 
-            return true;
+            return new ValidationResult(true, "Tag added successfully");
         }
 
         public virtual bool RemoveTag(Tag tag)

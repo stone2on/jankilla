@@ -1,4 +1,5 @@
 ﻿using Jankilla.Core.Collections;
+using Jankilla.Core.Utils;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -87,40 +88,35 @@ namespace Jankilla.Core.Contracts
 
         #region Public Methods
 
-        public virtual bool ValidateBlock(Block block)
+        public virtual ValidationResult ValidateBlock(Block block)
         {
-            bool bValidated = ValidateContract(block);
+            ValidationResult validationResult = ValidateContract(block);
 
-            if (bValidated == false)
+            if (!validationResult.IsValid)
             {
-                return false;
-            }
-
-            if (block.Discriminator != Discriminator)
-            {
-                return false;
+                return validationResult;
             }
 
             if (_blocks.Contains(block))
             {
-                return false;
+                return new ValidationResult(false, "Block already exists in the collection.");
             }
 
             if (string.IsNullOrEmpty(block.StartAddress))
             {
-                return false;
+                return new ValidationResult(false, "Block start address is null or empty.");
             }
 
-            return true;
+            return new ValidationResult(true, "Block is valid.");
         }
 
-        public virtual bool AddBlock(Block block)
+        public virtual ValidationResult AddBlock(Block block)
         {
-            bool bValidated = ValidateBlock(block);
+            ValidationResult validationResult = ValidateBlock(block);
 
-            if (bValidated == false)
+            if (!validationResult.IsValid)
             {
-                return false;
+                return validationResult;
             }
 
             block.Path = $"{Path}.{block.Name}";
@@ -128,7 +124,7 @@ namespace Jankilla.Core.Contracts
 
             _blocks.Add(block);
 
-            return true;
+            return new ValidationResult(true, "Block added successfully.");
         }
 
         public virtual bool RemoveBlock(Block block)
@@ -147,16 +143,16 @@ namespace Jankilla.Core.Contracts
             _blocks.Clear();
         }
 
-        public virtual bool ReplaceBlock(int index, Block block)
+        public virtual ValidationResult ReplaceBlock(int index, Block block)
         {
-            bool bValidated = ValidateBlock(block);
-            if (bValidated == false)
+            ValidationResult validationResult = ValidateBlock(block);
+            if (!validationResult.IsValid)
             {
-                return false;
+                return validationResult;
             }
 
             _blocks[index] = block;
-            return true;
+            return new ValidationResult(true, "Block replaced successfully.");
         }
 
         #endregion

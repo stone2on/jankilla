@@ -1,4 +1,5 @@
-﻿using Grpc.Core;
+﻿using Google.Protobuf.WellKnownTypes;
+using Grpc.Core;
 using Jankilla.Core.Contracts;
 using Jankilla.Core.Proto;
 using System;
@@ -11,42 +12,43 @@ namespace Jankilla.Core.Services
 {
     public class ProjectServiceAdapter : Proto.ProjectService.ProjectServiceBase
     {
-        private Project _project;
+        private Contracts.Project _project;
 
-        public ProjectServiceAdapter(Project project)
+        public ProjectServiceAdapter(Contracts.Project project)
         {
             _project = project;
         }
 
-        public override Task<ProjectResponse> GetProject(ProjectRequest request, ServerCallContext context)
+        public override Task<Proto.Project> GetProject(Empty request, ServerCallContext context)
         {
-            var projectResponse = new ProjectResponse();
+            var projectResponse = new Proto.Project();
+
             foreach (var driver in _project.Drivers)
             {
-                var driverResponse = new DriverResponse()
+                var driverResponse = new Proto.Driver()
                 {
-                    Id = new GUID() { Value = driver.ID.ToString() }
+                    Id = driver.ID.ToString(),
                 };
                 foreach (var device in driver.Devices)
                 {
-                    var deviceResponse = new DeviceResponse()
+                    var deviceResponse = new Proto.Device()
                     {
-                        Id = new GUID() { Value = device.ID.ToString() }
+                        Id =  device.ID.ToString()
                     };
                     foreach (var block in device.Blocks)
                     {
-                        var blockResponse = new BlockResponse()
+                        var blockResponse = new Proto.Block()
                         {
-                            Id = new GUID() { Value = block.ID.ToString() }
+                            Id = block.ID.ToString()
                         };
                         foreach (var tag in block.Tags)
                         {
-                            var tagResponse = new TagResponse()
+                            var tagResponse = new Proto.Tag()
                             {
-                                Id = new GUID() { Value = tag.ID.ToString() },
+                                Id = tag.ID.ToString(),
                                 Category = tag.Category,
                                 Name = tag.Name,
-                                Type = tag.Discriminator.ToString(),
+                                Kind = (TagKind)tag.Discriminator,
                             };
 
                             blockResponse.Tags.Add(tagResponse);
@@ -55,11 +57,13 @@ namespace Jankilla.Core.Services
                     }
                     driverResponse.Devices.Add(deviceResponse);
                 }
+
                 projectResponse.Drivers.Add(driverResponse);
             }
 
 
             return Task.FromResult(projectResponse);
         }
+
     }
 }

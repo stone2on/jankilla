@@ -20,12 +20,29 @@ namespace Jankilla.Core.Tags
         public override event EventHandler<TagEventArgs> Writed;
         public override event PropertyChangedEventHandler PropertyChanged;
 
+        
         public T[] Tags => _tags;
 
         [JsonIgnore]
         IEnumerable<Tag> IArrayTag.Tags => _tags;
 
-        public int Length { get; private set; }
+        private int _length;
+        public int Length
+        {
+            get => _length;
+            set
+            {
+                if (value <= 0)
+                {
+                    throw new ArgumentException("Length must be greater than 0", nameof(value));
+                }
+
+                if (_length != value)
+                {
+                    Initialize(value);
+                }
+            }
+        }
 
         [JsonIgnore]
         public override object Value
@@ -47,26 +64,54 @@ namespace Jankilla.Core.Tags
             }
         }
 
-        public override ETagDiscriminator Discriminator => ETagDiscriminator.Array;
+        public override ETagDiscriminator Discriminator => _discriminator;
 
-      
+        private ETagDiscriminator _discriminator;
 
-        public ArrayTag(int length)
+        public ArrayTag()
         {
-            if (length <= 0)
-                throw new ArgumentException("Length must be greater than 0", nameof(length));
+            _discriminator = GetDiscriminatorForType(typeof(T));
+        }
 
-            Initialize(length);
+        private ETagDiscriminator GetDiscriminatorForType(Type type)
+        {
+            if (type == typeof(BooleanTag)) return ETagDiscriminator.BooleanArray;
+            if (type == typeof(IntTag)) return ETagDiscriminator.IntArray;
+            if (type == typeof(ShortTag)) return ETagDiscriminator.ShortArray;
+            if (type == typeof(StringTag)) return ETagDiscriminator.StringArray;
+            if (type == typeof(FloatTag)) return ETagDiscriminator.FloatArray;
+            if (type == typeof(UShortTag)) return ETagDiscriminator.UShortArray;
+            if (type == typeof(UIntTag)) return ETagDiscriminator.UIntArray;
+            if (type == typeof(LongTag)) return ETagDiscriminator.LongArray;
+            if (type == typeof(ULongTag)) return ETagDiscriminator.ULongArray;
+            if (type == typeof(DoubleTag)) return ETagDiscriminator.DoubleArray;
+            if (type == typeof(ComplexTag)) return ETagDiscriminator.ComplexArray;
+
+            throw new NotSupportedException($"Unsupported tag type: {type.Name}");
         }
 
         private void Initialize(int length)
         {
-            Length = length;
+            if (_tags != null)
+            {
+                foreach (var tag in _tags)
+                {
+                    tag.Writed -= OnElementWrited;
+                    tag.PropertyChanged -= OnElementPropertyChanged;
+                }
+            }
+
+            _length = length;
             _tags = new T[length];
 
             for (int i = 0; i < length; i++)
             {
                 _tags[i] = new T();
+                _tags[i].ID = Guid.NewGuid();
+                _tags[i].Path = $"{Path}[{i}]";
+                _tags[i].Name = $"{Name}[{i + 1}]";
+                _tags[i].Category = Category;
+                _tags[i].Address = $"{Address}[{i}]";
                 _tags[i].Writed += OnElementWrited;
                 _tags[i].PropertyChanged += OnElementPropertyChanged;
             }
@@ -75,6 +120,37 @@ namespace Jankilla.Core.Tags
 
             _arrayWriteBuffer = new byte[ByteSize];
             _arrayReadBuffer = new byte[ByteSize];
+        }
+
+        public void SetTags(IEnumerable<Tag> tags)
+        {
+            if (tags == null)
+            {
+                throw new ArgumentNullException(nameof(tags));
+            }
+
+            if (_tags != null)
+            {
+                foreach (var tag in _tags)
+                {
+                    tag.Writed -= OnElementWrited;
+                    tag.PropertyChanged -= OnElementPropertyChanged;
+                }
+            }
+
+            _length = tags.Count();
+
+            for (int i = 0; i < Length; i++)
+            {
+                if (tags.ElementAt(i).GetType() != typeof(T))
+                {
+                    throw new ArgumentException($"Tag at index {i} is not of type {typeof(T).Name}");
+                }
+                _tags[i] = (T)tags.ElementAt(i);
+                _tags[i].Writed += OnElementWrited;
+                _tags[i].PropertyChanged += OnElementPropertyChanged;
+            }
+
         }
 
         public T this[int index]
@@ -211,18 +287,9 @@ namespace Jankilla.Core.Tags
 
         public void Resize(int newLength)
         {
-            if (newLength <= 0)
-            {
-                throw new ArgumentException("Length must be greater than 0", nameof(newLength));
-            }
-
-            foreach (var tag in _tags)
-            {
-                tag.Writed -= OnElementWrited;
-                tag.PropertyChanged -= OnElementPropertyChanged;
-            }
-
-            Initialize(newLength);
+            Length = newLength;
         }
+
+
     }
 }

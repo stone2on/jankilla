@@ -1,9 +1,11 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration;
+using CsvHelper.TypeConversion;
 using Jankilla.Core.Alarms;
 using Jankilla.Core.Contracts;
 using Jankilla.Core.Contracts.Tags;
 using Jankilla.Core.Converters.ClassMaps;
+using Jankilla.Core.Tags;
 using Jankilla.Core.Utils;
 using JsonSubTypes;
 using Newtonsoft.Json;
@@ -49,7 +51,7 @@ namespace Jankilla.Core.Converters
 
             _config = new CsvConfiguration(CultureInfo.CurrentCulture);
             _config.HasHeaderRecord = false;
- 
+
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
 
             var driverType = typeof(Driver);
@@ -121,24 +123,54 @@ namespace Jankilla.Core.Converters
             var tagType = typeof(Tag);
             var tagTypes = assemblies
                 .SelectMany(assembly => assembly.GetTypes())
-                .Where(type => tagType.IsAssignableFrom(type) && type.IsClass && !type.IsAbstract);
+                .Where(type => tagType.IsAssignableFrom(type) &&
+                type.IsClass &&
+                !type.IsAbstract &&
+                type != typeof(ComplexTag));
 
             foreach (var type in tagTypes)
             {
-                var classMap = ObjectResolver.Current.Resolve(typeof(TagMap<>).MakeGenericType(type)) as ClassMap;
-                classMap.Map().Index(0).ConstantFixed(classMap.ClassType.Name);
-
-                var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
-                  .Where(p => p.GetMethod != null && p.GetMethod.GetBaseDefinition().DeclaringType == type && !p.Name.Contains("Value"))
-                  .ToList();
-
-                foreach (var prop in props)
+                if (type == typeof(ArrayTag<>))
                 {
-                    classMap.Map(type, prop);
-                }
+                    var arrayTagTypes = tagTypes.Where(t => !t.IsGenericTypeDefinition);
 
-                _classMaps.Add(classMap);
+                    foreach (var arrayTagType in arrayTagTypes)
+                    {
+                        var constructedType = type.MakeGenericType(arrayTagType);
+
+                        ClassMap classMap = ObjectResolver.Current.Resolve(typeof(TagMap<>).MakeGenericType(constructedType)) as ClassMap;
+                        classMap.Map().Index(0).ConstantFixed($"{constructedType.Name}<{constructedType.GetGenericArguments()[0].Name}>");
+
+                        _classMaps.Add(classMap);
+                    }
+
+                    var complexArrayType = type.MakeGenericType(typeof(ComplexTag));
+                    ClassMap complexClassMap = ObjectResolver.Current.Resolve(typeof(TagMap<>).MakeGenericType(complexArrayType)) as ClassMap;
+                    complexClassMap.Map().Index(0).ConstantFixed($"{complexArrayType.Name}<{complexArrayType.GetGenericArguments()[0].Name}>");
+
+                    _classMaps.Add(complexClassMap);
+                }
+                else
+                {
+                    ClassMap classMap = ObjectResolver.Current.Resolve(typeof(TagMap<>).MakeGenericType(type)) as ClassMap;
+                    classMap.Map().Index(0).ConstantFixed(classMap.ClassType.Name);
+
+                    var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
+                      .Where(p => p.GetMethod != null && p.GetMethod.GetBaseDefinition().DeclaringType == type && !p.Name.Contains("Value"))
+                      .ToList();
+
+                    foreach (var prop in props)
+                    {
+                        classMap.Map(type, prop);
+                    }
+
+                    _classMaps.Add(classMap);
+                }
             }
+
+            var complexTagMap = new ComplexTagMap();
+            complexTagMap.Map().Index(0).ConstantFixed(complexTagMap.ClassType.Name);
+            _classMaps.Add(complexTagMap);
 
             var tagAlarmType = typeof(TagAlarm);
             var tagAlarmTypes = assemblies
@@ -162,11 +194,19 @@ namespace Jankilla.Core.Converters
                 _classMaps.Add(classMap);
             }
 
-            _classMaps.Add(new ComplexAlarmMap());
+            var complexAlarmMap = new ComplexAlarmMap();
+            complexAlarmMap.Map().Index(0).ConstantFixed(nameof(ComplexAlarm));
+            _classMaps.Add(complexAlarmMap);
 
-            foreach (var cm in _classMaps)
+            foreach (ClassMap cm in _classMaps)
             {
-                _classTypeMap.Add(cm.ClassType.Name, cm.ClassType);
+                string key = cm.ClassType.Name;
+                if (cm.ClassType.Name.StartsWith("ArrayTag"))
+                {
+                    key += $"<{cm.ClassType.GetGenericArguments()[0].Name}>";
+                }
+
+                _classTypeMap.Add(key, cm.ClassType);
             }
         }
 
@@ -189,7 +229,7 @@ namespace Jankilla.Core.Converters
                     Device device = null;
                     Block block = null;
                     Tag tag = null;
-                    TagAlarm alarm = null;
+                    BaseAlarm alarm = null;
 
                     while (csv.Read())
                     {
@@ -217,6 +257,7 @@ namespace Jankilla.Core.Converters
                                 tag = (Tag)record;
                                 block?.AddTag(tag);
                                 break;
+
                             case nameof(TagAlarm):
                                 alarm = (TagAlarm)record;
                                 string tagIdStr = csv.GetField(TagAlarmMap<TagAlarm>.TAG_ID_INDEX);
@@ -226,13 +267,61 @@ namespace Jankilla.Core.Converters
                                     var targetTag = project.FindTagOrNull(tagId);
                                     if (targetTag != null)
                                     {
-                                        alarm.SetTag(targetTag);
+                                        ((TagAlarm)alarm).SetTag(targetTag);
                                         project.AddAlarm(alarm);
                                     }
                                 }
                                 break;
+                            case nameof(BaseAlarm):
+                                alarm = (BaseAlarm)record;
+                                project.AddAlarm(alarm);
+                                break;
                         }
 
+                    }
+
+                    foreach (var drv in project.Drivers)
+                    {
+                        foreach (var dev in drv.Devices)
+                        {
+                            foreach (var blk in dev.Blocks)
+                            {
+                                var tagsToRemove = new List<Tag>();
+
+                                foreach (var tg in blk.Tags)
+                                {
+                                    if (tg is IArrayTag arrayTag)
+                                    {
+                                        var subTags = blk.Tags
+                                            .Where(t => t.Name.StartsWith(tg.Name + "[") && t.Name.EndsWith("]"));
+
+                                        arrayTag.SetTags(subTags);
+
+                                        // ArrayTag의 서브 태그들을 제거할 목록에 추가
+                                        tagsToRemove.AddRange(subTags);
+                                    }
+                                    else if (tg is ComplexTag complexTag)
+                                    {
+                                        var subTags = blk.Tags
+                                            .Where(t => t.Name.StartsWith(complexTag.Name + "."));
+
+                                        foreach (var subTag in subTags)
+                                        {
+                                            complexTag.AddTag(subTag);
+                                        }
+
+                                        // ComplexTag의 서브 태그들을 제거할 목록에 추가
+                                        tagsToRemove.AddRange(subTags);
+                                    }
+                                }
+
+                                // blk.Tags에서 ArrayTag와 ComplexTag의 서브 태그들을 제거
+                                foreach (var tagToRemove in tagsToRemove)
+                                {
+                                    blk.RemoveTag(tagToRemove);
+                                }
+                            }
+                        }
                     }
 
                     return project;
@@ -255,6 +344,8 @@ namespace Jankilla.Core.Converters
                 using (var writer = new StreamWriter(stream))
                 using (var csv = new CsvWriter(writer, _config))
                 {
+                    //csv.Context.TypeConverterCache.AddConverter<Tag>(new IEnumerableConverter());
+
                     foreach (var cm in _classMaps)
                     {
                         csv.Context.RegisterClassMap(cm);
@@ -274,6 +365,26 @@ namespace Jankilla.Core.Converters
                                 csv.NextRecord();
                                 foreach (var tag in block.Tags)
                                 {
+                                    if (tag.Discriminator == Tags.Base.ETagDiscriminator.Complex)
+                                    {
+                                        var cTag = (ComplexTag)tag;
+                                        var stack = new Stack<Tag>(cTag.Tags.Values);
+                                        while (stack.Count > 0)
+                                        {
+                                            var subTag = stack.Pop();
+                                            if (subTag.Discriminator == Tags.Base.ETagDiscriminator.Complex)
+                                            {
+                                                ComplexTag cSubTag = (ComplexTag)subTag;
+                                                foreach (var item in cSubTag.Tags)
+                                                {
+                                                    stack.Push(item.Value);
+                                                }
+                                            }
+                                            csv.WriteRecord((object)subTag);
+                                            csv.NextRecord();
+                                        }
+                                    }
+
                                     csv.WriteRecord((object)tag);
                                     csv.NextRecord();
                                 }
@@ -300,7 +411,7 @@ namespace Jankilla.Core.Converters
                                 }
                                 csv.WriteRecord((object)subAlarm);
                                 csv.NextRecord();
-                            }                     
+                            }
                         }
 
                         csv.WriteRecord((object)alarm);

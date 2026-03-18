@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Jankilla.Core.Contracts.Tags
+namespace Jankilla.Core.Tags
 {
     public class FloatTag : Tag
     {

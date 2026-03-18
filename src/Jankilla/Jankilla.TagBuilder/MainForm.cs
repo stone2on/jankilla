@@ -5,6 +5,7 @@ using Jankilla.Core.Contracts;
 using Jankilla.Core.Contracts.Tags;
 using Jankilla.Core.Contracts.Tags.Base;
 using Jankilla.Core.Converters;
+using Jankilla.Core.Tags;
 using Jankilla.Core.Tags.Base;
 using Jankilla.Core.UI.WinForms.Forms;
 using Jankilla.Core.UI.WinForms.Forms.Base;

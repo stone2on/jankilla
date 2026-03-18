@@ -77,10 +77,10 @@ namespace Jankilla.TagBuilder.Controls.MitsubishiMxComponent
                 Description = textEditDescription.Text
             };
 
-            bool bAdded = Driver.AddDevice(_result);
-            if (!bAdded)
+            var validationResult = Driver.AddDevice(_result);
+            if (!validationResult.IsValid)
             {
-                errorMessage = "Unable to add device due to internal issues.";
+                errorMessage = $"Unable to add device due to internal issues : {validationResult.Message}";
                 return null;
             }
 

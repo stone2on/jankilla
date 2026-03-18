@@ -1,6 +1,7 @@
 ﻿using DevExpress.XtraEditors;
 using Jankilla.Core.Contracts;
 using Jankilla.Core.UI.WinForms.Forms.Base;
+using Jankilla.Core.Utils;
 using Jankilla.Driver.MitsubishiMxComponent;
 using System;
 using System.Collections.Generic;
@@ -81,9 +82,10 @@ namespace Jankilla.TagBuilder.Controls.MitsubishiMxComponent
                 Description = textEditDescription.Text
             };
 
-            bool bAdded = Project.AddDriver(_result);
-            if (!bAdded)
+            ValidationResult validationResult = Project.AddDriver(_result);
+            if (!validationResult.IsValid)
             {
+                errorMessage = $"Unable to add driver due to internal issues : {validationResult.Message}";
                 return null;
             }
 
